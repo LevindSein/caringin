@@ -75,11 +75,11 @@
                             </div>
                         </div><!-- nav-sub -->
                     </li>
-                    <li class="nav-item with-sub">
+                    <li class="nav-item with-sub {{ (request()->is('keuangan/data*')) ? 'active' : '' }}">
                         <a href="" class="nav-link"><i data-feather="database"></i> Data Usaha</a>
                         <ul class="navbar-menu-sub">
-                            <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="dollar-sign"></i> Tagihan</a></li>
-                            <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="arrow-up-right"></i> Tunggakan</a></li>
+                            <li class="nav-sub-item"><a href="{{url('keuangan/data/tagihan')}}" class="nav-sub-link"><i data-feather="dollar-sign"></i> Tagihan</a></li>
+                            <li class="nav-sub-item"><a href="{{url('keuangan/data/tunggakan')}}" class="nav-sub-link"><i data-feather="arrow-up-right"></i> Tunggakan</a></li>
                         </ul>
                     </li>
                     <li class="nav-item with-sub">

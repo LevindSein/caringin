@@ -762,6 +762,80 @@ class KeuanganController extends Controller
         }
     }
 
+    public function dataTagihan(Request $request){
+        if($request->ajax()){
+            $data = Tagihan::select('bln_tagihan')->groupBy('bln_tagihan')->orderBy('bln_tagihan','desc');
+            return DataTables::of($data)
+            ->addColumn('ttl_tagihan', function($data){
+                $tagihan = Tagihan::where('bln_tagihan',$data->bln_tagihan)
+                ->select(DB::raw('SUM(ttl_tagihan) as tagihan'))->get();
+                if($tagihan != NULL){
+                    return number_format($tagihan[0]->tagihan);
+                }
+                else{
+                    return 0;
+                }
+            })
+            ->addColumn('dis_tagihan', function($data){
+                $tagihan = Tagihan::where('bln_tagihan',$data->bln_tagihan)
+                ->select(DB::raw('SUM(dis_tagihan) as tagihan'))->get();
+                if($tagihan != NULL){
+                    return number_format($tagihan[0]->tagihan);
+                }
+                else{
+                    return 0;
+                }
+            })
+            ->addColumn('rea_tagihan', function($data){
+                $tagihan = Tagihan::where('bln_tagihan',$data->bln_tagihan)
+                ->select(DB::raw('SUM(rea_tagihan) as tagihan'))->get();
+                if($tagihan != NULL){
+                    return number_format($tagihan[0]->tagihan);
+                }
+                else{
+                    return 0;
+                }
+            })
+            ->addColumn('sel_tagihan', function($data){
+                $tagihan = Tagihan::where('bln_tagihan',$data->bln_tagihan)
+                ->select(DB::raw('SUM(sel_tagihan) as tagihan'))->get();
+                if($tagihan != NULL){
+                    return number_format($tagihan[0]->tagihan);
+                }
+                else{
+                    return 0;
+                }
+            })
+            ->editColumn('bln_tagihan', function($data){
+                return IndoDate::bulan($data->bln_tagihan,' ');
+            })
+            ->make(true);
+        }
+        return view('keuangan.data.tagihan');
+    }
+
+    public function dataTunggakan(Request $request){
+        if($request->ajax()){
+            $data = Tagihan::select('bln_tagihan')->groupBy('bln_tagihan')->orderBy('bln_tagihan','desc');
+            return DataTables::of($data)
+            ->addColumn('sel_tagihan', function($data){
+                $tagihan = Tagihan::where('bln_tagihan',$data->bln_tagihan)
+                ->select(DB::raw('SUM(sel_tagihan) as tagihan'))->get();
+                if($tagihan != NULL){
+                    return number_format($tagihan[0]->tagihan);
+                }
+                else{
+                    return 0;
+                }
+            })
+            ->editColumn('bln_tagihan', function($data){
+                return IndoDate::bulan($data->bln_tagihan,' ');
+            })
+            ->make(true);
+        }
+        return view('keuangan.data.tunggakan');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

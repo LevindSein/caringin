@@ -121,6 +121,8 @@ Route::middleware('ceklogin:kasir')->group(function(){
 });
 
 Route::middleware('ceklogin:keuangan')->group(function(){
+    Route::get('keuangan/data/tunggakan',[KeuanganController::class, 'dataTunggakan']);
+    Route::get('keuangan/data/tagihan',[KeuanganController::class, 'dataTagihan']);
     Route::get('keuangan/laporan/rekap/generate/{data}',[KeuanganController::class, 'lapGenerateRekap']);
     Route::get('keuangan/laporan/rekap/{data}',[KeuanganController::class, 'lapRekap']);
     Route::get('keuangan/laporan/pendapatan/generate/{data}',[KeuanganController::class, 'lapGeneratePendapatan']);
