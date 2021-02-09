@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Rekap Pendapatan Bulanan | Kasir</title>
+        <title>Rekap Pendapatan Harian | Keuangan</title>
         <link rel="stylesheet" href="{{asset('css/penerimaan.css')}}" media="all"/>
         <link rel="icon" href="{{asset('img/logo.png')}}">
     </head>
@@ -10,12 +10,7 @@
     <body onload="window.print()">
         <div>
             <header class="clearfix">
-                <h2 style="text-align:center;">Rekap Pendapatan<br>{{$bulan}}</h2>
-                <div id="project">
-                    <div>
-                        <span>Nama Perekap</span>:
-                        {{Session::get('username')}}</div>
-                </div>
+                <h2 style="text-align:center;">Rekap Pendapatan<br>{{$tanggal}}</h2>
             </header>
             <main>
                 <table class="tg">
@@ -51,8 +46,8 @@
                         </tr>
                     <?php 
                     $i++;
-                    $bulanan = $bulanan + $d['bulanan'];
                     $harian = $harian + $d['harian'];
+                    $bulanan = $bulanan + $d['bulanan'];
                     $total = $total + $d['jumlah'];
                     ?>
                     @endif
@@ -79,12 +74,7 @@
         </div>
         <div style="page-break-before:always">
             <header class="clearfix">
-                <h2 style="text-align:center;">Rincian Pendapatan Tagihan Rutin Bulanan<br>{{$bulan}}</h2>
-                <div id="project">
-                    <div>
-                        <span>Nama Perekap</span>:
-                        {{Session::get('username')}}</div>
-                </div>
+                <h2 style="text-align:center;">Rincian Pendapatan Tagihan Rutin Bulanan<br>{{$tanggal}}</h2>
             </header>
             <main>
                 <table class="tg">
@@ -92,7 +82,8 @@
                         <tr>
                             <th class="tg-r8fv" rowspan="3">No</th>
                             <th class="tg-r8fv" rowspan="3">Kasir</th>
-                            <th class="tg-r8fv" rowspan="3">Tgl.Setor</th>
+                            <th class="tg-r8fv" rowspan="3">Rek</th>
+                            <th class="tg-r8fv" rowspan="3">Kontrol</th>
                             <th class="tg-r8fv" colspan="8">Penerimaan Tunai</th>
                             <th class="tg-r8fv" rowspan="3">Jumlah</th>
                         </tr>
@@ -110,11 +101,11 @@
                             <th class="tg-ccvv">Air Brs</th>
                         </tr>
                         <tr>
-                            <th class="tg-g255" colspan="12" style="height:1px"></th>
+                            <th class="tg-g255" colspan="13" style="height:1px"></th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php 
+                        <?php 
                         $listrik = 0;
                         $denlistrik = 0;
                         $airbersih = 0;
@@ -127,41 +118,40 @@
                         $i = 1;
                         ?>
                         @foreach($rincianbulan as $r)
-                            @foreach($r as $d)
                             <tr>
                                 <td class="tg-r8fz">{{$i}}</td>
-                                <td class="tg-r8fy">{{substr($d['nama'],0,6)}}</td>
-                                <td class="tg-r8fz">{{date('d-m-Y',strtotime($d['setor']))}}</td>
-                                <td class="tg-r8fx">{{number_format($d['listrik'])}}</td>
-                                <td class="tg-r8fx">{{number_format($d['airbersih'])}}</td>
-                                <td class="tg-r8fx">{{number_format($d['keamananipk'])}}</td>
-                                <td class="tg-r8fx">{{number_format($d['kebersihan'])}}</td>
-                                <td class="tg-r8fx">{{number_format($d['denlistrik'])}}</td>
-                                <td class="tg-r8fx">{{number_format($d['denairbersih'])}}</td>
-                                <td class="tg-r8fx">{{number_format($d['airkotor'])}}</td>
-                                <td class="tg-r8fx">{{number_format($d['lain'])}}</td>
-                                <td class="tg-r8fx">{{number_format($d['jumlah'])}}</td>
+                                <td class="tg-r8fy">{{substr($r->nama,0,6)}}</td>
+                                <td class="tg-r8fz">{{date('m/Y', strtotime($r->tgl_tagihan))}}</td>
+                                <td class="tg-r8fz">{{$r->kd_kontrol}}</td>
+                                <td class="tg-r8fx">{{number_format($r->byr_listrik - $r->byr_denlistrik)}}</td>
+                                <td class="tg-r8fx">{{number_format($r->byr_airbersih - $r->byr_denairbersih)}}</td>
+                                <td class="tg-r8fx">{{number_format($r->byr_keamananipk)}}</td>
+                                <td class="tg-r8fx">{{number_format($r->byr_kebersihan)}}</td>
+                                <td class="tg-r8fx">{{number_format($r->byr_denlistrik)}}</td>
+                                <td class="tg-r8fx">{{number_format($r->byr_denairbersih)}}</td>
+                                <td class="tg-r8fx">{{number_format($r->byr_airkotor)}}</td>
+                                <td class="tg-r8fx">{{number_format($r->byr_lain)}}</td>
+                                <td class="tg-r8fx">{{number_format($r->byr_listrik + $r->byr_airbersih + $r->byr_keamananipk + $r->byr_kebersihan + $r->byr_airkotor + $r->byr_lain)}}</td>
                             </tr>
                             <?php 
-                            $listrik = $listrik + $d['listrik'];
-                            $denlistrik = $denlistrik + $d['denlistrik'];
-                            $airbersih = $airbersih + $d['airbersih'];
-                            $denairbersih = $denairbersih + $d['denairbersih'];
-                            $keamananipk = $keamananipk + $d['keamananipk'];
-                            $kebersihan = $kebersihan + $d['kebersihan'];
-                            $airkotor = $airkotor + $d['airkotor'];
-                            $lain = $lain + $d['lain'];
-                            $jumlah = $jumlah + $d['jumlah'];
+                            $listrik = $listrik + $r->byr_listrik - $r->byr_denlistrik;
+                            $denlistrik = $denlistrik + $r->byr_denlistrik;
+                            $airbersih = $airbersih + $r->byr_airbersih - $r->byr_denairbersih;
+                            $denairbersih = $denairbersih + $r->byr_denairbersih;
+                            $keamananipk = $keamananipk + $r->byr_keamananipk;
+                            $kebersihan = $kebersihan + $r->byr_kebersihan;
+                            $airkotor = $airkotor + $r->byr_airkotor;
+                            $lain = $lain + $r->byr_lain;
+                            $jumlah = $jumlah + $r->byr_listrik + $r->byr_airbersih + $r->byr_keamananipk + $r->byr_kebersihan + $r->byr_airkotor + $r->byr_lain;
                             $i++;
                             ?>
-                            @endforeach
                         @endforeach
                     </tbody>
                     <tr>
-                        <td class="tg-g255" colspan="12" style="height:1px"></td>
+                        <td class="tg-g255" colspan="13" style="height:1px"></td>
                     </tr>
                     <tr>
-                        <td class="tg-r8fz" colspan="3"><b>Total<b></td>
+                        <td class="tg-r8fz" colspan="4"><b>Total<b></td>
                         <td class="tg-r8fx"><b>{{number_format($listrik)}}</b></td>
                         <td class="tg-r8fx"><b>{{number_format($airbersih)}}</b></td>
                         <td class="tg-r8fx"><b>{{number_format($keamananipk)}}</b></td>

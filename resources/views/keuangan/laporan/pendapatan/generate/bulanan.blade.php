@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Rekap Pendapatan Bulanan | Kasir</title>
+        <title>Rekap Pendapatan Bulanan | Keuangan</title>
         <link rel="stylesheet" href="{{asset('css/penerimaan.css')}}" media="all"/>
         <link rel="icon" href="{{asset('img/logo.png')}}">
     </head>
@@ -11,11 +11,6 @@
         <div>
             <header class="clearfix">
                 <h2 style="text-align:center;">Rekap Pendapatan<br>{{$bulan}}</h2>
-                <div id="project">
-                    <div>
-                        <span>Nama Perekap</span>:
-                        {{Session::get('username')}}</div>
-                </div>
             </header>
             <main>
                 <table class="tg">
@@ -80,11 +75,6 @@
         <div style="page-break-before:always">
             <header class="clearfix">
                 <h2 style="text-align:center;">Rincian Pendapatan Tagihan Rutin Bulanan<br>{{$bulan}}</h2>
-                <div id="project">
-                    <div>
-                        <span>Nama Perekap</span>:
-                        {{Session::get('username')}}</div>
-                </div>
             </header>
             <main>
                 <table class="tg">

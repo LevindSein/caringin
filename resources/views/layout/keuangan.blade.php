@@ -63,9 +63,14 @@
                                 </ul>
                                 <ul>
                                     <li class="nav-label">Pendapatan</li>
-                                    <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="calendar"></i> Harian</a></li>
-                                    <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="calendar"></i> Bulanan</a></li>
-                                    <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="calendar"></i> Tahunan</a></li>
+                                    <li class="nav-sub-item"><a href="{{url('keuangan/laporan/pendapatan/harian')}}" class="nav-sub-link"><i data-feather="calendar"></i> Harian</a></li>
+                                    <li class="nav-sub-item"><a href="{{url('keuangan/laporan/pendapatan/bulanan')}}" class="nav-sub-link"><i data-feather="calendar"></i> Bulanan</a></li>
+                                    <li class="nav-sub-item"><a href="{{url('keuangan/laporan/pendapatan/tahunan')}}" class="nav-sub-link"><i data-feather="calendar"></i> Tahunan</a></li>
+                                </ul>
+                                <ul>
+                                    <li class="nav-label">Rekap</li>
+                                    <li class="nav-sub-item"><a href="{{url('keuangan/laporan/rekap/sisa')}}" class="nav-sub-link"><i data-feather="dollar-sign"></i> Sisa Tagihan</a></li>
+                                    <li class="nav-sub-item"><a href="{{url('keuangan/laporan/rekap/selesai')}}" class="nav-sub-link"><i data-feather="calendar"></i> Akhir Bulan</a></li>
                                 </ul>
                             </div>
                         </div><!-- nav-sub -->
@@ -76,23 +81,6 @@
                             <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="dollar-sign"></i> Tagihan</a></li>
                             <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="arrow-up-right"></i> Tunggakan</a></li>
                         </ul>
-                    </li>
-                    <li class="nav-item with-sub">
-                        <a href="" class="nav-link"><i data-feather="book"></i> Penerimaan</a>
-                        <div class="navbar-menu-sub">
-                            <div class="d-lg-flex">
-                                <ul>
-                                    <li class="nav-label">Rekap</li>
-                                    <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="dollar-sign"></i> Sisa Tagihan</a></li>
-                                    <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="dollar-sign"></i> Akhir Bulan</a></li>
-                                </ul>
-                                <ul>
-                                    <li class="nav-label">Rekap</li>
-                                    <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="calendar"></i> Harian</a></li>
-                                    <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="calendar"></i> Bulanan</a></li>
-                                </ul>
-                            </div>
-                        </div><!-- nav-sub -->
                     </li>
                     <li class="nav-item with-sub">
                         <a href="" class="nav-link"><i data-feather="send"></i> Checkout</a>

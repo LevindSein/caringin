@@ -1,27 +1,27 @@
 @extends('layout.keuangan')
 
 @section('breadcrumb')
-<title>Pendapatan Bulanan | BP3C</title>
+<title>Rekap Akhir Bulan | BP3C</title>
 <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
     <div>
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-style1 mg-b-10">
             <li class="breadcrumb-item" aria-current="page">Laporan</li>
-            <li class="breadcrumb-item" aria-current="page">Pendapatan</li>
-            <li class="breadcrumb-item active" aria-current="page">Bulanan</li>
+            <li class="breadcrumb-item" aria-current="page">Rekap</li>
+            <li class="breadcrumb-item active" aria-current="page">Akhir Bulan</li>
         </ol>
         </nav>
-        <h4 class="mg-b-0 tx-spacing--1">Daftar Pendapatan Bulanan</h4>
+        <h4 class="mg-b-0 tx-spacing--1">Daftar Rekap Selesai</h4>
     </div>
     <hr>
     <div class="text-center">
-        <button type="button" data-toggle="modal" data-target="#myGenerate" title="Cetak Pendapatan Bulanan" class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5"><i data-feather="printer"></i> Generate</button>
+        <button type="button" data-toggle="modal" data-target="#myGenerate" title="Cetak Rekap Selesai" class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5"><i data-feather="printer"></i> Generate</button>
     </div>
 </div>
 @endsection
 
 @section('content')
-<input type="hidden" id="fasilitas" value="bulanan" />
+<input type="hidden" id="fasilitas" value="selesai" />
 <table 
     id="tabel" 
     class="table table-bordered" 
@@ -31,7 +31,6 @@
         <tr>
             <th class="wd-25p"><b>Bulan</b></th>
             <th class="wd-20p"><b>Realisasi</b></th>
-            <th class="wd-20p"><b>Diskon</b></th>
         </tr>
     </thead>
 </table>
@@ -46,16 +45,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cetak Pendapatan Bulan ?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Cetak Akhir Bulan ?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form class="user" action="{{url('keuangan/laporan/pendapatan/generate/bulanan')}}" method="GET" target="_blank">
+            <form class="user" action="{{url('keuangan/laporan/rekap/generate/selesai')}}" method="GET" target="_blank">
                 <div class="modal-body-short">
                     <div class="form-group col-lg-12">
-                        <label for="bulanpendapatan">Bulan</label>
-                        <select class="form-control" name="bulanpendapatan" id="bulanpendapatan" required>
+                        <label for="bulanselesai">Bulan</label>
+                        <select class="form-control" name="bulanselesai" id="bulanselesai" required>
                             <option value="01">Januari</option>
                             <option value="02">Februari</option>
                             <option value="03">Maret</option>
@@ -71,8 +70,8 @@
                         </select>
                     </div>
                     <div class="form-group col-lg-12">
-                        <label for="tahunpendapatan">Tahun</label>
-                        <select class="form-control" name="tahunpendapatan" id="tahunpendapatan" required>
+                        <label for="tahunselesai">Tahun</label>
+                        <select class="form-control" name="tahunselesai" id="tahunselesai" required>
                             @foreach($dataTahun as $d)
                             <option value="{{$d->thn_tagihan}}">{{$d->thn_tagihan}}</option>
                             @endforeach
@@ -89,5 +88,5 @@
 @endsection
 
 @section('js')
-<script src="{{asset('js/keuangan/pendapatan-bulanan.js')}}"></script>
+<script src="{{asset('js/keuangan/rekap-selesai.js')}}"></script>
 @endsection

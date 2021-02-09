@@ -26,7 +26,7 @@ class PendapatanController extends Controller
     public function index(Request $request){
         if($request->ajax())
         {
-            $data = Pembayaran::orderBy('id','desc');
+            $data = Pembayaran::orderBy('tgl_bayar','desc');
             return DataTables::of($data)
             ->editColumn('tgl_bayar', function ($data) {
                 return date('d-m-Y',strtotime($data->tgl_bayar));
@@ -66,7 +66,7 @@ class PendapatanController extends Controller
     public function bulanan(Request $request){
         if($request->ajax())
         {
-            $data = Pembayaran::select('bln_bayar')->groupBy('bln_bayar');
+            $data = Pembayaran::select('bln_bayar')->groupBy('bln_bayar')->orderBy('bln_bayar','desc');
             return DataTables::of($data)
             ->addColumn('listrik', function($data){
                 $tagihan = Pembayaran::where('bln_bayar',$data->bln_bayar)
@@ -158,7 +158,7 @@ class PendapatanController extends Controller
     public function tahunan(Request $request){
         if($request->ajax())
         {
-            $data = Pembayaran::select('thn_bayar')->groupBy('thn_bayar');
+            $data = Pembayaran::select('thn_bayar')->groupBy('thn_bayar')->orderBy('thn_bayar','desc');
             return DataTables::of($data)
             ->addColumn('listrik', function($data){
                 $tagihan = Pembayaran::where('thn_bayar',$data->thn_bayar)
