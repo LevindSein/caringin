@@ -568,6 +568,48 @@ class KasirController extends Controller
                 Tagihan::totalTagihan($d->id);
             }
 
+            $struk = new StrukPembayaran();
+            $struk->bln_bayar = date('Y-m',strtotime(Carbon::now()));
+            $struk->kd_kontrol = $request->tempatId;
+            $struk->pedagang = $request->pedagang;
+            $struk->los = $request->los;
+            $struk->lokasi = $request->lokasi;
+            $struk->nomor = Crypt::decryptString($request->faktur);
+
+            $struk->taglistrik = $request->taglistrik;
+            $struk->tagtunglistrik = $request->tagtunglistrik;
+            $struk->tagdenlistrik = $request->tagdenlistrik;
+            $struk->tagawlistrik = $request->tagawlistrik;
+            $struk->tagaklistrik = $request->tagaklistrik;
+            $struk->tagdylistrik = $request->tagdylistrik;
+            $struk->tagpklistrik = $request->tagpklistrik;
+            
+            $struk->tagairbersih = $request->tagairbersih;
+            $struk->tagtungairbersih = $request->tagtungairbersih;
+            $struk->tagdenairbersih = $request->tagdenairbersih;
+            $struk->tagawairbersih = $request->tagawairbersih;
+            $struk->tagakairbersih = $request->tagakairbersih;
+            $struk->tagpkairbersih = $request->tagpkairbersih;
+            
+            $struk->tagkeamananipk = $request->tagkeamananipk;
+            $struk->tagtungkeamananipk = $request->tagtungkeamananipk;
+            
+            $struk->tagkebersihan = $request->tagkebersihan;
+            $struk->tagtungkebersihan = $request->tagtungkebersihan;
+            
+            $struk->tagairkotor = $request->tagairkotor;
+            $struk->tagtungairkotor = $request->tagtungairkotor;
+            
+            $struk->taglain = $request->taglain;
+            $struk->tagtunglain = $request->tagtunglain;
+            
+            $struk->totalTagihan = $request->totalTagihan;
+            
+            $struk->bayar = date('d/m/Y H:i:s',strtotime(Carbon::now()));
+            
+            $struk->kasir = Session::get('username');
+            $struk->save();
+
             $data['kd_kontrol'] = $request->tempatId;
             $data['pedagang'] = $request->pedagang;
             $data['los'] = $request->los;
@@ -626,48 +668,6 @@ class KasirController extends Controller
         $los = $json->los;
         $lokasi = $json->lokasi;
         $faktur = Crypt::decryptString($json->faktur);
-
-        $struk = new StrukPembayaran();
-        $struk->bln_bayar = date('Y-m',strtotime(Carbon::now()));
-        $struk->nomor = $faktur;
-        $struk->kd_kontrol = $json->kd_kontrol;
-        $struk->pedagang = $json->pedagang;
-        $struk->los = $json->los;
-        $struk->lokasi = $json->lokasi;
-
-        $struk->taglistrik = $json->taglistrik;
-        $struk->tagtunglistrik = $json->tagtunglistrik;
-        $struk->tagdenlistrik = $json->tagdenlistrik;
-        $struk->tagawlistrik = $json->tagawlistrik;
-        $struk->tagaklistrik = $json->tagaklistrik;
-        $struk->tagdylistrik = $json->tagdylistrik;
-        $struk->tagpklistrik = $json->tagpklistrik;
-        
-        $struk->tagairbersih = $json->tagairbersih;
-        $struk->tagtungairbersih = $json->tagtungairbersih;
-        $struk->tagdenairbersih = $json->tagdenairbersih;
-        $struk->tagawairbersih = $json->tagawairbersih;
-        $struk->tagakairbersih = $json->tagakairbersih;
-        $struk->tagpkairbersih = $json->tagpkairbersih;
-        
-        $struk->tagkeamananipk = $json->tagkeamananipk;
-        $struk->tagtungkeamananipk = $json->tagtungkeamananipk;
-        
-        $struk->tagkebersihan = $json->tagkebersihan;
-        $struk->tagtungkebersihan = $json->tagtungkebersihan;
-        
-        $struk->tagairkotor = $json->tagairkotor;
-        $struk->tagtungairkotor = $json->tagtungairkotor;
-        
-        $struk->taglain = $json->taglain;
-        $struk->tagtunglain = $json->tagtunglain;
-        
-        $struk->totalTagihan = $json->totalTagihan;
-        
-        $struk->bayar = date('d/m/Y H:i:s',strtotime(Carbon::now()));
-        
-        $struk->kasir = Session::get('username');
-        $struk->save();
 
         $listrik         = number_format($json->taglistrik);
         $tunglistrik     = number_format($json->tagtunglistrik);
