@@ -45,6 +45,15 @@ class SearchController extends Controller
         return response()->json($alamat);
     }
 
+    public function cariAlamatKosong(Request $request){
+        $alamat = [];
+        if ($request->has('q')) {
+            $cariAlamat = $request->q;
+            $alamat = TempatUsaha::select('id', 'kd_kontrol')->where([['kd_kontrol', 'LIKE', '%'.$cariAlamat.'%'],['stt_tempat',2]])->orderBy('kd_kontrol','asc')->get();
+        }
+        return response()->json($alamat);
+    }
+
     public function cariAlatAir(Request $request){
         $alat = [];
         if ($request->has('q')) {

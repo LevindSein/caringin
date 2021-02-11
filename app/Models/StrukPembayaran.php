@@ -41,6 +41,7 @@ class StrukPembayaran extends Model
         'totalTagihan',
         'bayar',
         'kasir',
+        'cetakan',
         'updated_at',
         'created_at'
     ];

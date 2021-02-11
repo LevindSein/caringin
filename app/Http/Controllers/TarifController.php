@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use DataTables;
 use Validator;
 use Exception;
@@ -34,8 +35,12 @@ class TarifController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="keamananipk" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
-                    $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="keamananipk" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    if(Session::get('role') == 'master'){
+                        $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="keamananipk" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
+                        $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="keamananipk" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    }
+                    else
+                        $button = '<span style="color:#4e73df;"><i class="fas fa-ban"></i></span>';
                     return $button;
                 })
                 ->editColumn('tarif', function ($data) {
@@ -52,8 +57,12 @@ class TarifController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="kebersihan" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
-                    $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="kebersihan" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    if(Session::get('role') == 'master'){
+                        $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="kebersihan" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
+                        $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="kebersihan" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    }
+                    else
+                        $button = '<span style="color:#4e73df;"><i class="fas fa-ban"></i></span>';
                     return $button;
                 })
                 ->editColumn('tarif', function ($data) {
@@ -70,8 +79,12 @@ class TarifController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="airkotor" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
-                    $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="airkotor" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    if(Session::get('role') == 'master'){
+                        $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="airkotor" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
+                        $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="airkotor" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    }
+                    else
+                        $button = '<span style="color:#4e73df;"><i class="fas fa-ban"></i></span>';
                     return $button;
                 })
                 ->editColumn('tarif', function ($data) {
@@ -88,8 +101,12 @@ class TarifController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="lain" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
-                    $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="lain" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    if(Session::get('role') == 'master'){
+                        $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="lain" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
+                        $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="lain" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    }
+                    else
+                        $button = '<span style="color:#4e73df;"><i class="fas fa-ban"></i></span>';
                     return $button;
                 })
                 ->editColumn('tarif', function ($data) {

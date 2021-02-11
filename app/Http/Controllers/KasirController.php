@@ -836,7 +836,7 @@ class KasirController extends Controller
                 $printer -> text("----------------------------------------\n");
                 $printer -> text("Nomor : $faktur\n");
                 $printer -> text("Dibayar pada ".date('d/m/Y H:i:s',strtotime(Carbon::now()))."\n");
-                $printer -> text("Kuitansi ini adalah bukti pembayaran\nyang sah. Harap Disimpan.\n");
+                $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\n");
                 $printer -> text("Ksr : $nama\n");
                 $printer -> feed();
             }
@@ -969,7 +969,7 @@ class KasirController extends Controller
                 $printer -> text("----------------------------------------\n");
                 $printer -> text("Nomor : $faktur\n");
                 $printer -> text("Dibayar pada ".date('d/m/Y H:i:s',strtotime(Carbon::now()))."\n");
-                $printer -> text("Kuitansi ini adalah bukti pembayaran\nyang sah. Harap Disimpan.\n");
+                $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\n");
                 $printer -> text("Ksr : $nama\n");
                 $printer -> feed();
                 $printer -> cut();
@@ -2269,6 +2269,11 @@ class KasirController extends Controller
 
             $total           = number_format($struk->totalTagihan);
 
+            if($struk->cetakan > 0)
+                $cetakan     = number_format($struk->cetakan);
+            else
+                $cetakan     = 0;
+
             $dirfile = storage_path('app/public/logo_struk.png');
             $logo = EscposImage::load($dirfile,false);
 
@@ -2398,9 +2403,11 @@ class KasirController extends Controller
                     $printer -> selectPrintMode();
                     $printer -> setFont(Printer::FONT_B);
                     $printer -> text("----------------------------------------\n");
+                    if($cetakan != 0)
+                        $printer -> text("Salinan ke-$cetakan\n");
                     $printer -> text("Nomor : $struk->nomor\n");
                     $printer -> text("Dibayar pada $struk->bayar\n");
-                    $printer -> text("Kuitansi ini adalah bukti pembayaran\nyang sah. Harap Disimpan.\n");
+                    $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\n");
                     $printer -> text("Ksr : $struk->kasir\n");
                     $printer -> feed();
                 }
@@ -2526,13 +2533,18 @@ class KasirController extends Controller
                     $printer -> selectPrintMode();
                     $printer -> setFont(Printer::FONT_B);
                     $printer -> text("----------------------------------------\n");
+                    if($cetakan != 0)
+                        $printer -> text("Salinan ke-$cetakan\n");
                     $printer -> text("Nomor : $struk->nomor\n");
                     $printer -> text("Dibayar pada $struk->bayar\n");
-                    $printer -> text("Kuitansi ini adalah bukti pembayaran\nyang sah. Harap Disimpan.\n");
+                    $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\n");
                     $printer -> text("Ksr : $struk->kasir\n");
                     $printer -> feed();
                     $printer -> cut();
                 }
+                $cetakan++;
+                $struk->cetakan = $cetakan;
+                $struk->save();
             }catch(\Exception $e){
                 return response()->json(['status' => 'Gagal Print Struk']);
             }finally{

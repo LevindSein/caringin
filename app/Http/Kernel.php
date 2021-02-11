@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         
         'ceklogin' => \App\Http\Middleware\CekLogin::class,
         'dashboard' => \App\Http\Middleware\Dashboard::class,
+        'layanan' => \App\Http\Middleware\Layanan::class,
         'pedagang' => \App\Http\Middleware\Pedagang::class,
         'tempatusaha' => \App\Http\Middleware\TempatUsaha::class,
         'tagihan' => \App\Http\Middleware\Tagihan::class,
@@ -75,6 +76,7 @@ class Kernel extends HttpKernel
         'alatmeter' => \App\Http\Middleware\AlatMeter::class,
         'harilibur' => \App\Http\Middleware\HariLibur::class,
         'blok' => \App\Http\Middleware\Blok::class,
+        'master' => \App\Http\Middleware\Master::class,
         'user' => \App\Http\Middleware\User::class,
         'log' => \App\Http\Middleware\Log::class,
         'human' => \App\Http\Middleware\Human::class,

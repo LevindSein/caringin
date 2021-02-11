@@ -279,15 +279,25 @@ $(document).ready(function(){
     });
 
     $('#nama').on('input',function(){
-        var nama = $(this).val();
-        var username = nama.replace(/\s/g,'');
-        var username = username.slice(0, 7);
-        var number = Math.floor(1000 + Math.random() * 9000);
-        document.getElementById("username").value = username + number;
+        if($('#action').val() == 'Add'){
+            nama = $(this).val();
+            username = nama.replace(/[^a-zA-Z]/g,'');
+            nama = username;
+            username = username.slice(0, 7);
+            number = Math.floor(1000 + Math.random() * 9000);
 
-        var pass = shuffle('abcdefghjkmnpqrstuvwxyz123456789');
-        var pass = pass.slice(0, 7);
-        document.getElementById("password").value = pass;
+            pass = shuffle('abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ123456789');
+            pass = pass.slice(0, 8);
+
+            if(nama == ''){
+                document.getElementById("username").value = '';
+                document.getElementById("password").value = '';
+            }
+            else{
+                document.getElementById("username").value = username + number;
+                document.getElementById("password").value = pass;
+            }
+        }
     });
 
     $(".toggle-password").click(function() {
@@ -394,6 +404,7 @@ $(document).ready(function(){
         $("#alatmeter").prop("checked", false);
         $("#tarif").prop("checked", false);
         $("#harilibur").prop("checked", false);
+        $("#layanan").prop("checked", false);
 		$.ajax({
 			url :"/user/"+id+"/otoritas",
             cache:false,
@@ -458,6 +469,8 @@ $(document).ready(function(){
                     if(data.result.tarif == true) $("#tarif").prop("checked", true);
                     
                     if(data.result.harilibur == true) $("#harilibur").prop("checked", true);
+
+                    if(data.result.layanan == true) $("#layanan").prop("checked", true);
                 }
                 else{
                     $('.blokOtoritas').select2({
@@ -554,5 +567,9 @@ $(document).ready(function(){
     $('[type=tel]').on('keypress', function(e) {
         keys = ['0','1','2','3','4','5','6','7','8','9']
         return keys.indexOf(e.key) > -1
+    });
+
+    $("#nama").on("change paste keyup", function(e){
+        $(e.target).val($(e.target).val().replace(/[^a-zA-Z.\s]/gi,''));
     });
 });

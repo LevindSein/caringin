@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\DatabaseBackUp',
     ];
 
     /**
@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('cron:kerjakasir')->dailyAt('06:00');
         $schedule->command('cron:tutupkasir')->dailyAt('15:00');
         $schedule->command('cron:login')->dailyAt('03:00');
-        // $schedule->command('cron:backup')->dailyAt('04:00');
+        $schedule->command('cron:backup')->dailyAt('05:00');
     }
 
     /**

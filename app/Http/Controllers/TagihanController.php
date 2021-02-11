@@ -93,7 +93,10 @@ class TagihanController extends Controller
                         $button .= '&nbsp;&nbsp;<a type="button" title="Publish" name="unpublish" id="'.$data->id.'" class="unpublish"><i class="fas fa-check-circle" style="color:#1cc88a;"></i></a>';
                     }
                     else{
-                        $button = '<button type="button" title="Cancel Publish" name="unpublish" id="'.$data->id.'" class="unpublish btn btn-sm btn-danger">Unpublish</button>';
+                        if(Session::get('role') == 'master')
+                            $button = '<button type="button" title="Cancel Publish" name="unpublish" id="'.$data->id.'" class="unpublish btn btn-sm btn-danger">Unpublish</button>';
+                        else
+                            $button = '<span style="color:#1cc88a;">Published</span>';
                     }
                     return $button;
                 })
@@ -383,7 +386,10 @@ class TagihanController extends Controller
                         $button .= '&nbsp;&nbsp;<a type="button" title="Publish" name="unpublish" id="'.$data->id.'" class="unpublish"><i class="fas fa-check-circle" style="color:#1cc88a;"></i></a>';
                     }
                     else{
-                        $button = '<button type="button" title="Cancel Publish" name="unpublish" id="'.$data->id.'" class="unpublish btn btn-sm btn-danger">Unpublish</button>';
+                        if(Session::get('role') == 'master')
+                            $button = '<button type="button" title="Cancel Publish" name="unpublish" id="'.$data->id.'" class="unpublish btn btn-sm btn-danger">Unpublish</button>';
+                        else
+                            $button = '<span style="color:#1cc88a">Published</span>';
                     }
                     return $button;
                 })
@@ -1660,7 +1666,10 @@ class TagihanController extends Controller
                         $button .= '&nbsp;&nbsp;<a type="button" title="Publish" name="unpublish" id="'.$data->id.'" class="unpublish"><i class="fas fa-check-circle" style="color:#1cc88a;"></i></a>';
                     }
                     else{
-                        $button = '<button type="button" title="Cancel Publish" name="unpublish" id="'.$data->id.'" class="unpublish btn btn-sm btn-danger">Unpublish</button>';
+                        if(Session::get('role') == 'master')
+                            $button = '<button type="button" title="Cancel Publish" name="unpublish" id="'.$data->id.'" class="unpublish btn btn-sm btn-danger">Unpublish</button>';
+                        else
+                            $button = '<span style="color:#1cc88a;">Published</span>';
                     }
                     return $button;
                 })

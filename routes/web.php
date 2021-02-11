@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PedagangController;
 use App\Http\Controllers\TempatController;
 use App\Http\Controllers\TagihanController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\TarifController;
 use App\Http\Controllers\AlatController;
 use App\Http\Controllers\HariLiburController;
 use App\Http\Controllers\BlokController;
+use App\Http\Controllers\MasterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 
@@ -132,6 +134,11 @@ Route::middleware('ceklogin:keuangan')->group(function(){
     Route::resource('keuangan', KeuanganController::class);
 });
 
+Route::middleware('ceklogin:layanan')->group(function (){
+    Route::get('layanan/tempat/{data}',[LayananController::class, 'tempat']);
+    Route::resource('layanan', LayananController::class);
+});
+
 Route::middleware('ceklogin:pedagang')->group(function (){
     Route::post('pedagang/update', [PedagangController::class, 'update']);
     Route::get('pedagang/destroy/{id}', [PedagangController::class, 'destroy']);
@@ -241,6 +248,10 @@ Route::middleware('ceklogin:blok')->group(function(){
     Route::get('utilities/blok/destroy/{id}', [BlokController::class, 'destroy']);
 });
 
+Route::middleware('ceklogin:master')->group(function(){
+    Route::get('master/kasir', [MasterController::class, 'kasir']);
+});
+
 Route::middleware('ceklogin:user')->group(function(){
     Route::post('user/update', [UserController::class, 'update']);
     Route::get('user/destroy/{id}', [UserController::class, 'destroy']);
@@ -258,7 +269,7 @@ Route::middleware('ceklogin:log')->group(function(){
     Route::get('log',function(Request $request){
         if($request->ajax())
         {
-            $data = LoginLog::orderBy('created_at','desc');
+            $data = LoginLog::orderBy('id','desc');
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->editColumn('ktp', function ($ktp) {
@@ -287,6 +298,7 @@ Route::middleware('ceklogin:human')->group(function(){
     Route::get('cari/blok',[SearchController::class, 'cariBlok']);
     Route::get('cari/nasabah',[SearchController::class, 'cariNasabah']);
     Route::get('cari/alamat',[SearchController::class, 'cariAlamat']);
+    Route::get('cari/alamat/kosong',[SearchController::class, 'cariAlamatKosong']);
     Route::get('cari/alatlistrik',[SearchController::class, 'cariAlatListrik']);
     Route::get('cari/alatair',[SearchController::class, 'cariAlatAir']);
     Route::get('cari/tagihan/{id}',[SearchController::class, 'cariTagihan']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use DataTables;
 use Validator;
 use Exception;
@@ -25,9 +26,13 @@ class AlatController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $button = '<a type="button" title="Print QR" name="qr" id="'.$data->id.'" fas="listrik" class="qr"><i class="fas fa-qrcode" style="color:#fd7e14;"></i></a>';
-                    $button .= '&nbsp;&nbsp;<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="listrik" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
-                    $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="listrik" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    if(Session::get('role') ==  'master'){
+                        $button = '<a type="button" title="Print QR" name="qr" id="'.$data->id.'" fas="listrik" class="qr"><i class="fas fa-qrcode" style="color:#fd7e14;"></i></a>';
+                        $button .= '&nbsp;&nbsp;<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="listrik" class="edit"><i class="fas fa-edit" style="color:#4e73df;"></i></a>';
+                        $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="listrik" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    }
+                    else
+                        $button = '<span style="color:#4e73df;"><i class="fas fa-ban"></i></span>';
                     return $button;
                 })
                 ->addColumn('tempat', function($data){
@@ -54,9 +59,13 @@ class AlatController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $button = '<a type="button" title="Print QR" name="edit" id="'.$data->id.'" fas="air" class="qr"><i class="fas fa-qrcode fa-sm" style="color:#fd7e14;"></i></a>';
-                    $button .= '&nbsp;&nbsp;<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="air" class="edit"><i class="fas fa-edit fa-sm" style="color:#4e73df;"></i></a>';
-                    $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="air" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    if(Session::get('role') == 'master'){
+                        $button = '<a type="button" title="Print QR" name="edit" id="'.$data->id.'" fas="air" class="qr"><i class="fas fa-qrcode fa-sm" style="color:#fd7e14;"></i></a>';
+                        $button .= '&nbsp;&nbsp;<a type="button" title="Edit" name="edit" id="'.$data->id.'" fas="air" class="edit"><i class="fas fa-edit fa-sm" style="color:#4e73df;"></i></a>';
+                        $button .= '&nbsp;&nbsp;<a type="button" title="Hapus" name="delete" id="'.$data->id.'" fas="air" class="delete"><i class="fas fa-trash-alt" style="color:#e74a3b;"></i></a>';
+                    }
+                    else
+                        $button = '<span style="color:#4e73df;"><i class="fas fa-ban"></i></span>';
                     return $button;
                 })
                 ->addColumn('tempat', function($data){

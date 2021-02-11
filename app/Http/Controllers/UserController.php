@@ -188,7 +188,7 @@ class UserController extends Controller
     {
         $rules = array(
             'ktp'      => 'required',
-            'nama'     => 'required',
+            'nama'     => ['required', 'regex:/^[a-zA-Z\.\s]+$/u','min:2', 'max:30'],
             'username' => 'required',
             'password' => 'required',
             'hp'       => 'required',
@@ -290,7 +290,7 @@ class UserController extends Controller
     {
         $rules = array(
             'ktp'      => 'required',
-            'nama'     => 'required',
+            'nama'     => ['required', 'regex:/^[a-zA-Z\.\s]+$/u','min:2', 'max:30'],
             'username' => 'required',
             'hp'       => 'required',
             'role'     => 'required',
@@ -427,6 +427,7 @@ class UserController extends Controller
                 $data['alatmeter'] = $otoritas->alatmeter;
                 $data['tarif'] = $otoritas->tarif;
                 $data['harilibur'] = $otoritas->harilibur;
+                $data['layanan'] = $otoritas->layanan;
             }
 
             return response()->json(['result' => $data]);
@@ -442,7 +443,7 @@ class UserController extends Controller
      */
     public function otoritas(Request $request)
     {
-        $pilihanKelola = array('pedagang','tempatusaha','tagihan','blok','pemakaian','pendapatan','datausaha','publish','alatmeter','tarif','harilibur');
+        $pilihanKelola = array('pedagang','tempatusaha','tagihan','blok','pemakaian','pendapatan','datausaha','publish','alatmeter','tarif','harilibur','layanan');
 
         $kelola = array();
         $kelola['otoritas'] = $request->blokOtoritas;
