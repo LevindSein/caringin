@@ -9,7 +9,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Aplikasi Pengelolaan Pasar Induk Caringin di Kota Bandung">
-        <meta name="author" content="mr.Sein & Mr.Maizu">
+        <meta name="author" content="Sein & Maizu">
 
         <title>Login | BP3C</title>
 
@@ -23,7 +23,7 @@
             rel="stylesheet">
 
         <!-- Custom styles for this template-->
-        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+        <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
 
         <link rel="icon" href="{{asset('img/logo.png')}}">
 
@@ -31,7 +31,7 @@
 
     </head>
 
-    <body class="bg-gradient-vine">
+    <body class="bg-gradient-vine" id="body-dynamic">
 
         <div class="container">
 
@@ -44,12 +44,12 @@
                         <div class="card-body p-0">
                             <!-- Nested Row within Card Body -->
                             <div class="row">
-                                <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                                <div class="col-lg-6 d-none d-lg-block bg-login-image" id="img-dynamic"></div>
                                 <div class="col-lg-6">
                                     <div class="p-5">
                                         <div class="text-center">
                                             @include('message.flash-message')
-                                            <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                                            <h1 class="h4 text-gray-900 mb-4" id="login-dynamic">Login</h1>
                                         </div>
                                         <form class="user" action="{{url('storelogin')}}" method="POST" id="sample_form">
                                             @csrf
@@ -122,6 +122,43 @@
                 });
             });
         </script>
+        @if($time == 'pagi')
+        <script>
+            $(document).ready(function () {
+                $("#body-dynamic").removeClass("bg-gradient-vine").addClass("bg-gradient-evening");
+                $("#save").removeClass("btn-primary").addClass("btn-success");
+                $("#img-dynamic").removeClass("bg-login-image").addClass("bg-login-image-evening");
+                $("#login-dynamic").html("Selamat Pagi");
+            });
+        </script>
+        @elseif($time == 'siang')
+        <script>
+            $(document).ready(function () {
+                $("#body-dynamic").removeClass("bg-gradient-vine").addClass("bg-gradient-afternoon");
+                $("#save").removeClass("btn-primary").addClass("btn-danger");
+                $("#img-dynamic").removeClass("bg-login-image").addClass("bg-login-image-afternoon");
+                $("#login-dynamic").html("Selamat Siang");
+            });
+        </script>
+        @elseif($time == 'sore')
+        <script>
+            $(document).ready(function () {
+                $("#body-dynamic").removeClass("bg-gradient-vine").addClass("bg-gradient-vine");
+                $("#save").removeClass("btn-primary").addClass("btn-primary");
+                $("#img-dynamic").removeClass("bg-login-image").addClass("bg-login-image-vine");
+                $("#login-dynamic").html("Selamat Sore");
+            });
+        </script>
+        @elseif($time == 'malam')
+        <script>
+            $(document).ready(function () {
+                $("#body-dynamic").removeClass("bg-gradient-vine").addClass("bg-gradient-night");
+                $("#save").removeClass("btn-primary").addClass("btn-dark");
+                $("#img-dynamic").removeClass("bg-login-image").addClass("bg-login-image-night");
+                $("#login-dynamic").html("Selamat Malam");
+            });
+        </script>
+        @endif
     </body>
 
 </html>

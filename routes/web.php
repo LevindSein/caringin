@@ -28,6 +28,7 @@ use App\Http\Controllers\DownloadController;
 
 use App\Models\User;
 use App\Models\LoginLog;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -47,7 +48,34 @@ Route::get('/', function(){
     return redirect()->route('login');
 });
 Route::get('login',function(){
-    return view('home.login');
+    $time = "unknown";
+    $now = Carbon::now();
+    $start = Carbon::createFromTimeString('04:00');
+    $end = Carbon::createFromTimeString('10:00');
+    if ($now->between($start, $end)){
+        $time = "pagi";
+    }
+    $start = Carbon::createFromTimeString('10:00');
+    $end = Carbon::createFromTimeString('15:00');
+    if ($now->between($start, $end)){
+        $time = "siang";
+    }
+    $start = Carbon::createFromTimeString('15:00');
+    $end = Carbon::createFromTimeString('19:00');
+    if ($now->between($start, $end)){
+        $time = "sore";
+    }
+    $start = Carbon::createFromTimeString('19:00');
+    $end = Carbon::createFromTimeString('23:59');
+    if ($now->between($start, $end)){
+        $time = "malam";
+    }
+    $start = Carbon::createFromTimeString('00:00');
+    $end = Carbon::createFromTimeString('04:00');
+    if ($now->between($start, $end)){
+        $time = "malam";
+    }
+    return view('home.login',['time'=>$time]);
 })->name('login');
 
 //LOGIN
