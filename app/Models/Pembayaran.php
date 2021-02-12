@@ -11,6 +11,7 @@ class Pembayaran extends Model
     protected $fillable = [
         'id',
         'no_faktur',
+        'ref',
         'tgl_bayar',
         'bln_bayar',
         'thn_bayar',

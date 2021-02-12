@@ -278,6 +278,8 @@ Route::middleware('ceklogin:blok')->group(function(){
 
 Route::middleware('ceklogin:master')->group(function(){
     Route::get('master/kasir', [MasterController::class, 'kasir']);
+    Route::post('master/kasir/restore/{id}', [MasterController::class, 'kasirRestore']);
+    Route::get('master/kasir/edit/{id}', [MasterController::class, 'kasirEdit']);
 });
 
 Route::middleware('ceklogin:user')->group(function(){
@@ -332,6 +334,10 @@ Route::middleware('ceklogin:human')->group(function(){
     Route::get('cari/tagihan/{id}',[SearchController::class, 'cariTagihan']);
     Route::get('cari/listrik/{id}',[SearchController::class, 'cariListrik']);
     Route::get('cari/airbersih/{id}',[SearchController::class, 'cariAirBersih']);
+    Route::get('cari/keamananipk/{id}',[SearchController::class, 'cariKeamananIpk']);
+    Route::get('cari/kebersihan/{id}',[SearchController::class, 'cariKebersihan']);
+    Route::get('cari/airkotor/{id}',[SearchController::class, 'cariAirKotor']);
+    Route::get('cari/lain/{id}',[SearchController::class, 'cariLain']);
     Route::get('cari/tagihan/{fasilitas}/{kontrol}',[SearchController::class, 'cariTagihanku']);
 });
 

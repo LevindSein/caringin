@@ -11,6 +11,8 @@ class StrukPembayaran extends Model
     protected $table ='struk_pembayaran';
     protected $fillable = [
         'id',
+        'ref',
+        'tgl_bayar',
         'bln_bayar',
         'nomor',
         'kd_kontrol',

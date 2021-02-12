@@ -382,8 +382,8 @@ class UserController extends Controller
     {
         if($request->ajax()){
             try{
-                $pass = str_shuffle('abcdefghjkmnpqrstuvwxyz123456789');
-                $pass = substr($pass,0,7);
+                $pass = str_shuffle('abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ123456789');
+                $pass = substr($pass,0,8);
 
                 $password = sha1(md5(hash('gost',$pass)));
 

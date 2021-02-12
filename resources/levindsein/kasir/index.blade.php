@@ -398,6 +398,7 @@ $agent = new Agent();
                     <input hidden id="los" name="los"/>
                     <input hidden id="lokasi" name="lokasi"/>
                     <input hidden id="faktur" name="faktur"/>
+                    <input hidden id="ref" name="ref"/>
                     
                     <input hidden id="taglistrik" name="taglistrik"/>
                     <input hidden id="tagtunglistrik" name="tagtunglistrik"/>

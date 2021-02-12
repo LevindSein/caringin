@@ -145,7 +145,7 @@
             $(document).ready(function () {
                 $("#body-dynamic").removeClass("bg-gradient-vine").addClass("bg-gradient-vine");
                 $("#save").removeClass("btn-primary").addClass("btn-primary");
-                $("#img-dynamic").removeClass("bg-login-image").addClass("bg-login-image-vine");
+                $("#img-dynamic").removeClass("bg-login-image").addClass("bg-login-image");
                 $("#login-dynamic").html("Selamat Sore");
             });
         </script>

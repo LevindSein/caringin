@@ -1496,7 +1496,7 @@ class TagihanController extends Controller
                 })
                 ->editColumn('ttl_keamananipk', function ($data) {
                     $hasil = number_format($data->ttl_keamananipk);
-                    return '<span style="font-size:14px;color:#000000;"><b>'.$hasil.'</b></span>';
+                    return '<a href="javascript:void(0)" class="totalkeamananipk" id="'.$data->id.'"><span style="font-size:14px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                 })
                 ->editColumn('dis_kebersihan', function ($data) {
                     $hasil = number_format($data->dis_kebersihan);
@@ -1504,15 +1504,15 @@ class TagihanController extends Controller
                 })
                 ->editColumn('ttl_kebersihan', function ($data) {
                     $hasil = number_format($data->ttl_kebersihan);
-                    return '<span style="font-size:14px;color:#000000;"><b>'.$hasil.'</b></span>';
+                    return '<a href="javascript:void(0)" class="totalkebersihan" id="'.$data->id.'"><span style="font-size:14px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                 })
                 ->editColumn('ttl_airkotor', function ($data) {
                     $hasil = number_format($data->ttl_airkotor);
-                    return '<span style="font-size:14px;color:#000000;"><b>'.$hasil.'</b></span>';
+                    return '<a href="javascript:void(0)" class="totalairkotor" id="'.$data->id.'"><span style="font-size:14px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                 })
                 ->editColumn('ttl_lain', function ($data) {
                     $hasil = number_format($data->ttl_lain);
-                    return '<span style="font-size:14px;color:#000000;"><b>'.$hasil.'</b></span>';
+                    return '<a href="javascript:void(0)" class="totallain" id="'.$data->id.'"><span style="font-size:14px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                 })
                 ->editColumn('ttl_tagihan', function ($data) {
                     $warna = max($data->warna_airbersih,$data->warna_listrik);

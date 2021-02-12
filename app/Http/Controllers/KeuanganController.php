@@ -395,7 +395,7 @@ class KeuanganController extends Controller
             $tanggal = $request->tgl_utama;
             $tgl = $tanggal;
             $tanggal = IndoDate::tanggal($tanggal, ' ');
-            $cetak = IndoDate::tanggal(date('Y-m-d',strtotime(Carbon::now())),' ');
+            $cetak = IndoDate::tanggal(date('Y-m-d',strtotime(Carbon::now())),' ')." ".date('H:i:s',strtotime(Carbon::now()));
 
             $data  = User::where('role','kasir')->get();
             $i = 0;
@@ -437,7 +437,7 @@ class KeuanganController extends Controller
         if($data == 'bulanan'){
             $periode = $request->tahunpendapatan."-".$request->bulanpendapatan;
             $bln = IndoDate::bulan($periode, ' ');
-            $cetak = IndoDate::tanggal(date('Y-m-d',strtotime(Carbon::now())),' ');
+            $cetak = IndoDate::tanggal(date('Y-m-d',strtotime(Carbon::now())),' ')." ".date('H:i:s',strtotime(Carbon::now()));
 
             $data  = User::where('role','kasir')->get();
             $i = 0;
@@ -709,7 +709,7 @@ class KeuanganController extends Controller
         }
 
         if($data == 'selesai'){
-            $cetak   = IndoDate::tanggal(date('Y-m-d',strtotime(Carbon::now())),' ');
+            $cetak   = IndoDate::tanggal(date('Y-m-d',strtotime(Carbon::now())),' ')." ".date('H:i:s',strtotime(Carbon::now()));
             $periode = $request->tahunselesai."-".$request->bulanselesai;
             $data = Pembayaran::where('bln_bayar',$periode)->get();
             $listrik = 0;

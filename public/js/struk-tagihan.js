@@ -10,8 +10,8 @@ $(document).ready(function () {
 		},
 		columns: [
 			{ data: 'kd_kontrol', name: 'kd_kontrol', class : 'text-center', width: '25%' },
-			{ data: 'bln_bayar', name: 'bln_bayar', class : 'text-center', width: '25%'},
-			{ data: 'pedagang', name: 'pedagang', class : 'text-center', width: '20%', orderable:false },
+			{ data: 'bayar', name: 'bayar', class : 'text-center', width: '25%'},
+			{ data: 'totalTagihan', name: 'totalTagihan', class : 'text-center', width: '20%', orderable:false },
 			{ data: 'lokasi', name: 'lokasi', class : 'text-center', width: '20%', orderable:false },
 			{ data: 'action', name: 'action', class : 'text-center', width: '5%', orderable:false }
         ],

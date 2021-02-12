@@ -55,6 +55,7 @@ $(document).ready(function () {
                 $("#los").val(data.result.los);
                 $("#lokasi").val(data.result.lokasi);
                 $("#faktur").val(data.result.faktur);
+                $("#ref").val(data.result.ref);
                 
                 total = 0;
 
@@ -418,6 +419,7 @@ $(document).ready(function () {
         kode_kontrol = kontrol;
     });
 
+    localStorage.setItem("struk", "0");
     $('#form_rincian').on('submit', function(event){
 		event.preventDefault();
 		$.ajax({
@@ -441,6 +443,9 @@ $(document).ready(function () {
                         ajax_print('/kasir/bayar/' + JSON.stringify(data.result));
                     }
 				}
+                
+                localStorage.setItem("struk", "1");
+                
                 $('#tabelKasir').DataTable().ajax.reload(function(){}, false);
                 $('#myRincian').modal('hide');
                 $('#form_result').html(html);

@@ -15,8 +15,8 @@
             <thead>
                 <tr>
                     <th style="text-align:center;"><b>Kontrol</b></th>
-                    <th style="text-align:center;"><b>Bulan Bayar</b></th>
-                    <th style="text-align:center;"><b>Pengguna</b></th>
+                    <th style="text-align:center;"><b>Dibayar</b></th>
+                    <th style="text-align:center;"><b>Tagihan</b></th>
                     <th style="text-align:center;"><b>Ket</b></th>
                     <th style="text-align:center;"><b>Action</b></th>
                 </tr>
