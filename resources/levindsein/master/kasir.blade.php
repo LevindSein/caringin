@@ -49,7 +49,44 @@
                 </table>
             </div>
         </div>
-    </div>    
+    </div>  
+</div>
+<div
+    class="modal fade"
+    id="myModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Tanggal Penerimaan</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="user" id="form_edit" method="POST">
+                @csrf
+                <div class="modal-body-short">
+                    <div class="col-lg-12">
+                        <input
+                            required
+                            placeholder="Masukkan Tanggal Penerimaan" class="form-control" type="date"
+                            autocomplete="off"
+                            type="date"
+                            name="edittanggal"
+                            id="edittanggal"
+                            value="{{Session::get('masterkasir')}}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="hidden_ref" id="hidden_ref"/>
+                    <input type="submit" class="btn btn-primary btn-sm" value="Submit" />
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -113,4 +150,5 @@ $(document).ready(function () {
     });
 });
 </script>
+<script src="{{asset('js/master/kasir.js')}}"></script>
 @endsection

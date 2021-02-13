@@ -36,6 +36,7 @@ class MasterController extends Controller
             return DataTables::of($data)
                 ->addColumn('action', function($data){
                     $button = '<a type="button" title="Restore" name="restore" id="'.$data->ref.'" class="restore"><i class="fas fa-undo" style="color:#4e73df;"></i></a>&nbsp;&nbsp;';
+                    $button .= '<a type="button" title="Edit" name="edit" id="'.$data->ref.'" class="edit"><i class="fas fa-edit" style="color:red;"></i></a>';
                     return $button;
                 })
                 ->addColumn('pengguna', function($data){
@@ -187,6 +188,43 @@ class MasterController extends Controller
             }
             catch(\Exception $e){
                 return response()->json(['errors' => 'Restore Gagal']);
+            }
+        }
+    }
+
+    public function kasirEdit(Request $request){
+        if($request->ajax()){
+            try{
+                $pembayaran = Pembayaran::where('ref',$request->hidden_ref)->get();
+                if($pembayaran != NULL){
+                    foreach($pembayaran as $d){
+                        $tanggal = $request->edittanggal;
+                        $d->tgl_bayar = $tanggal;
+                        $d->bln_bayar = date("Y-m",strtotime($tanggal));
+                        $d->thn_bayar = date("Y",strtotime($tanggal));
+                        $d->save();
+                    }
+                }
+
+                $struk = StrukPembayaran::where('ref', $request->hidden_ref)->get();
+                if($struk != NULL){
+                    foreach($struk as $d){
+                        $tanggal = $request->edittanggal;
+                        $d->tgl_bayar = $tanggal;
+                        $d->bln_bayar = date("Y-m",strtotime($tanggal));
+
+                        $bayar   = $d->bayar;
+                        $pattern = date("d/m/Y", strtotime($tanggal));
+                        $bayar   = substr_replace($bayar,$pattern,0,10);
+
+                        $d->bayar = $bayar;
+                        $d->save();
+                    }
+                }
+                return response()->json(['success' => 'Berhasil Melakukan Update']);
+            }
+            catch(\Exception $e){
+                return response()->json(['errors' => 'Gagal Melakukan Update']);
             }
         }
     }
