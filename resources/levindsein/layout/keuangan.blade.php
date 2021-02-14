@@ -19,13 +19,15 @@
         <!-- Custom styles for this page -->
         <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
         <link href="{{asset('vendor/datatables/responsive.bootstrap.min.css')}}" rel="stylesheet">
+        <!-- <link href="{{asset('dashforge/assets/css/jquery.dataTables.min.css')}}" rel="stylesheet"> -->
+        <!-- <link href="{{asset('dashforge/assets/css/responsive.dataTables.min.css')}}" rel="stylesheet"> -->
 
         <!-- vendor css -->
         <link href="{{asset('dashforge/lib/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
         <link href="{{asset('dashforge/lib/ionicons/css/ionicons.min.css')}}" rel="stylesheet">
 
         <!-- DashForge CSS -->
-        <link rel="stylesheet" href="{{asset('dashforge/assets/css/dashforge.css')}}">
+        <link rel="stylesheet" href="{{asset('dashforge/assets/css/dashforge.min.css')}}">
         <!-- <link rel="stylesheet" href="{{asset('dashforge/assets/css/dashforge.dashboard.css')}}"> -->
         
         <script src="{{asset('js/animate.min.js')}}"></script>

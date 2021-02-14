@@ -24,7 +24,7 @@
 <input type="hidden" id="fasilitas" value="harian" />
 <table 
     id="tabel" 
-    class="table table-bordered" 
+    class="table table-bordered"
     cellspacing="0"
     width="100%">
     <thead>

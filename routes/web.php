@@ -200,7 +200,7 @@ Route::middleware('ceklogin:tagihan')->group(function (){
     });
     Route::get('tagihan/pemberitahuan/{blok}', [TagihanController::class, 'pemberitahuan']);
     Route::post('tagihan/unpublish/{id}', [TagihanController::class, 'unpublish']);
-    // Route::get('tagihan/pembayaran/{blok}', [TagihanController::class, 'pembayaran']);
+    Route::get('tagihan/pembayaran/{blok}', [TagihanController::class, 'pembayaran']);
     Route::get('tagihan/periode', [TagihanController::class, 'periode']);
     Route::post('tagihan/tambah', [TagihanController::class, 'tambah']);
     Route::get('tagihan/publish', [TagihanController::class, 'publish']);

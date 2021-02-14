@@ -454,7 +454,7 @@ class CekLogin
             if($page == 'human'){
                 $explode = explode('-',Session::get('login'));
                 $validator = User::where([['username',$explode[0]],['role',$explode[1]]])->first();
-                $roles = array('master','admin','manajer','keuangan');
+                $roles = array('master','admin','manajer','keuangan','kasir');
                 if($validator != NULL){
                     if(in_array($explode[1],$roles)){
                         if(Session::get('role') != NULL)
