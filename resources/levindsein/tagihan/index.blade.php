@@ -126,14 +126,16 @@
                             type="submit">
                             <i class="fas fa-fw fa-exclamation fa-sm text-gray-500"></i> Pemberitahuan
                         </a>
-                        <!-- <a 
+                        @if(Session::get('role') == 'master')
+                        <a 
                             class="dropdown-item" 
                             href="#" 
                             data-toggle="modal" 
                             data-target="#myPembayaran"
                             type="submit">
                             <i class="fas fa-fw fa-dollar-sign fa-sm text-gray-500"></i> Pembayaran
-                        </a> -->
+                        </a>
+                        @endif
                         @endif
                     </div>
                 </div>

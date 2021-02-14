@@ -2374,6 +2374,7 @@ class KasirController extends Controller
                     $printer -> selectPrintMode();
                     $printer -> setFont(Printer::FONT_B);
                     $printer -> text("----------------------------------------\n");
+                    $feed = 0;
                     if($struk->taglistrik != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Listrik",$listrik,true));
@@ -2383,20 +2384,23 @@ class KasirController extends Controller
                         $printer -> text(new Struk80mm("Akhir",$akhirlistrik,false));
                         $printer -> text(new Struk80mm("Pakai",$pakailistrik,false));
                         $i++;
-                        $printer -> feed();
+                        $feed = 1;
                     }
                     if($struk->tagtunglistrik != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Tgk.Listrik",$tunglistrik,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 1;
                     }
                     if($struk->tagdenlistrik != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Den.Listrik",$denlistrik,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 1;
                     }
+
+                    if($feed == 1)
+                        $printer -> feed();
                     
                     if($struk->tagairbersih != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
@@ -2406,72 +2410,88 @@ class KasirController extends Controller
                         $printer -> text(new Struk80mm("Akhir",$akhirairbersih,false));
                         $printer -> text(new Struk80mm("Pakai",$pakaiairbersih,false));
                         $i++;
-                        $printer -> feed();
+                        $feed = 2;
                     }
                     if($struk->tagtungairbersih != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Tgk.Air Bersih",$tungairbersih,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 2;
                     }
                     if($struk->tagdenairbersih != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Den.Air Bersih",$denairbersih,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 2;
                     }
+                    
+                    if($feed == 2)
+                        $printer -> feed();
                     
                     if($struk->tagkeamananipk != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Keamanan IPK",$keamananipk,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 3;
                     }
                     if($struk->tagtungkeamananipk != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Tgk.Keamanan IPK",$tungkeamananipk,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 3;
                     }
+                    
+                    if($feed == 3)
+                        $printer -> feed();
                     
                     if($struk->tagkebersihan != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Kebersihan",$kebersihan,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 4;
                     }
                     if($struk->tagtungkebersihan != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Tgk.Kebersihan",$tungkebersihan,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 4;
                     }
+                    
+                    if($feed == 4)
+                        $printer -> feed();
                     
                     if($struk->tagairkotor != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Air Kotor",$airkotor,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 5;
                     }
                     if($struk->tagtungairkotor != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Tgk.Air Kotor",$tungairkotor,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 5;
                     }
+                    
+                    if($feed == 5)
+                        $printer -> feed();
                     
                     if($struk->taglain != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Lain Lain",$lain,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 6;
                     }
                     if($struk->tagtunglain != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk80mm("$i. Tgk.Lain Lain",$tunglain,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 6;
                     }
+                    
+                    if($feed == 6)
+                        $printer -> feed();
+                    
                     $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
                     $printer -> text(new Struk80mm("Total",$total,true,true));
                     $printer -> selectPrintMode();
@@ -2510,6 +2530,7 @@ class KasirController extends Controller
                     $printer -> selectPrintMode();
                     $printer -> setFont(Printer::FONT_B);
                     $printer -> text("----------------------------------------\n");
+                    $feed = 0;
                     if($struk->taglistrik != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Listrik",$listrik,true));
@@ -2519,20 +2540,23 @@ class KasirController extends Controller
                         $printer -> text(new Struk70mm("Akhir",$akhirlistrik,false));
                         $printer -> text(new Struk70mm("Pakai",$pakailistrik,false));
                         $i++;
-                        $printer -> feed();
+                        $feed = 1;
                     }
                     if($struk->tagtunglistrik != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Tgk.Listrik",$tunglistrik,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 1;
                     }
                     if($struk->tagdenlistrik != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Den.Listrik",$denlistrik,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 1;
                     }
+                    
+                    if($feed == 1)
+                        $printer -> feed();
                     
                     if($struk->tagairbersih != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
@@ -2542,72 +2566,87 @@ class KasirController extends Controller
                         $printer -> text(new Struk70mm("Akhir",$akhirairbersih,false));
                         $printer -> text(new Struk70mm("Pakai",$pakaiairbersih,false));
                         $i++;
-                        $printer -> feed();
+                        $feed = 2;
                     }
                     if($struk->tagtungairbersih != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Tgk.Air Bersih",$tungairbersih,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 2;
                     }
                     if($struk->tagdenairbersih != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Den.Air Bersih",$denairbersih,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 2;
                     }
+                    
+                    if($feed == 2)
+                        $printer -> feed();
                     
                     if($struk->tagkeamananipk != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Keamanan IPK",$keamananipk,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 3;
                     }
                     if($struk->tagtungkeamananipk != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Tgk.Keamanan IPK",$tungkeamananipk,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 3;
                     }
+                    
+                    if($feed == 3)
+                        $printer -> feed();
                     
                     if($struk->tagkebersihan != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Kebersihan",$kebersihan,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 4;
                     }
                     if($struk->tagtungkebersihan != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Tgk.Kebersihan",$tungkebersihan,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 4;
                     }
+                    
+                    if($feed == 4)
+                        $printer -> feed();
                     
                     if($struk->tagairkotor != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Air Kotor",$airkotor,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 5;
                     }
                     if($struk->tagtungairkotor != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Tgk.Air Kotor",$tungairkotor,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 5;
                     }
+                    
+                    if($feed == 5)
+                        $printer -> feed();
                     
                     if($struk->taglain != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Lain Lain",$lain,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 6;
                     }
                     if($struk->tagtunglain != 0){
                         $printer -> setJustification(Printer::JUSTIFY_CENTER);
                         $printer -> text(new Struk70mm("$i. Tgk.Lain Lain",$tunglain,true));
                         $i++;
-                        $printer -> feed();
+                        $feed = 6;
                     }
+                    
+                    if($feed == 6)
+                        $printer -> feed();
                     
                     $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
                     $printer -> text(new Struk70mm("Total",$total,true,true));

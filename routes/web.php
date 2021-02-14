@@ -280,6 +280,7 @@ Route::middleware('ceklogin:master')->group(function(){
     Route::get('master/kasir', [MasterController::class, 'kasir']);
     Route::post('master/kasir/restore/{id}', [MasterController::class, 'kasirRestore']);
     Route::post('master/kasir/edit', [MasterController::class, 'kasirEdit']);
+    Route::get('master/kasir/struk/{struk}/{id}',[MasterController::class, 'cetakStruk']);
 });
 
 Route::middleware('ceklogin:user')->group(function(){

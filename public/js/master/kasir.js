@@ -36,4 +36,41 @@ $(document).ready(function () {
 			}
 		});
     });
+
+	$(document).on('click', '.cetak', function(event){
+        id = $(this).attr('id');
+        ajax_print('/master/kasir/struk/tagihan/' + id);
+        console.log('Printing . . .');
+    });
+
+    //Print Via Bluetooth atau USB
+    function pc_print(data){
+        var socket = new WebSocket("ws://127.0.0.1:40213/");
+        socket.bufferType = "arraybuffer";
+        socket.onerror = function(error) {  
+            alert("Printer Not Ready");
+        };			
+        socket.onopen = function() {
+            socket.send(data);
+            socket.close(1000, "Work complete");
+        };
+    }	
+
+    function android_print(data){
+        window.location.href = data;  
+    }
+
+    function ajax_print(url) {
+        $.get(url, function (data) {
+            var ua = navigator.userAgent.toLowerCase();
+            var isAndroid = ua.indexOf("android") > -1; 
+            if(isAndroid) {
+                android_print(data);
+            }else{
+                pc_print(data);
+            }
+        }).fail(function (data) {
+            console.log(data);
+        });
+    }
 });
