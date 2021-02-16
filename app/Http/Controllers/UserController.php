@@ -428,6 +428,7 @@ class UserController extends Controller
                 $data['tarif'] = $otoritas->tarif;
                 $data['harilibur'] = $otoritas->harilibur;
                 $data['layanan'] = $otoritas->layanan;
+                $data['neraca'] = '$otoritas->neraca';
             }
 
             return response()->json(['result' => $data]);
@@ -443,7 +444,7 @@ class UserController extends Controller
      */
     public function otoritas(Request $request)
     {
-        $pilihanKelola = array('pedagang','tempatusaha','tagihan','blok','pemakaian','pendapatan','datausaha','publish','alatmeter','tarif','harilibur','layanan');
+        $pilihanKelola = array('pedagang','tempatusaha','tagihan','blok','pemakaian','pendapatan','datausaha','publish','alatmeter','tarif','harilibur','layanan','neraca');
 
         $kelola = array();
         $kelola['otoritas'] = $request->blokOtoritas;

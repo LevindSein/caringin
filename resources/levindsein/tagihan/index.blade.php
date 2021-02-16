@@ -79,6 +79,14 @@
                             <i class="fas fa-fw fa-paper-plane fa-sm text-gray-500"></i> Publish
                         </button>
                         @endif
+                        @if(Session::get('role') == 'master' || Session::get('otoritas')->neraca)
+                        <button
+                            class="dropdown-item" 
+                            id="neraca"
+                            type="submit">
+                            <i class="fas fa-fw fa-balance-scale fa-sm text-gray-500"></i> Neraca
+                        </button>
+                        @endif
                         @if(Session::get('role') == 'master' || Session::get('otoritas')->tagihan)
                         @if($now >= $check)
                         <button

@@ -18,6 +18,7 @@ use App\Models\IndoDate;
 
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 use Mike42\Escpos\PrintConnectors\RawbtPrintConnector;
 use Mike42\Escpos\CapabilityProfile;
 use Mike42\Escpos\EscposImage;
@@ -428,6 +429,7 @@ class MasterController extends Controller
                     if($feed == 6)
                         $printer -> feed();
                     
+                    $printer -> setJustification(Printer::JUSTIFY_CENTER);
                     $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
                     $printer -> text(new Struk80mm("Total",$total,true,true));
                     $printer -> selectPrintMode();
@@ -584,6 +586,7 @@ class MasterController extends Controller
                     if($feed == 6)
                         $printer -> feed();
                     
+                    $printer -> setJustification(Printer::JUSTIFY_CENTER);
                     $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
                     $printer -> text(new Struk70mm("Total",$total,true,true));
                     $printer -> selectPrintMode();

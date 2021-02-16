@@ -374,6 +374,17 @@
                                     Blok
                                 </label>
                             </div>
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    name="kelola[]"
+                                    id="neraca"
+                                    value="neraca">
+                                <label class="form-check-label" for="neraca">
+                                    Neraca
+                                </label>
+                            </div>
                         </div>
                         <div>
                             <div class="form-check">

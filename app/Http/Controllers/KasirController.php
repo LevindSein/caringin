@@ -699,7 +699,7 @@ class KasirController extends Controller
             $data['tagtungkeamananipk'] = $request->tagtungkeamananipk;
             
             $data['tagkebersihan'] = $request->tagkebersihan;
-            $data['tagtungkebersihan'] = $request->tagtungkeamananipk;
+            $data['tagtungkebersihan'] = $request->tagtungkebersihan;
             
             $data['tagairkotor'] = $request->tagairkotor;
             $data['tagtungairkotor'] = $request->tagtungairkotor;
@@ -895,6 +895,8 @@ class KasirController extends Controller
                     }
                 }
                 $printer -> feed();
+                
+                $printer -> setJustification(Printer::JUSTIFY_CENTER);
                 $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
                 $printer -> text(new Struk80mm("Total",$total,true,true));
                 $printer -> selectPrintMode();
@@ -1029,6 +1031,8 @@ class KasirController extends Controller
                     }
                 }
                 $printer -> feed();
+                
+                $printer -> setJustification(Printer::JUSTIFY_CENTER);
                 $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
                 $printer -> text(new Struk70mm("Total",$total,true,true));
                 $printer -> selectPrintMode();
@@ -2492,6 +2496,7 @@ class KasirController extends Controller
                     if($feed == 6)
                         $printer -> feed();
                     
+                    $printer -> setJustification(Printer::JUSTIFY_CENTER);
                     $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
                     $printer -> text(new Struk80mm("Total",$total,true,true));
                     $printer -> selectPrintMode();
@@ -2648,6 +2653,7 @@ class KasirController extends Controller
                     if($feed == 6)
                         $printer -> feed();
                     
+                    $printer -> setJustification(Printer::JUSTIFY_CENTER);
                     $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
                     $printer -> text(new Struk70mm("Total",$total,true,true));
                     $printer -> selectPrintMode();

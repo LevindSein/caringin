@@ -16,66 +16,69 @@ class SearchController extends Controller
 {
     public function cariBlok(Request $request){
         $blok = [];
-        if ($request->has('q')) {
+        // if ($request->has('q')) {
             $cariBlok = $request->q;
-            $blok = Blok::select('id', 'nama')->where('nama', 'LIKE', '%'.$cariBlok.'%')->orderBy('nama','asc')->get();
-        }
+            $blok = Blok::select('id', 'nama')->where('nama', 'LIKE', '%'.$cariBlok.'%')->orderBy('nama','asc')->limit(50)->get();
+        // }
         return response()->json($blok);
     }
 
     public function cariNasabah(Request $request){
         $nasabah = [];
-        if ($request->has('q')) {
+        // if ($request->has('q')) {
             $cariNasabah = $request->q;
             $nasabah = User::select('id', 'nama', 'ktp')
             ->where('nama', 'LIKE', '%'.$cariNasabah.'%')
             ->orWhere('ktp', 'LIKE', '%'.$cariNasabah.'%')
             ->orderBy('nama','asc')
+            ->limit(20)
             ->get();
-        }
+        // }
         return response()->json($nasabah);
     }
 
     public function cariAlamat(Request $request){
         $alamat = [];
-        if ($request->has('q')) {
+        // if ($request->has('q')) {
             $cariAlamat = $request->q;
-            $alamat = TempatUsaha::select('id', 'kd_kontrol')->where('kd_kontrol', 'LIKE', '%'.$cariAlamat.'%')->orderBy('kd_kontrol','asc')->get();
-        }
+            $alamat = TempatUsaha::select('id', 'kd_kontrol')->where('kd_kontrol', 'LIKE', '%'.$cariAlamat.'%')->orderBy('kd_kontrol','asc')->limit(20)->get();
+        // }
         return response()->json($alamat);
     }
 
     public function cariAlamatKosong(Request $request){
         $alamat = [];
-        if ($request->has('q')) {
+        // if ($request->has('q')) {
             $cariAlamat = $request->q;
             $alamat = TempatUsaha::select('id', 'kd_kontrol')->where([['kd_kontrol', 'LIKE', '%'.$cariAlamat.'%'],['stt_tempat',2]])->orderBy('kd_kontrol','asc')->get();
-        }
+        // }
         return response()->json($alamat);
     }
 
     public function cariAlatAir(Request $request){
         $alat = [];
-        if ($request->has('q')) {
+        // if ($request->has('q')) {
             $cariAlat = $request->q;
             $alat = AlatAir::where([['kode', 'LIKE', '%'.$cariAlat.'%'],['stt_sedia',0]])
             ->orWhere([['nomor', 'LIKE', '%'.$cariAlat.'%'],['stt_sedia',0]])
             ->orderBy('id','desc')
+            ->limit(20)
             ->get();
-        }
+        // }
         return response()->json($alat);
     }
 
     public function cariAlatListrik(Request $request){
         $alat = [];
-        if ($request->has('q')) {
+        // if ($request->has('q')) {
             $cariAlat = $request->q;
             $alat = AlatListrik::where([['kode', 'LIKE', '%'.$cariAlat.'%'],['stt_sedia',0]])
             ->orWhere([['nomor', 'LIKE', '%'.$cariAlat.'%'],['stt_sedia',0]])
             ->orWhere([['daya', 'LIKE', '%'.$cariAlat.'%'],['stt_sedia',0]])
             ->orderBy('id','desc')
+            ->limit(20)
             ->get();
-        }
+        // }
         return response()->json($alat);
     }
 

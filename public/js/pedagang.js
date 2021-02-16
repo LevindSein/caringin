@@ -64,7 +64,7 @@ $(document).ready(function(){
                     })
                     };
                 },
-                cache: true
+                cache: true,
             }
         });
 

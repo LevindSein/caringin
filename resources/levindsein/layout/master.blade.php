@@ -83,7 +83,7 @@
                 <hr class="sidebar-divider">
                 @endif
 
-                @if(Session::get('role') == 'master' || Session::get('role') == 'manajer'||  Session::get('role') == 'admin' && (Session::get('otoritas')->pedagang || Session::get('otoritas')->tempatusaha || Session::get('otoritas')->tagihan || Session::get('otoritas')->publish || Session::get('otoritas')->layanan))
+                @if(Session::get('role') == 'master' || Session::get('role') == 'manajer'||  Session::get('role') == 'admin' && (Session::get('otoritas')->pedagang || Session::get('otoritas')->tempatusaha || Session::get('otoritas')->tagihan || Session::get('otoritas')->publish || Session::get('otoritas')->layanan || Session::get('otoritas')->neraca))
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Sumber Daya
@@ -116,7 +116,7 @@
                 </li>
                 @endif
 
-                @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->tagihan || Session::get('otoritas')->publish))
+                @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->tagihan || Session::get('otoritas')->publish || Session::get('otoritas')->neraca))
                 <!-- Nav Item - Tagihan -->
                 <li class="nav-item {{ (request()->is('tagihan*')) ? 'active' : '' }}">
                     <a class="nav-link" href="{{url('tagihan')}}">
