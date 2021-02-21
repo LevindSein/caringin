@@ -84,6 +84,8 @@ Route::post('storelogin',function(Request $request){
         if(csrf_token() === $request->_token){
             if($request->role === 'master')
                 return redirect()->route('dashboard')->with('success','Selamat Datang Master');
+            else if($request->role === 'manajer')
+                return redirect()->route('dashboard')->with('success','Selamat Datang Manajer');
             else if($request->role === 'kasir')
                 return redirect()->route('kasir.index');
             else if($request->role === 'admin')
@@ -186,6 +188,7 @@ Route::middleware('ceklogin:tempatusaha')->group(function (){
 });
 
 Route::middleware('ceklogin:tagihan')->group(function (){
+    Route::get('tagihan/neraca', [TagihanController::class, 'neraca']);
     Route::get('tagihan/manual/{id}', [TagihanController::class, 'manual']);
     Route::post('tagihan/sinkronisasi', function(Request $request){
         if($request->ajax()){

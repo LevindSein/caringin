@@ -746,6 +746,10 @@ class TempatController extends Controller
         $airId = $data->id_meteran_air;
 
         try{
+            $exists = Tagihan::where([['kd_kontrol', $data->kd_kontrol],['stt_lunas',0]])->first();
+            if($exists != NULL)
+                return response()->json(['status' => 'Data gagal dihapus, ada sejumlah tagihan']);
+
             if($listrikId != NULL){
                 $alat = AlatListrik::find($listrikId);
                 if($alat != NULL){

@@ -428,7 +428,7 @@ class UserController extends Controller
                 $data['tarif'] = $otoritas->tarif;
                 $data['harilibur'] = $otoritas->harilibur;
                 $data['layanan'] = $otoritas->layanan;
-                $data['neraca'] = '$otoritas->neraca';
+                $data['neraca'] = $otoritas->neraca;
             }
 
             return response()->json(['result' => $data]);

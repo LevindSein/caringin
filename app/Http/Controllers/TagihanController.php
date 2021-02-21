@@ -183,15 +183,15 @@ class TagihanController extends Controller
                 ->editColumn('ttl_listrik', function ($data) {
                     $hasil = number_format($data->ttl_listrik);
                     $warna = $data->warna_listrik;
-                    if ($data->ttl_listrik === NULL)
+                    if ($data->ttl_listrik == 0)
                         return '<span class="text-center"><i class="fas fa-times fa-sm"></i></span>';
                     else {
                         if($warna == 1 || $warna == 2)
-                            return '<span class="text-center" style="color:#f6c23e;">'.$hasil.'</span>';
+                            return '<a href="javascript:void(0)" class="totallistrik" id="'.$data->id.'"><span style="color:#f6c23e;font-size:13px;" class="listrik-hover;"><b>'.$hasil.'</b></span></a>';
                         else if($warna == 3)
-                            return '<span class="text-center" style="color:#e74a3b;">'.$hasil.'</span>';
+                            return '<a href="javascript:void(0)" class="totallistrik" id="'.$data->id.'"><span style="color:#e74a3b;font-size:13px;background-color:rgba(255, 169, 189, 0.2);"><b>'.$hasil.'</b></span></a>';
                         else
-                            return $hasil;
+                            return '<a href="javascript:void(0)" class="totallistrik" id="'.$data->id.'"><span style="font-size:13px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                     }
                 })
                 ->editColumn('awal_airbersih', function ($data) {
@@ -239,15 +239,15 @@ class TagihanController extends Controller
                 ->editColumn('ttl_airbersih', function ($data) {
                     $hasil = number_format($data->ttl_airbersih);
                     $warna = $data->warna_airbersih;
-                    if ($data->ttl_airbersih === NULL)
+                    if ($data->ttl_airbersih == 0)
                         return '<span class="text-center"><i class="fas fa-times fa-sm"></i></span>';
                     else {
                         if($warna == 1 || $warna == 2)
-                            return '<span class="text-center" style="color:#f6c23e;">'.$hasil.'</span>';
+                            return '<a href="javascript:void(0)" class="totalairbersih" id="'.$data->id.'"><span style="color:#f6c23e;font-size:13px;" class="listrik-hover;"><b>'.$hasil.'</b></span></a>';
                         else if($warna == 3)
-                            return '<span class="text-center" style="color:#e74a3b;">'.$hasil.'</span>';
+                            return '<a href="javascript:void(0)" class="totalairbersih" id="'.$data->id.'"><span style="color:#e74a3b;font-size:13px;background-color:rgba(255, 169, 189, 0.2);"><b>'.$hasil.'</b></span></a>';
                         else
-                            return $hasil;
+                            return '<a href="javascript:void(0)" class="totalairbersih" id="'.$data->id.'"><span style="font-size:13px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                     }
                 })
                 ->editColumn('ttl_keamananipk', function ($data) {
@@ -255,28 +255,28 @@ class TagihanController extends Controller
                     if ($data->ttl_keamananipk == 0)
                         return '<span class="text-center"><i class="fas fa-times fa-sm"></i></span>';
                     else 
-                        return $hasil;
+                        return '<a href="javascript:void(0)" class="totalkeamananipk" id="'.$data->id.'"><span style="font-size:13px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                 })
                 ->editColumn('ttl_kebersihan', function ($data) {
                     $hasil = number_format($data->ttl_kebersihan);
                     if ($data->ttl_kebersihan == 0)
                         return '<span class="text-center"><i class="fas fa-times fa-sm"></i></span>';
                     else
-                        return $hasil;
+                        return '<a href="javascript:void(0)" class="totalkebersihan" id="'.$data->id.'"><span style="font-size:13px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                 })
                 ->editColumn('ttl_airkotor', function ($data) {
                     $hasil = number_format($data->ttl_airkotor);
                     if ($data->ttl_airkotor == 0)
                         return '<span class="text-center"><i class="fas fa-times fa-sm"></i></span>';
                     else
-                        return $hasil;
+                        return '<a href="javascript:void(0)" class="totalairkotor" id="'.$data->id.'"><span style="font-size:13px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                 })
                 ->editColumn('ttl_lain', function ($data) {
                     $hasil = number_format($data->ttl_lain);
                     if ($data->ttl_lain == 0)
                         return '<span class="text-center"><i class="fas fa-times fa-sm"></i></span>';
                     else
-                        return $hasil;
+                        return '<a href="javascript:void(0)" class="totallain" id="'.$data->id.'"><span style="font-size:13px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                 })
                 ->editColumn('ttl_tagihan', function ($data) {
                     $hasil = number_format($data->ttl_tagihan);
@@ -285,9 +285,9 @@ class TagihanController extends Controller
                         return '<span class="text-center"><i class="fas fa-times fa-sm"></i></span>';
                     else {
                         if($warna == 1 || $warna == 2 || $warna == 3)
-                            return '<span class="text-center" style="color:#4e73df;">'.$hasil.'</span>';
+                            return '<a href="javascript:void(0)" class="totaltagihan" id="'.$data->id.'"><span style="color:#4e73df;font-size:13px;"><b>'.$hasil.'</b></span></a>';
                         else
-                            return $hasil;
+                            return '<a href="javascript:void(0)" class="totaltagihan" id="'.$data->id.'"><span style="font-size:13px;color:#000000;"><b>'.$hasil.'</b></span></a>';
                     }
                 })
                 ->rawColumns([
@@ -476,7 +476,7 @@ class TagihanController extends Controller
                 ->editColumn('ttl_listrik', function ($data) {
                     $hasil = number_format($data->ttl_listrik);
                     $warna = $data->warna_listrik;
-                    if ($data->ttl_listrik === NULL)
+                    if ($data->ttl_listrik == 0)
                         return '<span class="text-center"><i class="fas fa-times fa-sm"></i></span>';
                     else {
                         if($warna == 1 || $warna == 2)
@@ -532,7 +532,7 @@ class TagihanController extends Controller
                 ->editColumn('ttl_airbersih', function ($data) {
                     $hasil = number_format($data->ttl_airbersih);
                     $warna = $data->warna_airbersih;
-                    if ($data->ttl_airbersih === NULL)
+                    if ($data->ttl_airbersih == 0)
                         return '<span class="text-center"><i class="fas fa-times fa-sm"></i></span>';
                     else {
                         if($warna == 1 || $warna == 2)
@@ -1112,6 +1112,7 @@ class TagihanController extends Controller
                     'pengguna.nama as nama',
                     'tempat_usaha.kd_kontrol as kontrol',
                     'tempat_usaha.lok_tempat as lokasi',
+                    'meteran_listrik.daya  as daya',
                     'meteran_listrik.nomor as nomor',
                     'meteran_listrik.akhir as lalu')
                 ->orderBy('tempat_usaha.kd_kontrol')
@@ -2659,5 +2660,9 @@ class TagihanController extends Controller
                 return response()->json(['errors' => 'Fetching Data Failed']);
             }
         }
+    }
+
+    public function neraca(){
+        echo "Neraca";
     }
 }

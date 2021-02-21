@@ -22,7 +22,7 @@
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Tagihan Periode {{$periode}}</h6><input type="hidden" id="periode" value="{{$periode}}"/>
             <div>
-                @if(Session::get('role') == 'master' || Session::get('otoritas')->tagihan)
+                @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->tagihan))
                 @if($notif == 1)
                 <a
                     id="notification"
@@ -40,7 +40,7 @@
                     <i class="fas fa-fw fa-home fa-sm text-white"></i></b>
                 </a>
                 &nbsp;
-                @if(Session::get('role') == 'master' || Session::get('otoritas')->tagihan)
+                @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->tagihan))
                 <button 
                     type="button"
                     name="add_listrik"
@@ -71,7 +71,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                         <div class="dropdown-header">Tagihan:</div>
-                        @if(Session::get('role') == 'master' || Session::get('otoritas')->publish)
+                        @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->publish))
                         <button
                             class="dropdown-item" 
                             id="publish"
@@ -79,15 +79,16 @@
                             <i class="fas fa-fw fa-paper-plane fa-sm text-gray-500"></i> Publish
                         </button>
                         @endif
-                        @if(Session::get('role') == 'master' || Session::get('otoritas')->neraca)
-                        <button
-                            class="dropdown-item" 
-                            id="neraca"
-                            type="submit">
+                        @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->neraca))
+                        <a 
+                            class="dropdown-item"
+                            href="{{url('tagihan/neraca')}}"
+                            type="submit" 
+                            target="_blank">
                             <i class="fas fa-fw fa-balance-scale fa-sm text-gray-500"></i> Neraca
-                        </button>
+                        </a>
                         @endif
-                        @if(Session::get('role') == 'master' || Session::get('otoritas')->tagihan)
+                        @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->tagihan))
                         @if($now >= $check)
                         <button
                             class="dropdown-item" 
@@ -116,7 +117,7 @@
                             type="submit">
                             <i class="fas fa-fw fa-search fa-sm text-gray-500"></i> Cari Tagihan
                         </a>
-                        @if(Session::get('role') == 'master' || Session::get('otoritas')->tagihan)
+                        @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->tagihan))
                         <div class="dropdown-divider"></div>
                         <div class="dropdown-header">Edaran:</div>
                         <a 
@@ -919,6 +920,98 @@
                     <input type="submit" id="action_btn_manual" class="btn btn-primary btn-sm" value="Tambah Tagihan" />
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div
+    class="modal fade"
+    id="myTotal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title titles" id="exampleModalLabel"></h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body-short">
+                <div id="divBulan1">
+                    <div class="col-lg-12 justify-content-between" style="display:flex;flex-wrap: wrap;">
+                        <div>
+                            <h5><strong><span id="bulan1"></span></strong></h5>
+                        </div>
+                        <div>
+                            <h5><strong><span id="totalbulan1"></span></strong></h5>
+                        </div>
+                    </div>
+                </div>
+                <div id="divBulan2">
+                    <div class="col-lg-12 justify-content-between" style="display:flex;flex-wrap: wrap;">
+                        <div>
+                            <h5><strong><span id="bulan2"></span></strong></h5>
+                        </div>
+                        <div>
+                            <h5><strong><span id="totalbulan2"></span></strong></h5>
+                        </div>
+                    </div>
+                </div>
+                <div id="divBulan3">
+                    <div class="col-lg-12 justify-content-between" style="display:flex;flex-wrap: wrap;">
+                        <div>
+                            <h5><strong><span id="bulan3"></span></strong></h5>
+                        </div>
+                        <div>
+                            <h5><strong><span id="totalbulan3"></span></strong></h5>
+                        </div>
+                    </div>
+                </div>
+                <div id="divBulan4">
+                    <div class="col-lg-12 justify-content-between" style="display:flex;flex-wrap: wrap;">
+                        <div>
+                            <h5><strong><span id="bulan4"></span></strong></h5>
+                        </div>
+                        <div>
+                            <h5><strong><span id="totalbulan4"></span></strong></h5>
+                        </div>
+                    </div>
+                </div>
+                <div id="divBulan5">
+                    <div class="col-lg-12 justify-content-between" style="display:flex;flex-wrap: wrap;">
+                        <div>
+                            <h5><strong><span id="bulan5"></span></strong></h5>
+                        </div>
+                        <div>
+                            <h5><strong><span id="totalbulan5"></span></strong></h5>
+                        </div>
+                    </div>
+                </div>
+                <div id="divBulan6">
+                    <div class="col-lg-12 justify-content-between" style="display:flex;flex-wrap: wrap;">
+                        <div>
+                            <h5><strong><span id="bulan6"></span></strong></h5>
+                        </div>
+                        <div>
+                            <h5><strong><span id="totalbulan6"></span></strong></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 justify-content-between" style="display:flex;flex-wrap: wrap;">
+                    <div>
+                        <h4><strong><span id="bulanini" style="color:#3f6ad8;"></span></strong></h4>
+                    </div>
+                    <div>
+                        <h4><strong><span id="totalbulanini" style="color:#3f6ad8;"></span></strong></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="okbutton btn btn-primary btn-sm" data-dismiss="modal">OK</button>
+            </div>
         </div>
     </div>
 </div>

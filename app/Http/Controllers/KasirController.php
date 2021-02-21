@@ -386,11 +386,22 @@ class KasirController extends Controller
             }
             $dataset['faktur'] = Crypt::encryptString($no_faktur);
 
-            $ref = str_shuffle('ABCDEFGHJKMNPQRSTUVWXYZ');
-            $ref = substr($ref,0,10);
-            $dataset['ref'] = $ref;
+            $dataset['ref'] = $this->referensi();
 
             return response()->json(['result' => $dataset]);
+        }
+    }
+
+    public function referensi(){
+        $ref = str_shuffle('ABCDEFGHJKMNPQRSTUVWXYZ');
+        $ref = substr($ref,0,10);
+
+        $pembayaran = Pembayaran::where('ref', $ref)->first();
+        if($pembayaran != NULL){
+            $this->referensi();
+        }
+        else{
+            return $ref;
         }
     }
 
