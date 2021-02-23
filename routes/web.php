@@ -16,6 +16,7 @@ use App\Http\Controllers\TarifController;
 use App\Http\Controllers\AlatController;
 use App\Http\Controllers\HariLiburController;
 use App\Http\Controllers\BlokController;
+use App\Http\Controllers\SimulasiController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
@@ -176,8 +177,6 @@ Route::middleware('ceklogin:pedagang')->group(function (){
 });
 
 Route::middleware('ceklogin:tempatusaha')->group(function (){
-    // Route::get('tempatusaha/potensi', [TempatController::class, 'potensi']);
-    Route::get('tempatusaha/pengajuan/{fas}',[TempatController::class, 'pengajuan']);
     Route::get('tempatusaha/qr/{id}',[TempatController::class, 'qr']);
     Route::get('tempatusaha/rekap', [TempatController::class, 'rekap']);
     Route::get('tempatusaha/rekap/{blok}',[TempatController::class, 'rekapdetail']);
@@ -188,6 +187,7 @@ Route::middleware('ceklogin:tempatusaha')->group(function (){
 });
 
 Route::middleware('ceklogin:tagihan')->group(function (){
+    Route::post('tagihan/neraca', [TagihanController::class, 'neracaStore']);
     Route::get('tagihan/neraca', [TagihanController::class, 'neraca']);
     Route::get('tagihan/manual/{id}', [TagihanController::class, 'manual']);
     Route::post('tagihan/sinkronisasi', function(Request $request){
@@ -279,6 +279,11 @@ Route::middleware('ceklogin:blok')->group(function(){
     Route::get('utilities/blok/destroy/{id}', [BlokController::class, 'destroy']);
 });
 
+Route::middleware('ceklogin:simulasi')->group(function(){
+    Route::get('utilities/simulasi', [SimulasiController::class, 'index']);
+    Route::post('utilities/simulasi', [SimulasiController::class, 'store']);
+});
+
 Route::middleware('ceklogin:master')->group(function(){
     Route::get('master/kasir', [MasterController::class, 'kasir']);
     Route::post('master/kasir/restore/{id}', [MasterController::class, 'kasirRestore']);
@@ -328,7 +333,6 @@ Route::middleware('ceklogin:log')->group(function(){
 });
 
 Route::middleware('ceklogin:human')->group(function(){
-    Route::get('download/{file}/{id}',[DownloadController::class, 'download']);
     Route::get('cari/blok',[SearchController::class, 'cariBlok']);
     Route::get('cari/nasabah',[SearchController::class, 'cariNasabah']);
     Route::get('cari/alamat',[SearchController::class, 'cariAlamat']);
@@ -347,6 +351,8 @@ Route::middleware('ceklogin:human')->group(function(){
 
 Route::get('work',[WorkController::class, 'work']);
 Route::post('work/update',[WorkController::class, 'update']);
+
+Route::get('download',[DownloadController::class, 'index']);
 
 Route::get('optimize.p3cmaster',function(){
     Artisan::call('optimize');

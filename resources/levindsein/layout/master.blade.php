@@ -176,12 +176,12 @@
                 <hr class="sidebar-divider">
                 @endif
 
-                @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->blok || Session::get('otoritas')->alatmeter || Session::get('otoritas')->tarif || Session::get('otoritas')->harilibur))
+                @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->blok || Session::get('otoritas')->alatmeter || Session::get('otoritas')->tarif || Session::get('otoritas')->harilibur || Session::get('otoritas')->simulasi))
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Others
                 </div>
-                @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->blok || Session::get('otoritas')->alatmeter || Session::get('otoritas')->tarif || Session::get('otoritas')->harilibur))
+                @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->blok || Session::get('otoritas')->alatmeter || Session::get('otoritas')->tarif || Session::get('otoritas')->harilibur || Session::get('otoritas')->simulasi))
                 <!-- Nav Item - Utilities -->
                 <li class="nav-item {{ (request()->is('utilities/*')) ? 'active' : '' }}">
                     <a 
@@ -211,6 +211,9 @@
                             @endif
                             @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->blok))
                             <a class="collapse-item {{ (request()->is('utilities/blok*')) ? 'active' : '' }}" style="font-size:0.8rem;" href="{{url('utilities/blok')}}">Blok</a>
+                            @endif
+                            @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->simulasi))
+                            <a class="collapse-item {{ (request()->is('utilities/simulasi*')) ? 'active' : '' }}" style="font-size:0.8rem;" href="{{url('utilities/simulasi')}}">Simulasi</a>
                             @endif
                         </div>
                     </div>
@@ -338,7 +341,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk logout?</h5>
+                        <h5 id="exampleModalLabel">Apakah anda yakin untuk logout?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>

@@ -13,10 +13,14 @@
     <body onload="window.print()">  
         @for($i=1;$i<=2;$i++)
         @if($i == 1)
-        <h2 style="text-align:center;">REKAP TAGIHAN KEBERSIHAN<br>{{$bln}}</h2>
         <main>
             <table class="tg">
                 <thead>
+                    <tr>
+                        <th colspan="6" style="border-style:none;">
+                            <h3 style="text-align:center;">REKAP TAGIHAN KEBERSIHAN<br>{{$bln}}</h3>
+                        </th>
+                    </tr>
                     <tr>
                         <th class="tg-r8fv">No.</th>
                         <th class="tg-r8fv">Blok</th>
@@ -50,13 +54,17 @@
             </table>
         </main>
         @else
-        <h2 style="text-align:center;page-break-before:always">RINCIAN TAGIHAN KEBERSIHAN<br>{{$bln}}</h2>
+        <div style="page-break-before:always"></div>
         @foreach($rincian as $data)
         <div>
-            <h3>{{$data[0]}}</h3>
             <main>
                 <table class="tg">
                     <thead>
+                        <tr>
+                            <th colspan="8" style="border-style:none;">
+                                <h3 style="text-align:center;">RINCIAN TAGIHAN KEBERSIHAN<br>{{$bln}}<br>{{$data[0]}}</h3>
+                            </th>
+                        </tr>
                         <tr>
                             <th class="tg-r8fv">No.</th>
                             <th class="tg-r8fv">Kontrol</th>

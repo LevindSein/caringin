@@ -94,6 +94,14 @@ function indoDate($tanggal){
                                     class="btn btn-light"
                                     title="Total Pemakaian">
                                     <i class="fas fa-dollar-sign" style="color:#f6c23e;"></i></a>
+                                &nbsp;
+                                <a
+                                    id="diskon"
+                                    href="{{url('rekap/pemakaian',['diskon',$d->bln_pakai])}}"
+                                    target="_blank"
+                                    class="btn btn-light"
+                                    title="Diskon">
+                                    <i class="fas fa-percent" style="color:#4e73df;"></i></a>
                             </td>
                         </tr>
                         @endforeach

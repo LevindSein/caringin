@@ -81,5 +81,32 @@ class PemakaianController extends Controller
                 'rincian'=>Pemakaian::rincianTotal($bulan),
             ]);
         }
+
+        if($fasilitas == 'diskon'){
+            $rekapKeamananIpk = Pemakaian::rekapDisKeamananIpk($bulan);
+            $rekapKebersihan  = Pemakaian::rekapDisKebersihan($bulan);
+            $rekapListrik     = Pemakaian::rekapDisListrik($bulan);
+            $rekapAirBersih   = Pemakaian::rekapDisAirBersih($bulan);
+            
+            $time = strtotime($bulan);
+            $bln = date("Y-m", strtotime("+1 month", $time));
+
+            return view('pemakaian.diskon',[
+                'bln'=>IndoDate::bulanB($bln,' '),
+                'bulan'=>IndoDate::bulanB($bulan,' '),
+                'rekapKeamananIpk'=>$rekapKeamananIpk,
+                'ttlRekapKeamananIpk'=>Pemakaian::ttlRekapDisKeamananIpk($rekapKeamananIpk),
+                'rincianKeamananIpk'=>Pemakaian::rincianDisKeamananIpk($bulan),
+                'rekapKebersihan'=>$rekapKebersihan,
+                'ttlRekapKebersihan'=>Pemakaian::ttlRekapDisKebersihan($rekapKebersihan),
+                'rincianKebersihan'=>Pemakaian::rincianDisKebersihan($bulan),
+                'rekapListrik'=>$rekapListrik,
+                'ttlRekapListrik'=>Pemakaian::ttlRekapDisListrik($rekapListrik),
+                'rincianListrik'=>Pemakaian::rincianDisListrik($bulan),
+                'rekapAirBersih'=>$rekapAirBersih,
+                'ttlRekapAirBersih'=>Pemakaian::ttlRekapDisAirBersih($rekapAirBersih),
+                'rincianAirBersih'=>Pemakaian::rincianDisAirBersih($bulan),
+            ]);
+        }
     }
 }

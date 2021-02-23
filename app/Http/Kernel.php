@@ -76,6 +76,7 @@ class Kernel extends HttpKernel
         'alatmeter' => \App\Http\Middleware\AlatMeter::class,
         'harilibur' => \App\Http\Middleware\HariLibur::class,
         'blok' => \App\Http\Middleware\Blok::class,
+        'simulasi' => \App\Http\Middleware\Simulasi::class,
         'master' => \App\Http\Middleware\Master::class,
         'user' => \App\Http\Middleware\User::class,
         'log' => \App\Http\Middleware\Log::class,

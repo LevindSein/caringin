@@ -431,6 +431,17 @@
                                     Publishing
                                 </label>
                             </div>
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    name="kelola[]"
+                                    id="simulasi"
+                                    value="simulasi">
+                                <label class="form-check-label" for="simulasi">
+                                    Simulasi
+                                </label>
+                            </div>
                         </div>
                         <div>
                             <div class="form-check">

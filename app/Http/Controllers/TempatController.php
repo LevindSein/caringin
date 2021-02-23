@@ -31,6 +31,8 @@ use App\Models\IndoDate;
 
 use App\Models\Dokumen;
 
+use Carbon\Carbon;
+
 class TempatController extends Controller
 {
     public function __construct()
@@ -795,10 +797,6 @@ class TempatController extends Controller
         ]);
     }
 
-    public function potensi(){
-        return view('tempatusaha.potensi');
-    }
-
     public function fasilitas($fas){
         $dataset = TempatUsaha::fasilitas($fas);
         if($fas == 'airbersih'){
@@ -852,21 +850,5 @@ class TempatController extends Controller
             'kode'=>$kode,
             'kontrol'=>$kontrol
         ]);
-    }
-
-    public function pengajuan($fas){
-        if($fas == 'listrik'){
-            $dataset = Dokumen::where('stt_surat',1)->orderBy('id','desc')->get();
-            return view('tempatusaha.surat-listrik',[
-                'dataset' => $dataset
-            ]);
-        }
-
-        if($fas == 'air'){
-            $dataset = Dokumen::where('stt_surat',2)->orderBy('id','desc')->get();
-            return view('tempatusaha.surat-air',[
-                'dataset' => $dataset
-            ]);
-        }
     }
 }

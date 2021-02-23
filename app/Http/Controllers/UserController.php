@@ -188,7 +188,7 @@ class UserController extends Controller
     {
         $rules = array(
             'ktp'      => 'required',
-            'nama'     => ['required', 'regex:/^[a-zA-Z\.\s]+$/u','min:2', 'max:30'],
+            'nama'     => ['required', 'regex:/^[a-zA-Z\.\s]+$/u','min:1', 'max:30'],
             'username' => 'required',
             'password' => 'required',
             'hp'       => 'required',
@@ -290,7 +290,7 @@ class UserController extends Controller
     {
         $rules = array(
             'ktp'      => 'required',
-            'nama'     => ['required', 'regex:/^[a-zA-Z\.\s]+$/u','min:2', 'max:30'],
+            'nama'     => ['required', 'regex:/^[a-zA-Z\.\s]+$/u','min:1', 'max:30'],
             'username' => 'required',
             'hp'       => 'required',
             'role'     => 'required',
@@ -315,10 +315,6 @@ class UserController extends Controller
             'email'    => strtolower($request->email.'@gmail.com'),
             'role'     => $request->role,
         ];
-
-        if($request->password != NULL){
-            $data['password'] = sha1(md5(hash('gost',$request->password)));
-        }
        
         if($request->email == NULL) {
             $data['email'] = NULL;
@@ -339,6 +335,12 @@ class UserController extends Controller
             $dataset['role'] = $request->role;
 
             User::whereId($request->hidden_id)->update($data);
+
+            if($request->role != 'admin'){
+                $user = User::find($request->hidden_id);
+                $user->otoritas = NULL;
+                $user->save();
+            }
 
             return response()->json(['result' => $dataset]);
         }
@@ -429,6 +431,7 @@ class UserController extends Controller
                 $data['harilibur'] = $otoritas->harilibur;
                 $data['layanan'] = $otoritas->layanan;
                 $data['neraca'] = $otoritas->neraca;
+                $data['simulasi'] = $otoritas->simulasi;
             }
 
             return response()->json(['result' => $data]);
@@ -444,7 +447,7 @@ class UserController extends Controller
      */
     public function otoritas(Request $request)
     {
-        $pilihanKelola = array('pedagang','tempatusaha','tagihan','blok','pemakaian','pendapatan','datausaha','publish','alatmeter','tarif','harilibur','layanan','neraca');
+        $pilihanKelola = array('pedagang','tempatusaha','tagihan','blok','pemakaian','pendapatan','datausaha','publish','alatmeter','tarif','harilibur','layanan','neraca','simulasi');
 
         $kelola = array();
         $kelola['otoritas'] = $request->blokOtoritas;

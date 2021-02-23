@@ -9,10 +9,14 @@
     <body onload="window.print()">
         @for($i=1;$i<=2;$i++)
         @if($i == 1)
-        <h2 style="text-align:center;">REKAP TOTAL PEMAKAIAN FASILITAS<br>{{$bln}}</h2>
         <main>
             <table class="tg">
                 <thead>
+                    <tr>
+                        <th colspan="8" style="border-style:none;">
+                            <h3 style="text-align:center;">REKAP TOTAL PEMAKAIAN FASILITAS<br>{{$bln}}</h3>
+                        </th>
+                    </tr>
                     <tr>
                         <th class="tg-r8fv">No.</th>
                         <th class="tg-r8fv">Blok</th>
@@ -22,8 +26,8 @@
                         <th class="tg-r8fv">Keamanan IPK</th>
                         <th class="tg-r8fv">Kebersihan</th>
                         <th class="tg-r8fv">Tagihan</th>
-                        <th class="tg-r8fv">Realisasi</th>
-                        <th class="tg-r8fv">Selisih</th>
+                        <!-- <th class="tg-r8fv">Realisasi</th> -->
+                        <!-- <th class="tg-r8fv">Selisih</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -38,8 +42,8 @@
                         <td class="tg-g25h">{{number_format($d->keamananipk)}}</td>
                         <td class="tg-g25h">{{number_format($d->kebersihan)}}</td>
                         <td class="tg-g25h">{{number_format($d->tagihan)}}</td>
-                        <td class="tg-g25h">{{number_format($d->realisasi)}}</td>
-                        <td class="tg-g25h">{{number_format($d->selisih)}}</td>
+                        <!-- <td class="tg-g25h">{{number_format($d->realisasi)}}</td> -->
+                        <!-- <td class="tg-g25h">{{number_format($d->selisih)}}</td> -->
                     </tr>
                     <?php $no++; ?>
                     @endforeach
@@ -52,20 +56,23 @@
                     <td class="tg-8m6k">Rp. {{number_format($ttlRekap[3])}}</td>
                     <td class="tg-8m6k">Rp. {{number_format($ttlRekap[4])}}</td>
                     <td class="tg-8m6k">Rp. {{number_format($ttlRekap[5])}}</td>
-                    <td class="tg-8m6k">Rp. {{number_format($ttlRekap[6])}}</td>
-                    <td class="tg-8m6k">Rp. {{number_format($ttlRekap[7])}}</td>
+                    <!-- <td class="tg-8m6k">Rp. {{number_format($ttlRekap[6])}}</td> -->
+                    <!-- <td class="tg-8m6k">Rp. {{number_format($ttlRekap[7])}}</td> -->
                 </tr>
             </table>
         </main>
         @else
-        <h2 style="text-align:center;page-break-before:always">RINCIAN TOTAL PEMAKAIAN FASILITAS<br>{{$bln}}</h2>
+        <div style="page-break-before:always"></div>
         @foreach($rincian as $data)
         <div>
-            <br>
-            <h3>{{$data[0]}}</h3>
             <main>
                 <table class="tg">
                     <thead>
+                        <tr>
+                            <th colspan="10" style="border-style:none;">
+                                <h3 style="text-align:center;">RINCIAN PEMAKAIAN FASILITAS<br>{{$bln}}<br>{{$data[0]}}</h3>
+                            </th>
+                        </tr>
                         <tr>
                             <th class="tg-r8fv">No.</th>
                             <th class="tg-r8fv">Kontrol</th>
@@ -77,8 +84,8 @@
                             <th class="tg-r8fv">Keamanan IPK</th>
                             <th class="tg-r8fv">Kebersihan</th>
                             <th class="tg-r8fv">Tagihan</th>
-                            <th class="tg-r8fv">Realisasi</th>
-                            <th class="tg-r8fv">Selisih</th>
+                            <!-- <th class="tg-r8fv">Realisasi</th> -->
+                            <!-- <th class="tg-r8fv">Selisih</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -95,8 +102,8 @@
                             <td class="tg-g25h">{{number_format($d->keamananipk)}}</td>
                             <td class="tg-g25h">{{number_format($d->kebersihan)}}</td>
                             <td class="tg-g25h">{{number_format($d->tagihan)}}</td>
-                            <td class="tg-g25h">{{number_format($d->realisasi)}}</td>
-                            <td class="tg-g25h">{{number_format($d->selisih)}}</td>
+                            <!-- <td class="tg-g25h">{{number_format($d->realisasi)}}</td> -->
+                            <!-- <td class="tg-g25h">{{number_format($d->selisih)}}</td> -->
                         </tr>
                         <?php $no++; ?>
                         @endforeach
@@ -110,8 +117,8 @@
                         <td class="tg-8m6k">{{number_format($d->keamananipk)}}</td>
                         <td class="tg-8m6k">{{number_format($d->kebersihan)}}</td>
                         <td class="tg-8m6k">{{number_format($d->tagihan)}}</td>
-                        <td class="tg-8m6k">{{number_format($d->realisasi)}}</td>
-                        <td class="tg-8m6k">{{number_format($d->selisih)}}</td>
+                        <!-- <td class="tg-8m6k">{{number_format($d->realisasi)}}</td> -->
+                        <!-- <td class="tg-8m6k">{{number_format($d->selisih)}}</td> -->
                     </tr>
                     @endforeach
                 </table>

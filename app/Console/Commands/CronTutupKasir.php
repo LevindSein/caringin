@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use Carbon\Carbon;
 
 class CronTutupKasir extends Command
 {
@@ -39,13 +40,19 @@ class CronTutupKasir extends Command
      */
     public function handle()
     {
-        $users = User::where('role','kasir')->get();
-        if($users != NULL){
-            foreach($users as $user){
-                $user->stt_aktif = 0;
-                $user->save();
+        $time = Carbon::now();
+        $now = date('Y-m-d',strtotime($time));
+        $check = date('Y-m-15',strtotime($time));
+        
+        if($now != $check){
+            $users = User::where('role','kasir')->get();
+            if($users != NULL){
+                foreach($users as $user){
+                    $user->stt_aktif = 0;
+                    $user->save();
+                }
+                \Log::info('Shift 2 Kasir Fine');
             }
-            \Log::info('Shift 2 Kasir Fine');
         }
     }
 }

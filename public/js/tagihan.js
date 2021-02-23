@@ -23,6 +23,7 @@ $(document).ready(function(){
             { data: 'ttl_kebersihan' , name: 'ttl_kebersihan' , class : 'text-center' },
             { data: 'ttl_airkotor'   , name: 'ttl_airkotor'   , class : 'text-center' },
             { data: 'ttl_lain'       , name: 'ttl_lain'       , class : 'text-center' },
+            { data: 'via_tambah'     , name: 'via_tambah'     , class : 'text-center' },
             { data: 'via_publish'    , name: 'via_publish'    , class : 'text-center' },
             { data: 'ttl_tagihan'    , name: 'ttl_tagihan'    , class : 'text-center' },
             { data: 'action'         , name: 'action'         , class : 'text-center' },
@@ -37,8 +38,8 @@ $(document).ready(function(){
             "rightColumns": 2,
         },
         aoColumnDefs: [
-            { "bSortable": false, "aTargets": [17] }, 
-            { "bSearchable": false, "aTargets": [17] }
+            { "bSortable": false, "aTargets": [18] }, 
+            { "bSearchable": false, "aTargets": [18] }
         ]
     });
 
@@ -65,6 +66,7 @@ $(document).ready(function(){
             { data: 'ttl_kebersihan' , name: 'ttl_kebersihan' , class : 'text-center' },
             { data: 'ttl_airkotor'   , name: 'ttl_airkotor'   , class : 'text-center' },
             { data: 'ttl_lain'       , name: 'ttl_lain'       , class : 'text-center' },
+            { data: 'via_tambah'     , name: 'via_tambah'     , class : 'text-center' },
             { data: 'via_publish'    , name: 'via_publish'    , class : 'text-center' },
             { data: 'ttl_tagihan'    , name: 'ttl_tagihan'    , class : 'text-center' },
         ],

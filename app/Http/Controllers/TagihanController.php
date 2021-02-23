@@ -18,6 +18,7 @@ use App\Models\TarifListrik;
 use App\Models\TarifAirBersih;
 
 use App\Models\Pembayaran;
+use App\Models\Neraca;
 
 use App\Models\HariLibur;
 use App\Models\Sinkronisasi;
@@ -690,6 +691,7 @@ class TagihanController extends Controller
 
             $tagihan = Tagihan::find($id);
             $tagihan->nama = $request->pengguna;
+            $tagihan->via_tambah = Session::get('username');
             $tagihan->save();
             
             if($request->stt_listrik == 'ok'){
@@ -2662,7 +2664,38 @@ class TagihanController extends Controller
         }
     }
 
-    public function neraca(){
-        echo "Neraca";
+    public function neraca(Request $request){
+        if($request->ajax()){
+            $data = Neraca::orderBy('id','desc');
+            return DataTables::of($data)
+                ->editColumn('debit', function ($data) {
+                    if ($data->debit == NULL) return '';
+                    else return number_format($data->debit);
+                })
+                ->editColumn('kredit', function ($data) {
+                    if ($data->kredit == NULL) return '';
+                    else return number_format($data->kredit);
+                })
+                ->editColumn('saldo', function ($data) {
+                    if ($data->saldo == NULL) return '';
+                    else return number_format($data->saldo);
+                })
+                ->editColumn('sisa', function ($data) {
+                    if ($data->sisa == NULL) return '';
+                    else return number_format($data->sisa);
+                })
+                ->editColumn('created_at', function ($data) {
+                    return [
+                        'display' => $data->created_at->format('d-m-Y H:i:s'),
+                        'timestamp' => $data->created_at->timestamp
+                    ];
+                    })
+                ->make(true);
+        }
+        return view('tagihan.neraca');
+    }
+
+    public function neracaStore(Request $request){
+        
     }
 }

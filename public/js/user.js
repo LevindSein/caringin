@@ -232,6 +232,9 @@ $(document).ready(function(){
                     .slideUp(2000, function () {
                         $("#success-alert,#error-alert").slideUp(1000);
                 });
+                setTimeout(function(){
+                    $('#myModal').modal('hide');
+				}, 3000);
 			}
 		});
     });
@@ -405,6 +408,7 @@ $(document).ready(function(){
         $("#tarif").prop("checked", false);
         $("#harilibur").prop("checked", false);
         $("#layanan").prop("checked", false);
+        $("#simulasi").prop("checked", false);
 		$.ajax({
 			url :"/user/"+id+"/otoritas",
             cache:false,
@@ -471,6 +475,8 @@ $(document).ready(function(){
                     if(data.result.harilibur == true) $("#harilibur").prop("checked", true);
 
                     if(data.result.layanan == true) $("#layanan").prop("checked", true);
+
+                    if(data.result.simulasi == true) $("#simulasi").prop("checked", true);
                 }
                 else{
                     $('.blokOtoritas').select2({
