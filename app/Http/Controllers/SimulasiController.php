@@ -94,6 +94,7 @@ class SimulasiController extends Controller
                 'trf_ppn'          => $request->ppnAir
             ];
 
+            $rekap = Simulasi::rekapAirBersih($bulan);
             return view('simulasi.airbersih',[
                 'bln'     =>IndoDate::bulanB($bulan,' '),
                 'rekap'   =>$rekap,

@@ -15,7 +15,7 @@ class Simulasi extends Model
     public static function rekapListrik($bulan){
         return Tagihan::
             where([
-                    ['tagihan.bln_pakai',$bulan],
+                    ['tagihan.bln_tagihan',$bulan],
                     ['tagihan.stt_listrik',1]
                 ])
             ->select(
@@ -68,7 +68,7 @@ class Simulasi extends Model
     public static function rincianListrik($bulan){
         $blok = Tagihan::
             where([
-                ['tagihan.bln_pakai',$bulan],
+                ['tagihan.bln_tagihan',$bulan],
                 ['tagihan.stt_listrik',1]
             ])
             ->select('tagihan.blok')
@@ -81,7 +81,7 @@ class Simulasi extends Model
             $dataset[$i][0] = $blok[$i]->blok;
             $dataset[$i][1] = Tagihan::
             where([
-                ['tagihan.bln_pakai',$bulan],
+                ['tagihan.bln_tagihan',$bulan],
                 ['tagihan.stt_listrik',1],
                 ['tagihan.blok',$blok[$i]->blok]
             ])
@@ -106,7 +106,7 @@ class Simulasi extends Model
             ->get();
 
             $dataset[$i][2] = Tagihan::where([
-                ['tagihan.bln_pakai',$bulan],
+                ['tagihan.bln_tagihan',$bulan],
                 ['tagihan.stt_listrik',1],
                 ['tagihan.blok',$blok[$i]->blok]
             ])
@@ -132,7 +132,7 @@ class Simulasi extends Model
     public static function rekapAirBersih($bulan){
         return Tagihan::
             where([
-                    ['tagihan.bln_pakai',$bulan],
+                    ['tagihan.bln_tagihan',$bulan],
                     ['tagihan.stt_airbersih',1]
                 ])
             ->select(
@@ -185,7 +185,7 @@ class Simulasi extends Model
     public static function rincianAirBersih($bulan){
         $blok = Tagihan::
             where([
-                ['tagihan.bln_pakai',$bulan],
+                ['tagihan.bln_tagihan',$bulan],
                 ['tagihan.stt_airbersih',1],
             ])
             ->select('tagihan.blok')
@@ -198,7 +198,7 @@ class Simulasi extends Model
             $dataset[$i][0] = $blok[$i]->blok;
             $dataset[$i][1] = Tagihan::
             where([
-                ['tagihan.bln_pakai',$bulan],
+                ['tagihan.bln_tagihan',$bulan],
                 ['tagihan.stt_airbersih',1],
                 ['tagihan.blok',$blok[$i]->blok]
             ])
@@ -221,7 +221,7 @@ class Simulasi extends Model
             ->get();
             
             $dataset[$i][2] = Tagihan::where([
-                ['tagihan.bln_pakai',$bulan],
+                ['tagihan.bln_tagihan',$bulan],
                 ['tagihan.stt_airbersih',1],
                 ['tagihan.blok',$blok[$i]->blok]
             ])
