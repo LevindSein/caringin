@@ -142,6 +142,8 @@ class CronTagihan extends Command
                                 $diskon                   = $tagihan->dis_keamananipk;
                             }
                             $tagihan->ttl_keamananipk = $tagihan->sub_keamananipk - $diskon;
+                            $tagihan->ttl_keamanan    = $tagihan->ttl_keamananipk * ($tarif->prs_keamanan / 100);
+                            $tagihan->ttl_ipk         = $tagihan->ttl_keamananipk * ($tarif->prs_ipk / 100);
                             $tagihan->rea_keamananipk = 0;
                             $tagihan->sel_keamananipk = $tagihan->ttl_keamananipk;
                         }

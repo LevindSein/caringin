@@ -32,6 +32,8 @@ class Pembayaran extends Model
         'sel_airbersih',
         'dis_airbersih',
         'byr_keamananipk',
+        'byr_keamanan',
+        'byr_ipk',
         'sel_keamananipk',
         'dis_keamananipk',
         'byr_kebersihan',

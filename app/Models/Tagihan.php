@@ -68,6 +68,8 @@ class Tagihan extends Model
         'sub_keamananipk',
         'dis_keamananipk',
         'ttl_keamananipk',
+        'ttl_keamanan',
+        'ttl_ipk',
         'rea_keamananipk',
         'sel_keamananipk',
         'sub_kebersihan',

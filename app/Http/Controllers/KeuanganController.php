@@ -836,6 +836,72 @@ class KeuanganController extends Controller
         return view('keuangan.data.tunggakan');
     }
 
+    public function arsip(Request $request){
+        $tanggal = $request->tanggal;
+        $fasilitas = $request->fasilitasarsip;
+        $cetak = IndoDate::tanggal(date('Y-m-d',strtotime(Carbon::now())),' ')." ".date('H:i:s',strtotime(Carbon::now()));
+
+        if($fasilitas == 'listrik'){
+            $dataset = Pembayaran::where([['tgl_bayar',$tanggal],['byr_listrik','>',0]])->orderBy('kd_kontrol','asc')->get();
+            return view('keuangan.arsip.listrik',[
+                'dataset'   => $dataset, 
+                'tanggal'   => IndoDate::tanggal($tanggal," "),
+                'cetak'     => $cetak,
+                'fasilitas' => "Listrik"
+            ]);
+        }
+
+        if($fasilitas == 'airbersih'){
+            $dataset = Pembayaran::where([['tgl_bayar',$tanggal],['byr_airbersih','>',0]])->orderBy('kd_kontrol','asc')->get();
+            return view('keuangan.arsip.airbersih',[
+                'dataset'   => $dataset, 
+                'tanggal'   => IndoDate::tanggal($tanggal," "),
+                'cetak'     => $cetak,
+                'fasilitas' => "Air Bersih"
+            ]);
+        }
+
+        if($fasilitas == 'keamananipk'){
+            $dataset = Pembayaran::where([['tgl_bayar',$tanggal],['byr_keamananipk','>',0]])->orderBy('kd_kontrol','asc')->get();
+            return view('keuangan.arsip.keamananipk',[
+                'dataset'   => $dataset, 
+                'tanggal'   => IndoDate::tanggal($tanggal," "),
+                'cetak'     => $cetak,
+                'fasilitas' => "Keamanan & IPK"
+            ]);
+        }
+
+        if($fasilitas == 'kebersihan'){
+            $dataset = Pembayaran::where([['tgl_bayar',$tanggal],['byr_kebersihan','>',0]])->orderBy('kd_kontrol','asc')->get();
+            return view('keuangan.arsip.kebersihan',[
+                'dataset'   => $dataset, 
+                'tanggal'   => IndoDate::tanggal($tanggal," "),
+                'cetak'     => $cetak,
+                'fasilitas' => "Kebersihan"
+            ]);
+        }
+
+        if($fasilitas == 'airkotor'){
+            $dataset = Pembayaran::where([['tgl_bayar',$tanggal],['byr_airkotor','>',0]])->orderBy('kd_kontrol','asc')->get();
+            return view('keuangan.arsip.airkotor',[
+                'dataset'   => $dataset, 
+                'tanggal'   => IndoDate::tanggal($tanggal," "),
+                'cetak'     => $cetak,
+                'fasilitas' => "Air Kotor"
+            ]);
+        }
+
+        if($fasilitas == 'lain'){
+            $dataset = Pembayaran::where([['tgl_bayar',$tanggal],['byr_lain','>',0]])->orderBy('kd_kontrol','asc')->get();
+            return view('keuangan.arsip.lain',[
+                'dataset'   => $dataset, 
+                'tanggal'   => IndoDate::tanggal($tanggal," "),
+                'cetak'     => $cetak,
+                'fasilitas' => "Lain - Lain"
+            ]);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

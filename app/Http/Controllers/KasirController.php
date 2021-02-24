@@ -493,6 +493,8 @@ class KasirController extends Controller
                 }
                 
                 if(empty($request->checkKeamananIpk) == FALSE){
+                    $pembayaran->byr_keamanan = $d->ttl_keamanan;
+                    $pembayaran->byr_ipk      = $d->ttl_ipk;
                     $pembayaran->byr_keamananipk = $d->sel_keamananipk;
                     $pembayaran->sel_keamananipk = 0;
                     $pembayaran->dis_keamananipk = $d->dis_keamananipk;
@@ -502,6 +504,8 @@ class KasirController extends Controller
                     $diskon = $diskon + $pembayaran->dis_keamananipk;
                 }
                 else{
+                    $pembayaran->byr_keamanan = 0;
+                    $pembayaran->byr_ipk      = 0;
                     $pembayaran->byr_keamananipk = 0;
                     $pembayaran->sel_keamananipk = $d->sel_keamananipk;
                     $pembayaran->dis_keamananipk = 0;

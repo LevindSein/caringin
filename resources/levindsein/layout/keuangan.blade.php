@@ -86,11 +86,19 @@
                     </li>
                     <li class="nav-item with-sub {{ (request()->is('keuangan/checkout*')) ? 'active' : '' }}">
                         <a href="" class="nav-link"><i data-feather="send"></i> Checkout</a>
-                        <ul class="navbar-menu-sub">
-                            Under Construction
-                            <!-- <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="dollar-sign"></i> Tagihan</a></li>
-                            <li class="nav-sub-item"><a href="{{url('#')}}" class="nav-sub-link"><i data-feather="arrow-up-right"></i> Tunggakan</a></li> -->
-                        </ul>
+                        <div class="navbar-menu-sub">
+                            <div class="d-lg-flex">
+                                <ul>
+                                    <li class="nav-label">Arsip Harian</li>
+                                    <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="arslistrik"><i data-feather="zap"></i> Listrik</a></li>
+                                    <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="arsairbersih"><i data-feather="droplet"></i> Air Bersih</a></li>
+                                    <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="arskeamananipk"><i data-feather="shield"></i> Keamanan & IPK</a></li>
+                                    <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="arskebersihan"><i data-feather="feather"></i> Kebersihan</a></li>
+                                    <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="arsairkotor"><i data-feather="droplet"></i> Air Kotor</a></li>
+                                    <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="arslain"><i data-feather="grid"></i> Lain - Lain</a></li>
+                                </ul>
+                            </div>
+                        </div><!-- nav-sub -->
                     </li>
                 </ul>
             </div><!-- navbar-menu-wrapper -->
@@ -158,7 +166,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk logout?</h5>
+                        <h5 id="exampleModalLabel">Apakah anda yakin untuk logout?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -168,6 +176,42 @@
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                         <a class="btn btn-primary" href="{{url('logout')}}">Logout</a>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="modal fade"
+            id="myModal"
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="modal-title" id="titlesArsip"></span>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <form class="user" action="{{url('keuangan/checkout/arsip')}}" target="_blank" method="GET">
+                        <div class="modal-body-short">
+                            <div class="col-lg-12">
+                                <input
+                                    required
+                                    placeholder="Masukkan Tanggal" class="form-control" type="text" onfocus="(this.type='date')"
+                                    autocomplete="off"
+                                    type="date"
+                                    name="tanggal"
+                                    id="tanggal">
+                                <input type="hidden" id="fasilitasarsip" name="fasilitasarsip"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -197,6 +241,36 @@
                 $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
                     $($.fn.dataTable.tables( true ) ).DataTable().columns.adjust().draw();
                 } ); 
+
+                $(document).on('click', '#arslistrik', function(){
+                    $('#fasilitasarsip').val("listrik");
+                    $('#titlesArsip').html("<h5>Arsip Listrik</h5>");
+                });
+
+                $(document).on('click', '#arsairbersih', function(){
+                    $('#titlesArsip').html("<h5>Arsip Air Bersih</h5>");
+                    $('#fasilitasarsip').val("airbersih");
+                });
+
+                $(document).on('click', '#arskeamananipk', function(){
+                    $('#titlesArsip').html("<h5>Arsip Keamanan IPK</h5>");
+                    $('#fasilitasarsip').val("keamananipk");
+                });
+
+                $(document).on('click', '#arskebersihan', function(){
+                    $('#titlesArsip').html("<h5>Arsip Kebersihan</h5>");
+                    $('#fasilitasarsip').val("kebersihan");
+                });
+
+                $(document).on('click', '#arsairkotor', function(){
+                    $('#titlesArsip').html("<h5>Arsip Air Kotor</h5>");
+                    $('#fasilitasarsip').val("airkotor");
+                });
+
+                $(document).on('click', '#arslain', function(){
+                    $('#titlesArsip').html("<h5>Arsip Lain Lain</h5>");
+                    $('#fasilitasarsip').val("lain");
+                });
             });
         </script>
 

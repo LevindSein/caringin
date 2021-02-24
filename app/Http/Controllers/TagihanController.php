@@ -16,6 +16,8 @@ use App\Models\AlatAir;
 use App\Models\Penghapusan;
 use App\Models\TarifListrik;
 use App\Models\TarifAirBersih;
+use App\Models\TarifKeamananIpk;
+use App\Models\TarifKebersihan;
 
 use App\Models\Pembayaran;
 use App\Models\Neraca;
@@ -772,6 +774,9 @@ class TagihanController extends Controller
                     $tempat->dis_keamananipk = $diskon;
                     $tempat->save();
                 }
+                $tarif = TarifKeamananIpk::find($tempat->trf_keamananipk);
+                $tagihan->ttl_keamanan = ($tarif->prs_keamanan / 100) * $tagihan->ttl_keamananipk;
+                $tagihan->ttl_ipk = ($tarif->prs_ipk / 100) * $tagihan->ttl_keamananipk;
 
                 $tagihan->save();
             }
@@ -1025,6 +1030,12 @@ class TagihanController extends Controller
 
                     $hapus->ttl_keamananipk = $data->ttl_keamananipk;
                     $data->ttl_keamananipk  = 0;
+
+                    $hapus->ttl_keamanan = $data->ttl_keamanan;
+                    $data->ttl_keamanan  = 0;
+
+                    $hapus->ttl_ipk = $data->ttl_ipk;
+                    $data->ttl_ipk  = 0;
 
                     $hapus->rea_keamananipk = $data->rea_keamananipk;
                     $data->rea_keamananipk  = 0;
@@ -2232,6 +2243,9 @@ class TagihanController extends Controller
                         $tagihan->sub_keamananipk = $keamananipk;
                         $tagihan->dis_keamananipk = $diskon;
                         $tagihan->ttl_keamananipk = $tagihan->sub_keamananipk - $tagihan->dis_keamananipk;
+                        $tarif = TarifKeamananIpk::find($record->trf_keamananipk);
+                        $tagihan->ttl_keamanan    = ($tarif->prs_keamanan / 100) * $tagihan->ttl_keamananipk;
+                        $tagihan->ttl_ipk         = ($tarif->prs_ipk / 100) * $tagihan->ttl_keamananipk;
                         $tagihan->rea_keamananipk = 0;
                         $tagihan->sel_keamananipk = $tagihan->ttl_keamananipk;
                         $tagihan->stt_keamananipk = 1;

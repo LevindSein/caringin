@@ -154,6 +154,7 @@ Route::middleware('ceklogin:kasir')->group(function(){
 });
 
 Route::middleware('ceklogin:keuangan')->group(function(){
+    Route::get('keuangan/checkout/arsip',[KeuanganController::class, 'arsip']);
     Route::get('keuangan/data/tunggakan',[KeuanganController::class, 'dataTunggakan']);
     Route::get('keuangan/data/tagihan',[KeuanganController::class, 'dataTagihan']);
     Route::get('keuangan/laporan/rekap/generate/{data}',[KeuanganController::class, 'lapGenerateRekap']);
