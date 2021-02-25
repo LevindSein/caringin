@@ -1159,10 +1159,10 @@ class TagihanController extends Controller
     }
 
     public function listrik(Request $request){
-        $blok    = $request->tagihan_blok; 
+        $blok    = $request->tagihan_blok;
 
         if(Session::get('role') == 'admin'){
-            if (!in_array($blok, Session::get('otoritas')->blok)) {
+            if (!in_array($blok, Session::get('otoritas')->otoritas)) {
                 return redirect()->route('tagihan.index');
             }
         }
@@ -1254,7 +1254,7 @@ class TagihanController extends Controller
         $blok    = $request->tagihan_blok;
 
         if(Session::get('role') == 'admin'){
-            if (!in_array($blok, Session::get('otoritas')->blok)) {
+            if (!in_array($blok, Session::get('otoritas')->otoritas)) {
                 return redirect()->route('tagihan.index');
             }
         }

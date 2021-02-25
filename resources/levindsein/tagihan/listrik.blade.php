@@ -39,6 +39,7 @@
         <label for="daya">Daya Listrik <span style="color:red;">*</span></label>
         <input
             required
+            <?php if(Session::get('role') == 'admin') { ?> readonly <?php } ?>
             value="{{number_format($dataset->daya_listrik)}}"
             autocomplete="off"
             type="text" 
@@ -51,6 +52,7 @@
         <label for="awal">Stand Awal Listrik <span style="color:red;">*</span></label>
         <input
             required
+            <?php if(Session::get('role') == 'admin') { ?> readonly <?php } ?>
             value="{{number_format($dataset->awal_listrik)}}"
             autocomplete="off"
             type="text" 

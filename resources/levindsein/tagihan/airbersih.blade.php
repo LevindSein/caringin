@@ -39,6 +39,7 @@
         <label for="awal">Stand Awal Air Bersih <span style="color:red;">*</span></label>
         <input
             required
+            <?php if(Session::get('role') == 'admin') { ?> readonly <?php } ?>
             value="{{number_format($dataset->awal_airbersih)}}"
             autocomplete="off"
             type="text" 
