@@ -113,7 +113,7 @@ class CronDenda extends Command
                                 $t->sel_listrik = $t->ttl_listrik - $t->rea_listrik;
                             }
                             else if($t->daya_listrik > 4400){
-                                $t->den_listrik = $diff * (($listrik->trf_denda_lebih / 100) * $t->ttl_listrik);
+                                $t->den_listrik = $diff * (($listrik->trf_denda_lebih / 100) * $t->sub_listrik);
                                 $t->ttl_listrik =  $t->sub_listrik - $t->dis_listrik + $t->den_listrik;
                                 $t->sel_listrik = $t->ttl_listrik - $t->rea_listrik;
                             }

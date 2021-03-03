@@ -148,7 +148,25 @@ class Tagihan extends Model
         $tagihan->via_tambah  = Session::get('username');
         
         $batas_rekmin = round(18 * $daya /1000);
-        $pakai_listrik = $akhir - $awal;
+        
+        if($akhir >= $awal)
+            $pakai_listrik = $akhir - $awal;
+        else{
+            if($awal < 1000)
+                $denom = 1000;
+            else if($awal < 10000)
+                $denom = 10000;
+            else if($awal < 100000)
+                $denom = 100000;
+            else if($awal < 1000000)
+                $denom = 1000000;
+            else{
+                abort(500);
+            }
+            
+            $pakai_listrik = $denom - $awal;
+            $pakai_listrik = $pakai_listrik + $akhir;
+        }   
 
         $a = round(($daya * $tarif->trf_standar) / 1000);
         $blok1_listrik = $tarif->trf_blok1 * $a;
@@ -253,7 +271,25 @@ class Tagihan extends Model
 
         $tagihan->via_tambah  = Session::get('username');
 
-        $pakai_airbersih = $akhir - $awal;
+        if($akhir >= $awal)
+            $pakai_airbersih = $akhir - $awal;
+        else{
+            if($awal < 1000)
+                $denom = 1000;
+            else if($awal < 10000)
+                $denom = 10000;
+            else if($awal < 100000)
+                $denom = 100000;
+            else if($awal < 1000000)
+                $denom = 1000000;
+            else{
+                abort(500);
+            }
+            
+            $pakai_airbersih = $denom - $awal;
+            $pakai_airbersih = $pakai_airbersih + $akhir;
+        }
+
         if($pakai_airbersih > 10){
             $a = 10 * $tarif->trf_1;
             $b = ($pakai_airbersih - 10) * $tarif->trf_2;

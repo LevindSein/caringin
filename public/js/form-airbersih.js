@@ -28,12 +28,7 @@ $(document).ready(function(){
     akhir = akhir.join('');
     akhir = parseInt(akhir);
     
-    if(akhir >= awal){
-        $("#tambah").prop("disabled", false);
-    }
-    else{
-        $("#tambah").prop("disabled", true);
-    }
+    $("#tambah").prop("disabled", false);
 
     $("#akhir,#awal").on("change paste keyup", function() {
         var akhir = $('#akhir').val();
@@ -46,11 +41,6 @@ $(document).ready(function(){
         awal = awal.join('');
         awal = parseInt(awal); 
         
-        if(akhir >= awal){
-            $("#tambah").prop("disabled", false);
-        }
-        else{
-            $("#tambah").prop("disabled", true);
-        }
+        $("#tambah").prop("disabled", false);
     });
 });

@@ -17,17 +17,31 @@ $ppn = $data['trf_ppn'];
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
         <title>Simulasi Listrik | BP3C</title>
         <link rel="stylesheet" href="{{asset('css/style-pemakaian.css')}}" media="all"/>
+        <link
+            href="{{asset('vendor/fontawesome-free/css/all.min.css')}}"
+            rel="stylesheet"
+            type="text/css">
         <link rel="icon" href="{{asset('img/logo.png')}}">
     </head>
     <style type="text/css">
     table { page-break-inside:auto }
     tr    { page-break-inside:avoid; page-break-after:auto }
     </style>
-    <body onload="window.print()">
+    <body>
+        <h2 style="text-align:center;"><span id="tarif-normal"></span><span id="tarif-kenaikan"></span></h2><br>
+        <h2 style="text-align:center;" id="kenaikan"></h2>
+        <?php 
+        $tarifNormal   = 0;
+        $tarifKenaikan = 0;
+        ?>
         @for($i=1;$i<=2;$i++)
         @if($i == 1)
+        <?php
+        $tarifNormal = $ttlRekap[5];
+        ?>
         @else
         <div style="page-break-before:always"></div>
         @foreach($rincian as $data)
@@ -157,6 +171,7 @@ $ppn = $data['trf_ppn'];
                             <!-- <td class="tg-8m6k">{{number_format($d->realisasi)}}</td>
                             <td class="tg-8m6k">{{number_format($d->selisih)}}</td> -->
                         </tr>
+                        <?php $tarifKenaikan = $tarifKenaikan + $jml_tagihan; ?>
                         @endforeach
                     </tbody>
                 </table>
@@ -166,5 +181,20 @@ $ppn = $data['trf_ppn'];
         @endforeach
         @endif
         @endfor
+
+        <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+        <script>
+        $(document).ready(function () {
+            $("#tarif-normal").html('<?php echo "Rp. ".number_format($tarifNormal); ?>' + ' ');
+            $("#tarif-kenaikan").html('<i class="fas fa-angle-double-right"></i> ' + '<?php echo "Rp. ".number_format($tarifKenaikan); ?>');
+            var selisih = '<?php echo($tarifKenaikan - $tarifNormal); ?>';
+            if(selisih < 0)
+                var selisih = '<i class="fas fa-angle-double-down"></i> Rp. ' + '<?php echo number_format(abs($tarifKenaikan - $tarifNormal)); ?>';
+            else
+                var selisih = '<i class="fas fa-angle-double-up"></i> Rp. ' + '<?php echo number_format($tarifKenaikan - $tarifNormal); ?>';
+            $("#kenaikan").html(selisih);
+        });
+        </script>
     </body>
 </html>

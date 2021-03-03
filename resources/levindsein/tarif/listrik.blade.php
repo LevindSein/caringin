@@ -53,7 +53,7 @@
                             <?php } ?>
                             type="number" 
                             autocomplete="off"
-                            min="1"
+                            min="0"
                             max="24"
                             class="form-control shadow"
                             name="waktu" 

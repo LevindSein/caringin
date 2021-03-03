@@ -141,7 +141,7 @@ $(document).ready(function(){
                     akhir = akhir.join('');
                     akhir = parseInt(akhir);
                     
-                    if(akhir >= awal && daya > 0){
+                    if(daya > 0){
                         listrik = 1;
                     }
                     else{
@@ -164,7 +164,7 @@ $(document).ready(function(){
                         akhir = akhir.join('');
                         akhir = parseInt(akhir);
 
-                        if(akhir >= awal && daya > 0){
+                        if(daya > 0){
                             listrik = 1;
                         }
                         else{
@@ -191,12 +191,7 @@ $(document).ready(function(){
                     akhir = akhir.join('');
                     akhir = parseInt(akhir);
                     
-                    if(akhir >= awal){
-                        air = 1;
-                    }
-                    else{
-                        air = 0;
-                    }
+                    air = 1;
 
                     $("#akhirAir,#awalAir").on("change paste keyup", function() {
                         var akhir = $('#akhirAir').val();
@@ -209,12 +204,7 @@ $(document).ready(function(){
                         awal = awal.join('');
                         awal = parseInt(awal); 
                         
-                        if(akhir >= awal){
-                            air = 1;
-                        }
-                        else{
-                            air = 0;
-                        }
+                        air = 1;
                     });
                 }
 
