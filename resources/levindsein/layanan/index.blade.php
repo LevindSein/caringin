@@ -48,29 +48,15 @@
                     <li class="nav-label pd-l-20 pd-lg-l-25 d-lg-none">MENU LAYANAN</li>
                     <li class="nav-item"><a href="{{url('dashboard')}}" class="nav-link"><i data-feather="arrow-left"></i> Back to Dashboard</a></li>
                     <li class="nav-item {{ (request()->is('layanan')) ? 'active' : '' }}"><a href="{{url('layanan')}}" class="nav-link"><i data-feather="book"></i> Registrasi</a></li>
-                    <li class="nav-item with-sub {{ (request()->is('layanan/sumberdaya*')) ? 'active' : '' }}">
-                        <a href="" class="nav-link"><i data-feather="layers"></i> Sumber Daya</a>
-                        <div class="navbar-menu-sub">
-                            <div class="d-lg-flex">
-                                <ul>
-                                    <li class="nav-label">Pedagang</li>
-                                    <li class="nav-sub-item"><a href="{{url('layanan/sumberdaya/registrasi/pedagang')}}" class="nav-sub-link"><i data-feather="plus"></i> Tambah</a></li>
-                                    <li class="nav-sub-item"><a href="{{url('layanan/sumberdaya/update/pedagang')}}" class="nav-sub-link"><i data-feather="edit-3"></i> Update</a></li>
-                                </ul>
-                                <ul>
-                                    <li class="nav-label">Tempat Usaha</li>
-                                    <li class="nav-sub-item"><a href="{{url('layanan/sumberdaya/registrasi/tempatusaha')}}" class="nav-sub-link"><i data-feather="plus"></i> Tambah</a></li>
-                                    <li class="nav-sub-item"><a href="{{url('layanan/sumberdaya/update/tempatusaha')}}" class="nav-sub-link"><i data-feather="edit-3"></i> Update</a></li>
-                                </ul>
-                                <ul>
-                                    <li class="nav-label">Alat Meter</li>
-                                    <li class="nav-sub-item"><a href="{{url('layanan/sumberdaya/registrasi/alatmeter')}}" class="nav-sub-link"><i data-feather="plus"></i> Tambah</a></li>
-                                    <li class="nav-sub-item"><a href="{{url('layanan/sumberdaya/update/alatmeter')}}" class="nav-sub-link"><i data-feather="edit-3"></i> Update</a></li>
-                                </ul>
-                            </div>
-                        </div><!-- nav-sub -->
+                    <li class="nav-item with-sub {{ (request()->is('layanan/diskon*')) ? 'active' : '' }}">
+                        <a href="" class="nav-link"><i data-feather="database"></i> Pengajuan Diskon</a>
+                        <ul class="navbar-menu-sub">
+                            <li class="nav-sub-item"><a href="{{url('layanan/diskon/listrik')}}" class="nav-sub-link"><i data-feather="zap"></i> Listrik</a></li>
+                            <li class="nav-sub-item"><a href="{{url('layanan/diskon/airbersih')}}" class="nav-sub-link"><i data-feather="droplet"></i> Air Bersih</a></li>
+                            <li class="nav-sub-item"><a href="{{url('layanan/diskon/keamananipk')}}" class="nav-sub-link"><i data-feather="shield"></i> Keamanan & IPK</a></li>
+                            <li class="nav-sub-item"><a href="{{url('layanan/diskon/kebersihan')}}" class="nav-sub-link"><i data-feather="feather"></i> Kebersihan</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item {{ (request()->is('layanan/tagihan*')) ? 'active' : '' }}"><a href="{{url('layanan/tagihan')}}" class="nav-link"><i data-feather="dollar-sign"></i> Tagihan</a></li>
                 </ul>
             </div><!-- navbar-menu-wrapper -->
             <div class="navbar-right">

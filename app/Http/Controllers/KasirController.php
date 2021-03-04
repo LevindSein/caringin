@@ -919,7 +919,7 @@ class KasirController extends Controller
                 $printer -> text("----------------------------------------\n");
                 $printer -> text("Nomor : $faktur\n");
                 $printer -> text("Dibayar pada ".date('d/m/Y H:i:s',strtotime(Carbon::now()))."\n");
-                $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\n");
+                $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\nPembayaran sudah termasuk PPN\n");
                 $printer -> text("Ksr : $nama\n");
                 $printer -> feed();
             }
@@ -1055,7 +1055,7 @@ class KasirController extends Controller
                 $printer -> text("----------------------------------------\n");
                 $printer -> text("Nomor : $faktur\n");
                 $printer -> text("Dibayar pada ".date('d/m/Y H:i:s',strtotime(Carbon::now()))."\n");
-                $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\n");
+                $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\nPembayaran sudah termasuk PPN\n");
                 $printer -> text("Ksr : $nama\n");
                 $printer -> feed();
                 $printer -> cut();
@@ -2521,7 +2521,7 @@ class KasirController extends Controller
                         $printer -> text("Salinan ke-$cetakan\n");
                     $printer -> text("Nomor : $struk->nomor\n");
                     $printer -> text("Dibayar pada $struk->bayar\n");
-                    $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\n");
+                    $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\nPembayaran sudah termasuk PPN\n");
                     $printer -> text("Ksr : $struk->kasir\n");
                     $printer -> feed();
                 }
@@ -2678,7 +2678,7 @@ class KasirController extends Controller
                         $printer -> text("Salinan ke-$cetakan\n");
                     $printer -> text("Nomor : $struk->nomor\n");
                     $printer -> text("Dibayar pada $struk->bayar\n");
-                    $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\n");
+                    $printer -> text("Harap simpan tanda terima ini\nsebagai bukti pembayaran yang sah.\nTerimakasih.\nPembayaran sudah termasuk PPN\n");
                     $printer -> text("Ksr : $struk->kasir\n");
                     $printer -> feed();
                     $printer -> cut();

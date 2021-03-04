@@ -90,56 +90,43 @@ $ppn = $data['trf_ppn'];
                             <td class="tg-cegc">{{number_format($d->lalu)}}</td>
                             <td class="tg-cegc">{{number_format($d->baru)}}</td>
                             <td class="tg-cegc">{{number_format($d->pakai)}}</td>
-                            <td class="tg-cegc">{{number_format($d->rekmin)}}</td>
-                            <?php 
-                            $tagihan = $tagihan + $d->rekmin;
-                            ?>
-                            @if($d->blok1 > 0)
                             <?php
+                            $rekmin_listrik = $d->rekmin * 0;
+                            $tagihan = $tagihan + $rekmin_listrik;
                             $a = round(($d->daya * $standar) / 1000);
+                            ?>
+                            <td class="tg-cegc">{{number_format($rekmin_listrik)}}</td>
+
+                            <?php
                             $blok1_listrik = $blok1 * $a;
                             $tagihan = $tagihan + $blok1_listrik;
                             ?>
                             <td class="tg-cegc">{{number_format($blok1_listrik)}}</td>
-                            @else
-                            <td class="tg-cegc">{{number_format($d->blok1)}}</td>
-                            @endif
 
-                            @if($d->blok2 > 0)
                             <?php
-                            $b = $d->pakai - $a;
-                            $blok2_listrik = $blok2 * $b;
+                            if($d->pakai >= $a){
+                                $b = $d->pakai - $a;
+                                $blok2_listrik = $blok2 * $b;
+                            }
+                            else{
+                                $blok2_listrik = $blok2 * $d->pakai;
+                            }
                             $tagihan = $tagihan + $blok2_listrik;
                             ?>
                             <td class="tg-cegc">{{number_format($blok2_listrik)}}</td>
-                            @else
-                            <td class="tg-cegc">{{number_format($d->blok2)}}</td>
-                            @endif
 
-                            @if($d->beban > 0)
                             <?php
                             $beban_listrik = $d->daya * $beban;
                             $tagihan = $tagihan + $beban_listrik;
                             ?>
                             <td class="tg-cegc">{{number_format($beban_listrik)}}</td>
-                            @else
-                            <td class="tg-cegc">{{number_format($d->beban)}}</td>
-                            @endif
 
-                            @if($d->rekmin > 0)
-                            <?php
-                            $bpju_listrik = ($bpju / 100) * $d->rekmin;
-                            $tagihan = $tagihan + $bpju_listrik;
-                            ?>
-                            <td class="tg-cegc">{{number_format($bpju_listrik)}}</td>
-                            @else
                             <?php
                             $c = $blok1_listrik + $blok2_listrik + $beban_listrik;
                             $bpju_listrik = ($bpju / 100) * $c;
                             $tagihan = $tagihan + $bpju_listrik;
                             ?>
                             <td class="tg-cegc">{{number_format($bpju_listrik)}}</td>
-                            @endif
 
                             <?php
                             $ttl_tagihan = round($tagihan + ($tagihan * ($ppn / 100)));
