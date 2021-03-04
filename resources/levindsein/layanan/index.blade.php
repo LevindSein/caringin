@@ -51,10 +51,10 @@
                     <li class="nav-item with-sub {{ (request()->is('layanan/diskon*')) ? 'active' : '' }}">
                         <a href="" class="nav-link"><i data-feather="database"></i> Pengajuan Diskon</a>
                         <ul class="navbar-menu-sub">
-                            <li class="nav-sub-item"><a href="{{url('layanan/diskon/listrik')}}" class="nav-sub-link"><i data-feather="zap"></i> Listrik</a></li>
-                            <li class="nav-sub-item"><a href="{{url('layanan/diskon/airbersih')}}" class="nav-sub-link"><i data-feather="droplet"></i> Air Bersih</a></li>
-                            <li class="nav-sub-item"><a href="{{url('layanan/diskon/keamananipk')}}" class="nav-sub-link"><i data-feather="shield"></i> Keamanan & IPK</a></li>
-                            <li class="nav-sub-item"><a href="{{url('layanan/diskon/kebersihan')}}" class="nav-sub-link"><i data-feather="feather"></i> Kebersihan</a></li>
+                            <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="dislistrik"><i data-feather="zap"></i> Listrik</a></li>
+                            <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="disairbersih"><i data-feather="droplet"></i> Air Bersih</a></li>
+                            <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="diskeamananipk"><i data-feather="shield"></i> Keamanan & IPK</a></li>
+                            <li class="nav-sub-item"><a href="#" data-toggle="modal" data-target="#myModal" class="nav-sub-link" id="diskebersihan"><i data-feather="feather"></i> Kebersihan</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -137,6 +137,37 @@
             </div>
         </div>
 
+        <div
+            class="modal fade"
+            id="myModal"
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="modal-title" id="titlesDiskon"></span>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <form class="user" action="{{url('layanan/pengajuan/diskon')}}" target="_blank" method="POST">
+                        @csrf
+                        <div class="modal-body-short">
+                            <div class="col-lg-12">
+                                <select class="kontroldiskon select2" style="width:100%" name="kontroldiskon[]" id="kontroldiskon" required multiple></select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" id="fasilitasdiskon" name="fasilitasdiskon"/>
+                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <script>
             $(window).load(function () {
                 $(".se-pre-con")
@@ -162,6 +193,46 @@
                 $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
                     $($.fn.dataTable.tables( true ) ).DataTable().columns.adjust().draw();
                 } ); 
+
+                $(document).on('click', '#dislistrik', function(){
+                    $('#titlesDiskon').html("<h5>Pengajuan Diskon Listrik</h5>");
+                    $('#fasilitasdiskon').val("listrik");
+                });
+
+                $(document).on('click', '#disairbersih', function(){
+                    $('#titlesDiskon').html("<h5>Pengajuan Diskon Air Bersih</h5>");
+                    $('#fasilitasdiskon').val("airbersih");
+                });
+
+                $(document).on('click', '#diskeamananipk', function(){
+                    $('#titlesDiskon').html("<h5>Pengajuan Diskon Keamanan IPK</h5>");
+                    $('#fasilitasdiskon').val("keamananipk");
+                });
+
+                $(document).on('click', '#diskebersihan', function(){
+                    $('#titlesDiskon').html("<h5>Pengajuan Diskon Kebersihan</h5>");
+                    $('#fasilitasdiskon').val("kebersihan");
+                });
+
+                $('#kontroldiskon').select2({
+                    placeholder: '--- Pilih Tempat ---',
+                    ajax: {
+                        url: "/cari/alamat",
+                        dataType: 'json',
+                        delay: 250,
+                        processResults: function (alamat) {
+                            return {
+                            results:  $.map(alamat, function (al) {
+                                return {
+                                    text: al.kd_kontrol,
+                                    id: al.id
+                                }
+                            })
+                            };
+                        },
+                        cache: true
+                    }
+                });
             });
         </script>
 

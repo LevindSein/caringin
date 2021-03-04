@@ -60,6 +60,66 @@ class LayananController extends Controller
         }
     }
 
+    public function diskon(Request $request){
+        $fasilitas = $request->fasilitasdiskon;
+        
+        $cetak = IndoDate::tanggal(date('Y-m-d',strtotime(Carbon::now())),' ')." ".date('H:i:s',strtotime(Carbon::now()));
+
+        $dataset = TempatUsaha::whereIn('id',$request->kontroldiskon)->orderBy('kd_kontrol','asc')->get();
+
+        $i = 0;
+        $data = array();
+        foreach($dataset as $d){
+            $pengguna = Pedagang::find($d->id_pengguna);
+            $data[$i]['nama'] = $pengguna->nama;
+            $data[$i]['kontrol'] = $d->kd_kontrol;
+            $data[$i]['blok'] = $d->blok;
+            $data[$i]['los'] = $d->no_alamat;
+            $data[$i]['unit'] = $d->jml_alamat;
+            if($fasilitas == 'keamananipk'){
+                $tarif = TarifKeamananIpk::find($d->trf_keamananipk);
+                if($tarif == NULL)
+                    $data[$i]['tarif'] = 0;
+                else
+                    $data[$i]['tarif'] = $tarif->tarif;
+            }
+            else if($fasilitas == 'kebersihan'){
+                $tarif = TarifKebersihan::find($d->trf_kebersihan);
+                if($tarif == NULL)
+                    $data[$i]['tarif'] = 0;
+                else
+                    $data[$i]['tarif'] = $tarif->tarif;
+            }
+
+            $i++; 
+        }
+
+        if($fasilitas == 'listrik'){
+            return view('layanan.diskon.listrik',[
+                'dataset' => $data,
+                'cetak'   => $cetak
+            ]);
+        }
+        elseif($fasilitas == 'airbersih'){
+            return view('layanan.diskon.airbersih',[
+                'dataset' => $data,
+                'cetak'   => $cetak
+            ]);
+        }
+        elseif($fasilitas == 'keamananipk'){
+            return view('layanan.diskon.keamananipk',[
+                'dataset' => $data,
+                'cetak'   => $cetak
+            ]);
+        }
+        elseif($fasilitas == 'kebersihan'){
+            return view('layanan.diskon.kebersihan',[
+                'dataset' => $data,
+                'cetak'   => $cetak
+            ]);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -167,6 +167,7 @@ Route::middleware('ceklogin:keuangan')->group(function(){
 });
 
 Route::middleware('ceklogin:layanan')->group(function (){
+    Route::post('layanan/pengajuan/diskon',[LayananController::class, 'diskon']);
     Route::get('layanan/tempat/{data}',[LayananController::class, 'tempat']);
     Route::resource('layanan', LayananController::class);
 });
