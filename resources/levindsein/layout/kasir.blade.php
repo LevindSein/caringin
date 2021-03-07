@@ -56,15 +56,12 @@
 											<i class="mdi mdi-sync text-primary"></i>
 											Mode Bulanan
 										</a>
-                                        <hr>
                                         @else
                                         <a class="dropdown-item"
                                             href="{{url('kasir/mode/harian')}}">
 											<i class="mdi mdi-sync text-primary"></i>
 											Mode Harian
 										</a>
-                                        <hr>
-                                        <div class="dropdown-header">Personal Kasir :</div>
                                         <a class="dropdown-item"
                                             data-toggle="modal"
                                             data-target="#mySisa">
@@ -77,9 +74,7 @@
 											<i class="mdi mdi-book-plus text-primary"></i>
 											Rekap Akhir Bulan
                                         </a>
-                                        <hr>
                                         @endif
-                                        <div class="dropdown-header">Kepala Kasir :</div>
                                         <a class="dropdown-item"
                                             data-toggle="modal"
                                             data-target="#myUtama">
@@ -92,7 +87,6 @@
 											<i class="mdi mdi-database text-primary"></i>
 											Pendapatan Bulanan
 										</a>
-                                        <hr>
                                         <a class="dropdown-item"
                                             href="{{url('kasir/settings')}}">
                                             <i class="mdi mdi-settings text-primary"></i>

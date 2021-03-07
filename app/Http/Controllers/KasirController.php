@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Models\Harian;
 use App\Models\Item;
 use App\Models\StrukPembayaran;
+use App\Models\Perkiraan;
 
 use App\Models\TempatUsaha;
 use App\Models\Sinkronisasi;
@@ -1649,83 +1650,50 @@ class KasirController extends Controller
         ->groupBy('thn_tagihan')
         ->get();
 
+        $perkiraan = Perkiraan::get();
+
         $tanggal = date('Y-m-d',strtotime(Carbon::now()));
         $tanggal = IndoDate::tanggal($tanggal,' ');
 
         return view('kasir.harian',[
             'tanggal'   => $tanggal,
-            'dataTahun' => $dataTahun
+            'dataTahun' => $dataTahun,
+            'perkiraan' => $perkiraan
         ]);
     }
 
     public function harianpost(Request $request){
         if($request->ajax()){
-            $rules = array(
-                'nama'                => ['required','max:30','string'],
-                'keamananlos'         => 'nullable|regex:/^[0-9\.,]+$/|max:14',
-                'kebersihanlos'       => 'nullable|regex:/^[0-9\.,]+$/|max:14',
-                'kebersihanpos'       => 'nullable|regex:/^[0-9\.,]+$/|max:14',
-                'kebersihanposlebih'  => 'nullable|regex:/^[0-9\.,]+$/|max:14',
-                'abonemen'            => 'nullable|regex:/^[0-9\.,]+$/|max:14',
-            );
-
-            $error = Validator::make($request->all(), $rules);
-
-            if($error->fails())
-            {
-                return response()->json(['errors' => 'Data Pembayaran Gagal Ditambah']);
-            }
-
             try{
                 $total = 0;
 
-                $time = strtotime(Carbon::now());
+                if($request->transaksi != NULL)
+                    $time = strtotime($request->transaksi);
+                else    
+                    $time = strtotime(Carbon::now());
                 $tanggal = date("Y-m-d", $time);
                 $bulan = date("Y-m", $time);
                 $tahun = date("Y", $time);
-                
-                $nama = ucwords($request->nama);
-
-                //Keamanan Los
-                $tarif = explode(",", $request->keamananlos);
-                $tarif = implode("", $tarif);
-                $keamananlos = $tarif;
-                $total = $total + $tarif;
-
-                //Kebersihan Los
-                $tarif = explode(",", $request->kebersihanlos);
-                $tarif = implode("", $tarif);
-                $kebersihanlos = $tarif;
-                $total = $total + $tarif;
-
-                //Kebersihan Pos
-                $tarif = explode(",", $request->kebersihanpos);
-                $tarif = implode("", $tarif);
-                $kebersihanpos = $tarif;
-                $total = $total + $tarif;
-
-                //Kebersihan Pos Lebih
-                $tarif = explode(",", $request->kebersihanposlebih);
-                $tarif = implode("", $tarif);
-                $kebersihanposlebih = $tarif;
-                $total = $total + $tarif;
-
-                //Abonemen
-                $tarif = explode(",", $request->abonemen);
-                $tarif = implode("", $tarif);
-                $abonemen = $tarif;
-                $total = $total + $tarif;
 
                 // $json = array();
                 if($request->title != NULL){
                     $json = array();
                     for($i = 0; $i < count($request->title); $i++){
-                        $title = ucwords($request->title[$i]);
+                        $perkiraan = Perkiraan::find($request->title[$i]);
+
+                        $jenis = ucwords($perkiraan->jenis);
+                        $nama  = ucwords($perkiraan->nama);
+                        $kode  = $perkiraan->kode;
 
                         $tarif = explode(",",$request->tarif[$i]);
                         $tarif = implode("", $tarif);
 
-                        $json[$title] = $tarif;
+                        $json[$i] = array(
+                            "kode"  => $kode,
+                            "nama"  => $nama,
+                            "jenis" => $jenis,
+                            "tarif" => $tarif
+                        );
                         $total = $total + $tarif;
                     }
 
@@ -1735,21 +1703,19 @@ class KasirController extends Controller
                     $json = NULL;
                 }
 
+                $ref = str_shuffle('ABCDEFGHJKMNPQRSTUVWXYZ');
+                $ref = substr($ref,0,10);
+
                 $data = [
-                    'tgl_bayar'            => $tanggal,
-                    'bln_bayar'            => $bulan,
-                    'thn_bayar'            => $tahun,
-                    'nama'                 => $nama,
-                    'keamanan_los'         => $keamananlos,
-                    'kebersihan_los'       => $kebersihanlos,
-                    'kebersihan_pos'       => $kebersihanpos,
-                    'kebersihan_pos_lebih' => $kebersihanposlebih,
-                    'abonemen'             => $abonemen,
-                    'ket'                  => $request->laporan,
-                    'json'                 => $json,
-                    'total'                => $total,
-                    'id_kasir'             => Session::get('userId'),
-                    'kasir'                => Session::get('username')
+                    'ref'       => $ref,
+                    'tgl_bayar' => $tanggal,
+                    'bln_bayar' => $bulan,
+                    'thn_bayar' => $tahun,
+                    'ket'       => $request->laporan,
+                    'json'      => $json,
+                    'total'     => $total,
+                    'id_kasir'  => Session::get('userId'),
+                    'kasir'     => Session::get('username')
                 ];
 
                 Harian::create($data);
@@ -1757,9 +1723,42 @@ class KasirController extends Controller
                 return response()->json(['success' => 'Data Pembayaran Berhasil Ditambah']);
             }
             catch(\Exception $e){
-                return response()->json(['errors' => $e]);
+                return response()->json(['errors' => 'Data Pembayaran Gagal Ditambah']);
             }
         }
+    }
+
+    public function dataPerkiraan(Request $request){
+        $dataTahun = Tagihan::select('thn_tagihan')
+        ->groupBy('thn_tagihan')
+        ->get();
+
+        if($request->ajax()){
+            $data = Perkiraan::orderBy('id','desc');
+            return DataTables::of($data)
+            ->addColumn('action', function($data){
+                $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" class="edit btn btn-sm btn-warning">Edit</a>&nbsp;&nbsp;';
+                $button .= '<a type="button" title="Hapus" name="hapus" id="'.$data->id.'" class="delete btn btn-sm btn-danger">Hapus</a>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        return view('kasir.harian.perkiraan',[
+            'dataTahun' => $dataTahun
+        ]);
+    }
+
+    public function dataPerkiraanDestroy($id){
+        $data = Perkiraan::findOrFail($id);
+        try{
+            $data->delete();
+        }
+        catch(\Exception $e){
+            return response()->json(['error' => 'Data gagal dihapus.']);
+        }
+        return response()->json(['success' => 'Data berhasil dihapus.']);
     }
 
     public function harianpendapatan(Request $request){

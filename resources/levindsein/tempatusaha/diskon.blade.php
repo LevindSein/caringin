@@ -67,14 +67,14 @@
                     @endif
                 </td>
                 <td class="text-center">
-                    @if($data->dis_keamananipk !== NULL)
+                    @if($data->dis_keamananipk > 0)
                     <i class="fas fa-check"></i>
                     @else
                     <i class="fas fa-times"></i>
                     @endif
                 </td>
                 <td class="text-center">
-                    @if($data->dis_kebersihan !== NULL)
+                    @if($data->dis_kebersihan > 0)
                     <i class="fas fa-check"></i>
                     @else
                     <i class="fas fa-times"></i>

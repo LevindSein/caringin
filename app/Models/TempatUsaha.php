@@ -76,8 +76,8 @@ class TempatUsaha extends Model
         if($fas == 'diskon'){
             return TempatUsaha::where('tempat_usaha.dis_airbersih','!=',NULL)
             ->orWhere('tempat_usaha.dis_listrik','!=',NULL)
-            ->orWhere('tempat_usaha.dis_keamananipk','!=',NULL)
-            ->orWhere('tempat_usaha.dis_kebersihan','!=',NULL)
+            ->orWhere('tempat_usaha.dis_keamananipk','>',0)
+            ->orWhere('tempat_usaha.dis_kebersihan','>',0)
             ->leftJoin('user as user_pengguna','tempat_usaha.id_pengguna','=','user_pengguna.id')
             ->leftJoin('user as user_pemilik','tempat_usaha.id_pemilik','=','user_pemilik.id')
             ->select(

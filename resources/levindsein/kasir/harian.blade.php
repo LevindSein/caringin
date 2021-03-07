@@ -26,6 +26,16 @@
             <i class="mdi mdi-printer btn-icon-append"></i>  
         </button>
     </div>
+    &nbsp;
+    <div>
+        <a
+            type="button"
+            class="btn btn-outline-inverse-info"
+            href="{{url('kasir/harian/data/perkiraan')}}"
+            title="Data Perkiraan">
+            <i class="mdi mdi-table-edit btn-icon-append"></i>  
+        </a>
+    </div>
 </div>
 <div id="container">
     <div id="qr-result" hidden="">
@@ -37,64 +47,18 @@
 <form id="form_harian" >
     @csrf
     <div class="row">
-        <div class="col-lg-6" style="height:50vh;overflow-y:auto">
-            <div class="form-group col-lg-12">
-                <label for="nama">Nama <span style="color:red;">*</span></label>
-                <input required type="text" class="form-control" id="nama" name="nama" maxlength="30" style="text-transform:capitalize;" placeholder="Masukkan Nama (Bukan Kasir)" autocomplete="off">
-            </div>
-            <div class="form-group col-lg-12">
-                <label for="keamananlos"><span style="color:blue;">Keamanan LOS</span></label>
-                <div class="input-group mb-3">
-                    <div class="input-group-append" style="width:10vh">
-                        <input readonly class="form-control text-center" value="Rp." tabIndex="-1">
-                    </div>
-                    <input type="text" class="form-control" id="keamananlos" name="keamananlos" maxlength="14" placeholder="Masukkan Tarif">
-                </div>
-            </div>
-            <div class="form-group col-lg-12">
-                <label for="kebersihanlos"><span style="color:green;">Kebersihan LOS</span></label>
-                <div class="input-group mb-3">
-                    <div class="input-group-append" style="width:10vh">
-                        <input readonly class="form-control text-center" value="Rp." tabIndex="-1">
-                    </div>
-                    <input type="text" class="form-control" id="kebersihanlos" name="kebersihanlos" maxlength="14" placeholder="Masukkan Tarif">
-                </div>
-            </div>
-            <div class="form-group col-lg-12">
-                <label for="kebersihanpos"><span style="color:green;">Kebersihan POS</span></label>
-                <div class="input-group mb-3">
-                    <div class="input-group-append" style="width:10vh">
-                        <input readonly class="form-control text-center" value="Rp." tabIndex="-1">
-                    </div>
-                    <input type="text" class="form-control" id="kebersihanpos" name="kebersihanpos" maxlength="14" placeholder="Masukkan Tarif">
-                </div>
-            </div>
-            <div class="form-group col-lg-12">
-                <label for="kebersihanposlebih"><span style="color:green;">Kebersihan POS LEBIH</span></label>
-                <div class="input-group mb-3">
-                    <div class="input-group-append" style="width:10vh">
-                        <input readonly class="form-control text-center" value="Rp." tabIndex="-1">
-                    </div>
-                    <input type="text" class="form-control" id="kebersihanposlebih" name="kebersihanposlebih" maxlength="14" placeholder="Masukkan Tarif">
-                </div>
-            </div>
-            <div class="form-group col-lg-12">
-                <label for="abonemen"><span style="color:orange;">Abonemen</span></label>
-                <div class="input-group mb-3">
-                    <div class="input-group-append" style="width:10vh">
-                        <input readonly class="form-control text-center" value="Rp." tabIndex="-1">
-                    </div>
-                    <input type="text" class="form-control" id="abonemen" name="abonemen" maxlength="14" placeholder="Masukkan Tarif">
-                </div>
-            </div>
-            <div class="form-group col-lg-12">
-                <label for="laporan">Laporan (optional)</label>
-                <textarea autocomplete="off" name="laporan" class="form-control" id="laporan" placeholder="Masukkan Keterangan Disini . . ." style="height:15vh"></textarea>
-            </div>
-        </div>
-        <div class="col-lg-6" style="height:50vh;overflow-y:auto">
+        <div class="col-lg-12">
             <div id="newRow"></div>
             <button id="addRow" type="button" class="btn btn-primary btn-rounded btn-icon float-right"><i class="mdi mdi-plus"></i></button>
+            <br><br>
+            <div class="form-group col-lg-12">
+                <label for="laporan">Laporan (opsional)</label>
+                <textarea autocomplete="off" name="laporan" class="form-control" id="laporan" placeholder="Masukkan Keterangan Disini . . ." style="height:15vh"></textarea>
+            </div>
+            <div class="form-group col-lg-12">
+                <label for="transaksi">Tanggal Transaksi</label>
+                <input type="date" name="transaksi" class="form-control" id="transaksi" placeholder="Masukkan Keterangan Disini . . ." />
+            </div>
         </div>  
     </div>
     <br>
@@ -180,5 +144,39 @@
 @endsection
 
 @section('js')
+<script>
+$(document).ready(function () {
+    var i = 0;
+    $("#addRow").click(function () {
+        var html = '';
+        html += '<div class="form-group col-lg-12">';
+        html += '<div id="inputFormRow" class="inputFormRow">';
+        html += '<label>&nbsp;</label>';
+        html += '<div class="input-group mb-3">';
+        html += '<div class="input-group-append" style="width:50vh">';
+        html += '<select class="title form-control m-input" name="title[]" required> @foreach($perkiraan as $d) <option value="{{$d->id}}">{{$d->nama}} - ({{$d->jenis}})</option> @endforeach </select>';
+        html += '</div>';
+        html += '<input type="text" id="tarif" name="tarif[]" class="tarif form-control m-input" maxlength="14" placeholder="Masukkan Tarif" autocomplete="off">';
+        html += '<div class="input-group-append">';
+        html += '<button id="removeRow" type="button" class="btn btn-danger btn-rounded btn-icon" tabIndex="-1"><i class="mdi mdi-minus"></i></button>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        
+        $('#newRow').append(html);
+        $('.title').focus().prop('required',true);
+        $('.tarif').prop('required',true);
+        $(".tarif").on('input',event => event.target.value = (parseInt(event.target.value.replace(/[^\d]+/gi, '')) || 0).toLocaleString('en-US'));
+        i++;
+    });
+
+    // remove row
+    $(document).on('click', '#removeRow', function () {
+        $(this).blur().prop('required',false).closest('#inputFormRow').remove();
+    });
+});
+
+</script>
 <script src="{{asset('js/kasir-harian.js')}}"></script>
 @endsection

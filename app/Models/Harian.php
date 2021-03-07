@@ -11,20 +11,16 @@ class Harian extends Model
     protected $table = 'pembayaran_harian';
     protected $fillable = [
         'id',
+        'ref',
         'tgl_bayar',
         'bln_bayar',
         'thn_bayar',
-        'nama',
-        'keamanan_los',
-        'kebersihan_pos',
-        'kebersihan_los',
-        'kebersihan_pos_lebih',
-        'abonemen',
         'ket',
         'json',
         'total',
         'id_kasir',
         'kasir',
         'updated_at',
-        'created_at'];
+        'created_at'
+    ];
 }

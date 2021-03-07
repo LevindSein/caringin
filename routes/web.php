@@ -126,6 +126,8 @@ Route::middleware('ceklogin:kasir')->group(function(){
 
     Route::get('kasir/harian',[KasirController::class, 'harian'])->name('kasir.harian');
     Route::post('kasir/harian',[KasirController::class, 'harianpost']);
+    Route::get('kasir/harian/data/perkiraan',[KasirController::class, 'dataPerkiraan']);
+    Route::get('kasir/harian/data/perkiraan/destroy/{id}',[KasirController::class, 'dataPerkiraanDestroy']);
 
     Route::get('kasir/mode/{mode}',[KasirController::class, 'mode']);
 
