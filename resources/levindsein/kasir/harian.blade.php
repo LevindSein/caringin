@@ -26,16 +26,6 @@
             <i class="mdi mdi-printer btn-icon-append"></i>  
         </button>
     </div>
-    &nbsp;
-    <div>
-        <a
-            type="button"
-            class="btn btn-outline-inverse-info"
-            href="{{url('kasir/harian/data/perkiraan')}}"
-            title="Data Perkiraan">
-            <i class="mdi mdi-table-edit btn-icon-append"></i>  
-        </a>
-    </div>
 </div>
 <div id="container">
     <div id="qr-result" hidden="">

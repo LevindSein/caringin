@@ -14,10 +14,10 @@
                 <table class="tg" style="undefined;table-layout: fixed; width: 1200px">
                     <colgroup>
                     <col style="width: 101px">
-                    <col style="width: 420px">
-                    <col style="width: 45px">
-                    <col style="width: 101px">
-                    <col style="width: 383px">
+                    <col style="width: 350px">
+                    <col style="width: 100px">
+                    <col style="width: 110px">
+                    <col style="width: 310px">
                     </colgroup>
                     <!-- <thead>
                     <tr>
@@ -30,7 +30,7 @@
                         <td class="tg-m43w" colspan="5">KEMITRAAN KOPPAS PASAR INDUK BANDUNG-PT.LPP<br>BADAN PENGELOLA PUSAT PERDAGANGAN CARINGIN<br></td>
                     </tr>
                     <tr>
-                        <td class="tg-5b4e" colspan="5"><br><span style="font-size:16px"><b><u>FORM PENGAJUAN DISKON KEAMANAN & IPK</u></b></span><br><br></td>
+                        <td class="tg-5b4e" colspan="5"><span style="font-size:16px"><b><u>FORM PENGAJUAN DISKON KEAMANAN & IPK</u></b></span></td>
                     </tr>
                     <tr>
                         <td class="tg-spw2" colspan="5">Yang bertanda tangan dibawah ini<br></td>
@@ -71,15 +71,22 @@
                         <td class="tg-spw2">: .................................</td>
                     </tr>
                     <tr>
-                        <td class="tg-spw2" colspan="5"><br>Mengajukan permohonan diskon tarif keamanan & ipk. Sehubungan dengan permintaan tersebut diatas kami bersedia dan sanggup memenuhi ketentuan - ketentuan / peraturan - peraturan umum bagi pelanggan.<br></td>
+                        <td class="tg-spw4">No. HP</td>
+                        <td class="tg-spw4">: .................................</td>
+                        <td class="tg-spw2"></td>
+                        <td class="tg-spw2"></td>
+                        <td class="tg-spw2"></td>
                     </tr>
                     <tr>
-                        <td class="tg-exl0" colspan="4"></td>
-                        <td class="tg-exl0" colspan="1"><br><br>Bandung, {{$cetak}}</td>
+                        <td class="tg-spw4" colspan="5">Mengajukan permohonan diskon tarif keamanan & ipk. Sehubungan dengan permintaan tersebut diatas kami bersedia dan sanggup memenuhi ketentuan - ketentuan / peraturan - peraturan umum bagi pelanggan. Serta bersedia melampirkan <b><u>1 lembar fotokopi KTP</u></b> sebagai persyaratan pengajuan diskon</td>
                     </tr>
                     <tr>
-                        <td class="tg-exl0" colspan="4">Mengetahui / Menyetujui,<br><br><br><br><br>(........................................)&nbsp&nbsp&nbsp(........................................)&nbsp&nbsp&nbsp(........................................)&nbsp&nbsp&nbsp(........................................)</td>
-                        <td class="tg-exl0" colspan="1">Pemohon,<br><br><br><br><br>({{$d['nama']}})</td>
+                        <td class="tg-ex10" colspan="4"><textarea placeholder="Alasan : " style="height:75px;width:640px;"></textarea></td>
+                        <td class="tg-exl0" style="vertical-align:bottom;" colspan="1">Bandung, {{$cetak}}</td>
+                    </tr>
+                    <tr>
+                        <td class="tg-exl0" colspan="4">Mengetahui / Menyetujui,<br><br><br><br>(..........................)&nbsp&nbsp&nbsp(..........................)&nbsp&nbsp&nbsp(..........................)&nbsp&nbsp&nbsp(..........................)</td>
+                        <td class="tg-exl0" colspan="1">Pemohon,<br><br><br><br>({{$d['nama']}})</td>
                     </tr>
                     </tbody>
                 </table>

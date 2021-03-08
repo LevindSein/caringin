@@ -4,7 +4,7 @@ $(document).ready(function(){
         processing: true,
 		serverSide: true,
 		ajax: {
-            url: "/kasir/harian/data/perkiraan",
+            url: "/master/kasir/harian/data/perkiraan",
             cache:false,
 		},
 		columns: [
@@ -16,7 +16,6 @@ $(document).ready(function(){
         pageLength: 10,
         stateSave: true,
         scrollX: true,
-        scrollY: "35vh",
         lengthMenu: [[10,25,50,100,-1], [10,25,50,100,"All"]],
         deferRender: true,
         // dom : "r<'row'<'col-sm-12 col-md-6'><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
@@ -31,7 +30,7 @@ $(document).ready(function(){
 
 	$('#ok_button').click(function(){
 		$.ajax({
-			url:"/kasir/harian/data/perkiraan/destroy/" + user_id,
+			url:"/master/kasir/harian/data/perkiraan/destroy/" + user_id,
             cache:false,
 			beforeSend:function(){
 				$('#ok_button').text('Menghapus...');

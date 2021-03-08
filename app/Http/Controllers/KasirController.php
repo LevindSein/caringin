@@ -1728,39 +1728,6 @@ class KasirController extends Controller
         }
     }
 
-    public function dataPerkiraan(Request $request){
-        $dataTahun = Tagihan::select('thn_tagihan')
-        ->groupBy('thn_tagihan')
-        ->get();
-
-        if($request->ajax()){
-            $data = Perkiraan::orderBy('id','desc');
-            return DataTables::of($data)
-            ->addColumn('action', function($data){
-                $button = '<a type="button" title="Edit" name="edit" id="'.$data->id.'" class="edit btn btn-sm btn-warning">Edit</a>&nbsp;&nbsp;';
-                $button .= '<a type="button" title="Hapus" name="hapus" id="'.$data->id.'" class="delete btn btn-sm btn-danger">Hapus</a>';
-                return $button;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-        }
-
-        return view('kasir.harian.perkiraan',[
-            'dataTahun' => $dataTahun
-        ]);
-    }
-
-    public function dataPerkiraanDestroy($id){
-        $data = Perkiraan::findOrFail($id);
-        try{
-            $data->delete();
-        }
-        catch(\Exception $e){
-            return response()->json(['error' => 'Data gagal dihapus.']);
-        }
-        return response()->json(['success' => 'Data berhasil dihapus.']);
-    }
-
     public function harianpendapatan(Request $request){
         $tanggal = $request->tgl_pendapatan;
         Session::put('harian', $tanggal);

@@ -126,8 +126,6 @@ Route::middleware('ceklogin:kasir')->group(function(){
 
     Route::get('kasir/harian',[KasirController::class, 'harian'])->name('kasir.harian');
     Route::post('kasir/harian',[KasirController::class, 'harianpost']);
-    Route::get('kasir/harian/data/perkiraan',[KasirController::class, 'dataPerkiraan']);
-    Route::get('kasir/harian/data/perkiraan/destroy/{id}',[KasirController::class, 'dataPerkiraanDestroy']);
 
     Route::get('kasir/mode/{mode}',[KasirController::class, 'mode']);
 
@@ -289,6 +287,9 @@ Route::middleware('ceklogin:simulasi')->group(function(){
 });
 
 Route::middleware('ceklogin:master')->group(function(){
+    Route::get('master/kasir/harian/data/perkiraan',[MasterController::class, 'dataPerkiraan']);
+    Route::get('master/kasir/harian/data/perkiraan/destroy/{id}',[MasterController::class, 'dataPerkiraanDestroy']);
+
     Route::get('master/kasir', [MasterController::class, 'kasir']);
     Route::post('master/kasir/restore/{id}', [MasterController::class, 'kasirRestore']);
     Route::post('master/kasir/edit', [MasterController::class, 'kasirEdit']);

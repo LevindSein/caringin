@@ -21,7 +21,7 @@
   body {
     position: relative;
     height: 15cm;
-    width: 14cm;
+    width: 15cm;
   }
   
   
@@ -36,15 +36,16 @@
   }
   
   .tg  {border-collapse:collapse;border-spacing:0;}
-  .tg td{border-color:transparent;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    overflow:hidden;padding:10px 5px;word-break:normal;}
-  .tg th{border-color:transparent;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  .tg td{border-color:transparent;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:16px;
+    overflow:hidden;padding:7px 3px;word-break:normal;}
+  .tg th{border-color:transparent;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:16px;
     font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-  .tg .tg-5b4e{border-width:3px; border-bottom:none; border-left:none; border-right:none; border-color:black;font-family:"Times New Roman", Times, serif !important;;font-size:14px;text-align:center;
+  .tg .tg-5b4e{border-width:3px; border-bottom:none; border-left:none; border-right:none; border-color:black;font-family:"Times New Roman", Times, serif !important;;font-size:16px;text-align:center;
     vertical-align:middle}
   .tg .tg-m43w{border-width:3px; border-top:none; border-left:none; border-right:none; border-color:black;font-family:"Times New Roman", Times, serif !important;;font-size:18px;text-align:center;
     vertical-align:middle}
   .tg .tg-spw2{border-color:transparent;font-family:"Times New Roman", Times, serif !important;;text-align:left;vertical-align:middle;}
   .tg .tg-spw3{border-color:transparent;font-family:"Times New Roman", Times, serif !important;;text-align:left;vertical-align:middle;}
+  .tg .tg-spw4{border-color:transparent;font-family:"Times New Roman", Times, serif !important;;text-align:left;vertical-align:top;}
   .tg .tg-spw9{border-color:transparent;font-family:"Times New Roman", Times, serif !important;;text-align:right;vertical-align:middle}
   .tg .tg-exl0{border-color:transparent;font-family:"Times New Roman", Times, serif !important;;text-align:center;vertical-align:middle}

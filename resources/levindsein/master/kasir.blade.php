@@ -12,7 +12,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Data Aktivitas Kasir</h6>
-            <div>
+            <div class="row">
                 <form action="{{url('master/kasir')}}" method="GET">
                     <input
                         required
@@ -27,6 +27,13 @@
                         type="submit"
                         class="btn btn-sm btn-info" value="Cari"/>
                 </form>
+                &nbsp;
+                <a
+                    type="button"
+                    href="{{url('master/kasir/harian/data/perkiraan')}}"
+                    class="btn btn-sm btn-success"><b>
+                    <i class="fas fa-fw fa-table fa-sm text-white-50"></i> Data Perkiraan</b>
+                </a>
             </div>
         </div>
         <div class="card-body">
