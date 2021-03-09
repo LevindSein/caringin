@@ -71,6 +71,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                             <div class="dropdown-header">Tagihan:</div>
+                            <button class="dropdown-item" href="#" type="submit" data-toggle="modal" data-target="#myTempat"><i class="far fa-fw fa-file fa-sm text-gray-500"></i> Form Tagihan</button>
                             @if(Session::get('role') == 'master' || Session::get('role') == 'admin' && (Session::get('otoritas')->publish))
                             <button
                                 class="dropdown-item" 
@@ -228,6 +229,52 @@
     @endsection
 
     @section('modal')
+    <div id="myTempat" class="modal fade" role="dialog" tabIndex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Cetak Form Tagihan Tempat Usaha</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="{{url('tagihan/tempat')}}" method="GET" target="_blank">
+                    <div class="modal-body-short">
+                        <div class="form-group row col-lg-12">
+                            <div class="col-sm-12">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="tempat"
+                                        value="listrik"
+                                        id="listriktempat">
+                                    <label class="form-check-label" for="listriktempat">
+                                        Tagihan Listrik
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="tempat"
+                                        id="airbersihtempat"
+                                        value="airbersih">
+                                    <label class="form-check-label" for="airbersihtempat">
+                                        Tagihan Air Bersih
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-sm btn-primary" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Tambah Content pada Body modal -->
     <div id="confirmModal" class="modal fade" role="dialog" tabIndex="-1">
         <div class="modal-dialog">

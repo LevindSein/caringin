@@ -790,6 +790,24 @@ class TempatController extends Controller
         ]);
     }
 
+    public function alat(Request $request){
+        $time = strtotime(Carbon::now());
+        $now  = date("Y-m-d",$time);
+        $now  = IndoDate::tanggal($now, " "); 
+
+        if($request->alatTempat == 'terpasang'){
+            $status = "Terpasang";
+        }
+        else{
+            $status = "TIdak Terpasang";
+        }
+
+        return view('tempatusaha.alat',[
+            'now'    => $now,
+            'status' => $status
+        ]);
+    }
+
     public function rekapdetail($blok){
         return view('tempatusaha.details-rekap',[
             'dataset' => TempatUsaha::detailRekap($blok),

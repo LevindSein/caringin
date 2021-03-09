@@ -2748,4 +2748,24 @@ class TagihanController extends Controller
     public function neracaStore(Request $request){
         
     }
+
+    public function tempat(Request $request){
+        $time = strtotime(Carbon::now());
+        $now  = date("Y", $time);
+
+        if($request->tempat == 'listrik'){
+            $dataset = TempatUsaha::select('kd_kontrol')->where('trf_listrik','!=',NULL)->orderBy('kd_kontrol','asc')->get();
+            $status  = 'Listrik';
+        }
+        else{
+            $dataset = TempatUsaha::select('kd_kontrol')->where('trf_airbersih','!=',NULL)->orderBy('kd_kontrol','asc')->get();
+            $status  = 'Air Bersih';
+        }
+
+        return view('tagihan.tempat',[
+            'dataset' => $dataset,
+            'now'     => $now,
+            'status'  => $status
+        ]);
+    }
 }

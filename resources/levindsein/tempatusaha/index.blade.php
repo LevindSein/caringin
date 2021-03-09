@@ -41,6 +41,7 @@
                         @if(Session::get('role') == 'master' || Session::get('role') == 'manajer')
                         <div class="dropdown-header">Manajemen:</div>
                         <a class="dropdown-item {{ (request()->is('tempatusaha/rekap')) ? 'active' : '' }}" href="{{url('tempatusaha/rekap')}}" target="_blank">Data Rekap</a>
+                        <button class="dropdown-item" href="#" type="submit" data-toggle="modal" data-target="#myAlat">Data Alat</button>
                         <div class="dropdown-divider"></div>
                         @endif
                         <div class="dropdown-header">Pengguna Fasilitas:</div>
@@ -80,6 +81,52 @@
             	<button type="button" name="ok_button" id="ok_button" class="btn btn-danger">Hapus</button>
                 <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="myAlat" class="modal fade" role="dialog" tabIndex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Cetak Data Alat Tempat Usaha</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="{{url('tempatusaha/alat')}}" method="GET" target="_blank">
+                <div class="modal-body-short">
+                    <div class="form-group row col-lg-12">
+                        <div class="col-sm-12">
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="alatTempat"
+                                    value="terpasang"
+                                    id="terpasang">
+                                <label class="form-check-label" for="terpasang">
+                                    Terpasang
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="alatTempat"
+                                    id="tidakterpasang"
+                                    value="tidakterpasang">
+                                <label class="form-check-label" for="tidakterpasang">
+                                    Tidak Terpasang
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-sm btn-primary" value="Submit"/>
+                </div>
+            </form>
         </div>
     </div>
 </div>
