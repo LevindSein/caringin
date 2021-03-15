@@ -842,6 +842,14 @@ class TagihanController extends Controller
 
             Tagihan::totalTagihan($id);
 
+            if(empty($request->tambahdenda) == FALSE){
+                Tagihan::tambahDenda($id);
+            }
+
+            if(empty($request->hapusdenda) == FALSE){
+                Tagihan::hapusDenda($id);
+            }
+
             //Notification
             $now = date("Y-m-d",strtotime(Carbon::now()));
             $check = date("Y-m-25",strtotime(Carbon::now()));
@@ -1402,7 +1410,7 @@ class TagihanController extends Controller
                     $warna = max($data->warna_airbersih,$data->warna_listrik);
                     $hasil = $data->kd_kontrol;
                     if($warna == 1 || $warna == 2 || $warna == 3)
-                        return '<span class="text-center" style="color:#4e73df;">'.$hasil.'</span>';
+                        return '<span class="text-center" style="color:f4e73df;">'.$hasil.'</span>';
                     else
                         return '<span>'.$hasil.'</span>';
                 })

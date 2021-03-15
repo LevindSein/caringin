@@ -738,6 +738,29 @@
                             </div>
 
                             <div class="form-group col-lg-12">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="tambahdenda"
+                                        id="tambahdenda">
+                                    <label class="form-check-label" id="labeltambahdenda" for="tambahdenda">
+                                        Tambah Denda
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="hapusdenda"
+                                        id="hapusdenda">
+                                    <label class="form-check-label" id="labelhapusdenda" for="hapusdenda">
+                                        Hapus Denda
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-12">
                                 <label for="pesan">Pesan</label>
                                 <textarea autocomplete="off" name="pesan" class="form-control" id="pesan"></textarea>
                             </div>

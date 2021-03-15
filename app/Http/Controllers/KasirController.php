@@ -634,7 +634,7 @@ class KasirController extends Controller
 
                 if($selisih == 0){
                     $d->stt_lunas = 1;
-                    $d->stt_denda = NULL;
+                    $d->stt_denda = 0;
                 }
 
                 if($total != 0){
@@ -1301,7 +1301,7 @@ class KasirController extends Controller
                 
                 if($selisih == 0){
                     $d->stt_lunas = 1;
-                    $d->stt_denda = NULL;
+                    $d->stt_denda = 0;
                 }
 
                 if($total != 0){
