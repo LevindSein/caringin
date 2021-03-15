@@ -738,7 +738,7 @@
                             </div>
 
                             <div class="form-group col-lg-12">
-                                <div class="form-check">
+                                <div class="form-check" id="divtambahdenda">
                                     <input
                                         class="form-check-input"
                                         type="checkbox"
@@ -748,7 +748,7 @@
                                         Tambah Denda
                                     </label>
                                 </div>
-                                <div class="form-check">
+                                <div class="form-check" id="divhapusdenda">
                                     <input
                                         class="form-check-input"
                                         type="checkbox"

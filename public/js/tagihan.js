@@ -118,6 +118,15 @@ $(document).ready(function(){
                 var air = 1;
                 var keamananipk = 1;
                 var kebersihan = 1;
+
+                $('#divhapusdenda').hide();
+                $('#divtambahdenda').hide();
+                if(data.result.den_tagihan != 0){
+                    $('#divhapusdenda').show();
+                }
+                else{
+                    $('#divtambahdenda').show();
+                }
                 
                 if(data.result.sub_listrik != 0 || data.result.listrik != null){
                     $('#divEditListrik').show();

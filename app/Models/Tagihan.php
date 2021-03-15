@@ -480,6 +480,8 @@ class Tagihan extends Model
             $dataset = Tagihan::where('id',$id)->get();
 
             foreach($dataset as $t){
+                $t->stt_denda = 0;
+                $t->save();
                 $sekarang = date('Y-m-d',$today);
                 $denda    = $t->tgl_expired;
                 if($sekarang > $denda){
