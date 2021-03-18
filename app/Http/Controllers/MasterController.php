@@ -648,4 +648,121 @@ class MasterController extends Controller
         }
         return response()->json(['success' => 'Data berhasil dihapus.']);
     }
+
+    public function getsisa(Request $request){
+        $bulan   = IndoDate::bulan(date('Y-m',strtotime(Carbon::now())),' ');
+        
+        if($request->sisatagihan == 'all'){
+            $dataset = Tagihan::where([['stt_lunas',0],['stt_publish',1],['sel_tagihan','>',0]])->select('blok')->groupBy('blok')->orderBy('blok','asc')->get();
+        }
+        else{
+            $dataset = Tagihan::where([['stt_lunas',0],['stt_publish',1],['sel_tagihan','>',0]])->whereIn('blok',$request->sebagian)->select('blok')->groupBy('blok')->orderBy('blok','asc')->get();
+        }
+        
+        $rekap       = array();
+        $rek         = 0;
+        $listrik     = 0;
+        $denlistrik  = 0;
+        $airbersih   = 0;
+        $denairbersih= 0;
+        $keamananipk = 0;
+        $kebersihan  = 0;
+        $airkotor    = 0;
+        $lain        = 0;
+        $jumlah      = 0;
+        $diskon      = 0;
+
+        $rin          = array();
+
+        $i = 0;
+        $j = 0;
+
+        foreach($dataset as $d){
+            $rekap[$i]['blok'] = $d->blok;
+            $rekap[$i]['rek']  = Tagihan::where([['stt_lunas',0],['stt_publish',1],['sel_tagihan','>',0],['blok',$d->blok]])->count();
+            $setor = Tagihan::where([['stt_lunas',0],['stt_publish',1],['sel_tagihan','>',0],['blok',$d->blok]])
+            ->select(
+                DB::raw('SUM(sel_listrik)      as listrik'),
+                DB::raw('SUM(den_listrik)      as denlistrik'),
+                DB::raw('SUM(sel_airbersih)    as airbersih'),
+                DB::raw('SUM(den_airbersih)    as denairbersih'),
+                DB::raw('SUM(sel_keamananipk)  as keamananipk'),
+                DB::raw('SUM(sel_kebersihan)   as kebersihan'),
+                DB::raw('SUM(sel_airkotor)     as airkotor'),
+                DB::raw('SUM(sel_lain)         as lain'),
+                DB::raw('SUM(sel_tagihan)      as jumlah'),
+                DB::raw('SUM(dis_tagihan)      as diskon'))
+            ->get();
+            
+            $rekap[$i]['listrik']     = $setor[0]->listrik - $setor[0]->denlistrik;
+            $rekap[$i]['denlistrik']  = $setor[0]->denlistrik;
+            $rekap[$i]['airbersih']   = $setor[0]->airbersih - $setor[0]->denairbersih;
+            $rekap[$i]['denairbersih']= $setor[0]->denairbersih;
+            $rekap[$i]['keamananipk'] = $setor[0]->keamananipk;
+            $rekap[$i]['kebersihan']  = $setor[0]->kebersihan;
+            $rekap[$i]['airkotor']    = $setor[0]->airkotor;
+            $rekap[$i]['lain']        = $setor[0]->lain;
+            $rekap[$i]['diskon']      = $setor[0]->diskon;
+            $rekap[$i]['jumlah']      = $setor[0]->jumlah;
+            $rek         = $rek         + $rekap[$i]['rek'];
+            $listrik     = $listrik     + $rekap[$i]['listrik'];
+            $denlistrik  = $denlistrik  + $rekap[$i]['denlistrik'];
+            $airbersih   = $airbersih   + $rekap[$i]['airbersih'];
+            $denairbersih= $denairbersih+ $rekap[$i]['denairbersih'];
+            $keamananipk = $keamananipk + $rekap[$i]['keamananipk'];
+            $kebersihan  = $kebersihan  + $rekap[$i]['kebersihan'];
+            $airkotor    = $airkotor    + $rekap[$i]['airkotor'];
+            $lain        = $lain        + $rekap[$i]['lain'];
+            $diskon      = $diskon      + $rekap[$i]['diskon'];
+            $jumlah      = $jumlah      + $rekap[$i]['jumlah'];
+
+            $rincian = Tagihan::where([['stt_lunas',0],['stt_publish',1],['sel_tagihan','>',0],['blok',$d->blok]])->orderBy('kd_kontrol','asc')->get();
+            foreach($rincian as $r){
+                $rin[$j]['blok']  = $r->blok;
+                $rin[$j]['kode']  = $r->kd_kontrol;
+                $rin[$j]['pengguna']  = $r->nama;
+                $rin[$j]['listrik']  = $r->sel_listrik - $r->den_listrik;
+                $rin[$j]['denlistrik']  = $r->den_listrik;
+                $rin[$j]['airbersih']  = $r->sel_airbersih - $r->den_airbersih;
+                $rin[$j]['denairbersih']  = $r->den_airbersih;
+                $rin[$j]['keamananipk']  = $r->sel_keamananipk;
+                $rin[$j]['kebersihan']  = $r->sel_kebersihan;
+                $rin[$j]['airkotor']  = $r->sel_airkotor;
+                $rin[$j]['lain']  = $r->sel_lain;
+                $rin[$j]['jumlah']  = $r->sel_tagihan;
+                $rin[$j]['diskon']  = $r->dis_tagihan;
+
+                $tempat = TempatUsaha::where('kd_kontrol',$r->kd_kontrol)->first();
+                if($tempat != NULL){
+                    $rin[$j]['lokasi'] = $tempat->lok_tempat;
+                }
+                else{
+                    $rin[$j]['lokasi'] = '';
+                }
+
+                $j++;
+            }
+
+            $i++;
+        }
+        $t_rekap['rek']          = $rek;
+        $t_rekap['listrik']      = $listrik;
+        $t_rekap['denlistrik']   = $denlistrik;
+        $t_rekap['airbersih']    = $airbersih;
+        $t_rekap['denairbersih'] = $denairbersih;
+        $t_rekap['keamananipk']  = $keamananipk;
+        $t_rekap['kebersihan']   = $kebersihan;
+        $t_rekap['airkotor']     = $airkotor;
+        $t_rekap['lain']         = $lain;
+        $t_rekap['diskon']       = $diskon;
+        $t_rekap['jumlah']       = $jumlah;
+
+        return view('master.sisa',[
+            'dataset' => $dataset,
+            'bulan' => $bulan,
+            'rekap'     => $rekap,
+            't_rekap'   => $t_rekap,
+            'rincian'   => $rin
+        ]);
+    }
 }

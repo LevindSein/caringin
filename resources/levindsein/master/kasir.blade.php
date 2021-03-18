@@ -28,12 +28,33 @@
                         class="btn btn-sm btn-info" value="Cari"/>
                 </form>
                 &nbsp;
-                <a
-                    type="button"
-                    href="{{url('master/kasir/harian/data/perkiraan')}}"
-                    class="btn btn-sm btn-success"><b>
-                    <i class="fas fa-fw fa-table fa-sm text-white-50"></i> Data Perkiraan</b>
-                </a>
+                <div class="dropdown no-arrow" style="display:inline-block">
+                    <a 
+                        class="dropdown-toggle btn btn-sm btn-success" 
+                        href="#" 
+                        role="button" 
+                        data-toggle="dropdown"
+                        aria-haspopup="true" 
+                        aria-expanded="false"><b>
+                        Menu
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw"></i></b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                        <a 
+                            class="dropdown-item"
+                            href="{{url('master/kasir/harian/data/perkiraan')}}"
+                            type="submit">
+                            <i class="fas fa-fw fa-table fa-sm text-gray-500"></i> Data Perkiraan
+                        </a>
+                        <a 
+                            class="dropdown-item"
+                            data-toggle="modal"
+                            data-target="#mySisa"
+                            href="#">
+                            <i class="fas fa-fw fa-dollar-sign fa-sm text-gray-500"></i> Data Sisa
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -90,6 +111,45 @@
                 <div class="modal-footer">
                     <input type="hidden" name="hidden_ref" id="hidden_ref"/>
                     <input type="submit" class="btn btn-primary btn-sm" value="Submit" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div
+    class="modal fade"
+    id="mySisa"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rekap Sisa Tagihan</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="user" action="{{url('master/kasir/sisa')}}" target="_blank" method="GET">
+                <div class="modal-body-short">
+                    <div class="form-group col-lg-12">
+                        <label for="sisatagihan">Pilih Rekap Sisa Tagihan</label>
+                        <select class="form-control" name="sisatagihan" id="sisatagihan" required>
+                            <option selected value="all">Semua</option>
+                            <option value="sebagian">Sebagian</option>
+                        </select>
+                        <div class="form-group col-lg-12" style="display:none;" id="divrekapsisa">
+                            <br>
+                            <label for="sebagian">Blok <span style="color:red;">*</span></label>
+                            <div class="form-group">
+                                <select class="sebagian" name="sebagian[]" id="sebagian" required multiple></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">Cari</button>
                 </div>
             </form>
         </div>
@@ -154,6 +214,42 @@ $(document).ready(function () {
                 location.reload();
             }
 		});
+    });
+
+    $("#sebagian").prop('required',false);
+            
+    $('#sebagian').select2({
+        placeholder: '--- Pilih Blok ---',
+        ajax: {
+            url: "/cari/blok",
+            dataType: 'json',
+            delay: 250,
+            processResults: function (blok) {
+                return {
+                results:  $.map(blok, function (bl) {
+                    return {
+                    text: bl.nama,
+                    id: bl.nama
+                    }
+                })
+                };
+            },
+            cache: true
+        }
+    });
+
+    $("#sisatagihan").change(function() {
+        var val = $(this).val();
+        if(val === "all") {
+            $("#divrekapsisa").hide();
+            $("#sebagian").prop('required',false);
+            $('#sebagian').val('');
+            $('#sebagian').html('');
+        }
+        else if(val === "sebagian") {
+            $("#divrekapsisa").show();
+            $("#sebagian").prop('required',true);
+        }
     });
 });
 </script>

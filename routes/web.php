@@ -289,6 +289,8 @@ Route::middleware('ceklogin:simulasi')->group(function(){
 });
 
 Route::middleware('ceklogin:master')->group(function(){
+    Route::get('master/kasir/sisa',[MasterController::class, 'getsisa']);
+
     Route::get('master/kasir/harian/data/perkiraan',[MasterController::class, 'dataPerkiraan']);
     Route::get('master/kasir/harian/data/perkiraan/destroy/{id}',[MasterController::class, 'dataPerkiraanDestroy']);
 
